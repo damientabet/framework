@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+    <h1>Edit</h1>
+    <form method="post">
+        <div class="row">
+            <div class="col">
+                <label for="lastname">Lastname</label>
+                <input class="form-control" id="lastname" type="text" name="lastname" placeholder="Nom" value="{{ user.lastname }}">
+            </div>
+            <div class="col">
+                <label for="firstname">Firstname</label>
+                <input class="form-control" id="firstname" type="text" name="firstname" placeholder="Nom" value="{{ user.firstname }}">
+            </div>
+        </div>
+        <label for="email">Email</label>
+        <input id="email" class="form-control" type="email" name="email" placeholder="Email" value="{{ user.email }}">
+        <br />
+        <input class="form-control btn btn-primary" type="submit" name="updateUser">
+    </form>
+    <a class="form-control btn btn-danger" href="/user/delete/{{ user.id }}">Delete account</a>
+{% endblock %}

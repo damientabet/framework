@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Authentification{% endblock %}
+
+{% block body %}
+    <br/>
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <h2>Create account</h2>
+    <form method="post">
+        <label for="create_name">Lastname</label>
+        <input id="create_name" class="form-control" id="lastname" type="text" name="lastname">
+
+        <label for="create_name">Firstname</label>
+        <input id="create_name" class="form-control" id="firstname" type="text" name="firstname">
+
+        <label for="create_email">Email</label>
+        <input id="create_email" class="form-control" type="email" name="email">
+
+        <label for="create_password">Password</label>
+        <input id="create_password" class="form-control" type="password" name="password">
+
+        <input class="form-control btn btn-primary" type="submit" name="addUser" value="Create">
+    </form>
+{% endblock %}
