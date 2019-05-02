@@ -2,4 +2,7 @@
 
 {% block body %}
     <h1>Welcome {{ user.lastname }}</h1>
+    <ul>
+        <li><a href="/user/edit/{{ user.id }}">Edit my profile</a></li>
+    </ul>
 {% endblock %}

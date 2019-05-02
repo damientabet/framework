@@ -71,4 +71,24 @@ class UserController extends Controller
             }
         }
     }
+
+    public function updateUser($id)
+    {
+        if (isset($_POST['updateUser'])) {
+            $data = [
+                'firstname' => $_POST['firstname'],
+                'lastname' => $_POST['lastname'],
+                'email' => $_POST['email']
+            ];
+
+            ModelFactory::get('User')->update($id, $data);
+        }
+        $user = ModelFactory::get('User')->read($id, 'id');
+
+        echo $this->twig->render('user/edit.html.twig',
+            [
+                "user" => $user
+            ]
+        );
+    }
 }
