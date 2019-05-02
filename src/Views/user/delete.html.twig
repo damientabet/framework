@@ -1,0 +1,9 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+    <h1>Are you sure ?</h1>
+    <form action="/user/delete/{{ user_id }}" method="post" name="deleteForm">
+        <input class="btn btn-danger" type="submit" name="deleteUser" value="Yes">
+        <a href="javascript:history.go(-1)" class="btn">No</a>
+    </form>
+{% endblock %}
