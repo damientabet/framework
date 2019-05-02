@@ -6,6 +6,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        echo ('Hello World !');
+        echo $this->twig->render('index.html.twig');
     }
 }
