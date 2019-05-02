@@ -9,6 +9,16 @@ class UserController extends Controller
 {
     public $errors = [];
 
+    public function userIndex($id)
+    {
+        $user = ModelFactory::get('User')->read($id, 'id');
+        echo $this->twig->render('user/account.html.twig',
+            [
+                "user" => $user
+            ]
+        );
+    }
+
     public function authentification()
     {
         $this->createUser();
