@@ -21,12 +21,45 @@ class UserController extends Controller
 
     public function authentification()
     {
+        $this->connectionUser();
         $this->createUser();
 
         echo $this->twig->render('authentification.html.twig',
             [
                 'errors' => $this->errors
             ]);
+    }
+
+    public function connectionUser()
+    {
+        if (isset($_POST['connection'])) {
+            $email = $_POST['connection_email'];
+            $user = ModelFactory::get('User')->read($email, 'email');
+            if (empty($_POST['connection_email']) || empty($_POST['connection_password'])) {
+                return $this->errors[] = 'Please fill fields';
+            }
+            if ($user) {
+                if (password_verify($_POST['connection_password'], $user['password'])) {
+                    $_SESSION['user'] = [
+                        'id' => $user['id'],
+                        'lastname' => $user['lastname'],
+                        'firstname' => $user['firstname'],
+                        'email' => $email
+                    ];
+                    header('Location: /user/'.$_SESSION['user']['id']);
+                }
+            } else {
+                $this->errors[] = 'No matching user';
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header('Location: /');
     }
 
     public function createUser()
@@ -74,31 +107,39 @@ class UserController extends Controller
 
     public function updateUser($id)
     {
-        if (isset($_POST['updateUser'])) {
-            $data = [
-                'firstname' => $_POST['firstname'],
-                'lastname' => $_POST['lastname'],
-                'email' => $_POST['email']
-            ];
+        if (isset($_SESSION['user'])) {
+            if (isset($_POST['updateUser'])) {
+                $data = [
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
+                    'email' => $_POST['email']
+                ];
 
-            ModelFactory::get('User')->update($id, $data);
+                ModelFactory::get('User')->update($_SESSION['user']['id'], $data);
+            }
+            $user = ModelFactory::get('User')->read($_SESSION['user']['id'], 'id');
+
+            echo $this->twig->render('user/edit.html.twig',
+                [
+                    "user" => $user
+                ]
+            );
+        } else {
+            header('Location: /');
         }
-        $user = ModelFactory::get('User')->read($id, 'id');
-
-        echo $this->twig->render('user/edit.html.twig',
-            [
-                "user" => $user
-            ]
-        );
     }
 
     public function deleteUser($id)
     {
-        if (isset($_POST['deleteUser'])) {
-            if (ModelFactory::get('User')->delete($id)) {
-                header('Location: /');
+        if (isset($_SESSION['user'])) {
+            if (isset($_POST['deleteUser'])) {
+                if (ModelFactory::get('User')->delete($_SESSION['user']['id'])) {
+                    header('Location: /');
+                }
             }
+            echo $this->twig->render('user/delete.html.twig', ['user_id' => $_SESSION['user']['id']]);
+        } else {
+            header('Location: /');
         }
-        echo $this->twig->render('user/delete.html.twig', ['user_id' => $id]);
     }
 }
