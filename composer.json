@@ -6,6 +6,7 @@
   },
   "require": {
     "php": "^7.0",
-    "tracy/tracy": "^2.6"
+    "tracy/tracy": "^2.6",
+    "symfony/var-dumper": "^4.2"
   }
 }
