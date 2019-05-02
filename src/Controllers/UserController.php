@@ -91,4 +91,14 @@ class UserController extends Controller
             ]
         );
     }
+
+    public function deleteUser($id)
+    {
+        if (isset($_POST['deleteUser'])) {
+            if (ModelFactory::get('User')->delete($id)) {
+                header('Location: /');
+            }
+        }
+        echo $this->twig->render('user/delete.html.twig', ['user_id' => $id]);
+    }
 }
