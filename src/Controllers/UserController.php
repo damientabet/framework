@@ -2,8 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ModelFactory;
-use App\Models\User;
+use Core\Model\ModelFactory;
 
 class UserController extends Controller
 {
@@ -85,7 +84,8 @@ class UserController extends Controller
                     'firstname' => $_POST['firstname'],
                     'email' => $_POST['email'],
                     'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                    'date_add' => date('Y-m-d H:i:s')
+                    'date_add' => date('Y-m-d H:i:s'),
+                    'date_upd' => date('Y-m-d H:i:s')
                 ];
                 ModelFactory::get('User')->create($data);
 
@@ -98,7 +98,7 @@ class UserController extends Controller
                     'firstname' => $user['firstname'],
                     'email' => $user['email']
                 ];
-                header('Location: /');
+                header('Location: /user/'.$_SESSION['user']['id']);
             } else {
                 return $this->errors;
             }
@@ -112,7 +112,8 @@ class UserController extends Controller
                 $data = [
                     'firstname' => $_POST['firstname'],
                     'lastname' => $_POST['lastname'],
-                    'email' => $_POST['email']
+                    'email' => $_POST['email'],
+                    'date_upd' => date('Y-m-d H:i:s')
                 ];
 
                 ModelFactory::get('User')->update($_SESSION['user']['id'], $data);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Db;
+namespace Core\Database;
 
 use \PDO;
 
@@ -10,7 +10,7 @@ class PDOFactory
 
     public static function getConnection()
     {
-        require_once dirname(dirname(dirname(__DIR__))).'/config/config.php';
+        require_once dirname(dirname(__DIR__)) . '/config/config.php';
 
         if (is_null(self::$pdo))
         {
