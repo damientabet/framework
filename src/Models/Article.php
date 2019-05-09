@@ -13,5 +13,10 @@ class Article extends Model
                     ON (a.`id_user` = u.`id`)';
         return $this->database->results($query);
     }
-    
+
+    public function getArticleByIdUser($id, $id_user)
+    {
+        $query = 'SELECT * FROM `article` WHERE `id` = '.$id.' AND `id_user` = '.$id_user;
+        return $this->database->result($query);
+    }
 }
