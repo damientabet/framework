@@ -13,8 +13,8 @@ class Controller
     {
         $className = substr(get_class($this), 12, -10);
 
-        $loader = new \Twig\Loader\FilesystemLoader('./../src/Views/');
-        $this->twig = new \Twig\Environment($loader, array('cache' => false));
+        $loader = new FilesystemLoader('./../src/Views/');
+        $this->twig = new Environment($loader, array('cache' => false));
         $this->twig->addGlobal('session', $_SESSION);
     }
 }
