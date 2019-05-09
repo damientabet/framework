@@ -1,0 +1,9 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+    <h1>Êtes-vous sûr de vouloir le supprimer ?</h1>
+    <form action="/article/delete/{{ article_id }}" method="post" name="deleteForm">
+        <input class="btn btn-danger" type="submit" name="deleteArticle" value="Yes">
+        <a href="javascript:history.go(-1)" class="btn">No</a>
+    </form>
+{% endblock %}
