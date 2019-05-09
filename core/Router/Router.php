@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Router;
+namespace Core\Router;
 
 /**
  * Class Router
@@ -36,10 +36,11 @@ class Router
      * @param $path
      * @param $callable
      * @param null $name
+     * @return Route
      */
     public function post($path, $callable, $name = null)
     {
-        $this->add($path, $callable, $name, 'POST');
+        return $this->add($path, $callable, $name, 'POST');
     }
 
     /**
@@ -65,6 +66,7 @@ class Router
 
     /**
      * @return mixed
+     * @throws RouterException
      */
     public function run()
     {
@@ -84,6 +86,7 @@ class Router
      * @param $name
      * @param array $params
      * @return mixed
+     * @throws RouterException
      */
     public function url($name, $params = [])
     {
