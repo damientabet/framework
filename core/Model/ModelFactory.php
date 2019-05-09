@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace Core\Model;
 
-use App\Models\Db\PDODatabase;
-use App\Models\Db\PDOFactory;
+use Core\Database\PDODatabase;
+use Core\Database\PDOFactory;
 
 class ModelFactory
 {

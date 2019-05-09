@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace Core\Model;
 
-use App\Models\Db\DatabaseInterface;
+use Core\Database\DatabaseInterface;
 
 abstract class Model implements ModelInterface
 {

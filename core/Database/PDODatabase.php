@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Db;
+namespace Core\Database;
 
 class PDODatabase implements DatabaseInterface
 {

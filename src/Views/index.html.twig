@@ -4,4 +4,19 @@
 
 {% block body %}
     <h1>Hello World !</h1>
+    {% for article in articles %}
+        <ul>
+            <li>
+                <p>
+                    <b>{{ article.title }}</b>
+                </p>
+                <p>
+                    {{ article.content }}
+                </p>
+                <p>
+                    {{ article.firstname }} {{ article.lastname }}
+                </p>
+            </li>
+        </ul>
+    {% endfor %}
 {% endblock %}

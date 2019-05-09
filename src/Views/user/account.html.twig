@@ -1,8 +1,14 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
-    <h1>Welcome {{ user.lastname }}</h1>
+    <h1>Welcome {{ user.firstname }}</h1>
     <ul>
-        <li><a href="/user/edit/{{ user.id }}">Edit my profile</a></li>
+        <li><a href="/user/edit/{{ user.id }}">Éditer mon profil</a></li>
+        <li><a href="/article/add">Ajouter un article</a></li>
+        <li><a href="/user/article">Voir mes articles</a></li>
+        <li><form action="/logout" method="post">
+                <input style="border: none; background-color: transparent" class="nav-link" type="submit"
+                       name="logout" value="Se déconnecter">
+            </form></li>
     </ul>
 {% endblock %}
