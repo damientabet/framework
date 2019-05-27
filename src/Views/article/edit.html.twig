@@ -9,7 +9,7 @@
         <label for="content">Contenu</label>
         <textarea id="content" class="form-control" name="contentArticle" cols="30" rows="10">{{ article.content }}</textarea>
 
-        <input class="form-control btn btn-primary" type="submit" name="addArticle">
+        <input class="form-control btn btn-primary" type="submit" name="updateArticle">
     </form>
     <a class="form-control btn btn-danger" href="/article/delete/{{ article.id }}">Supprimer cet article</a>
 {% endblock %}
