@@ -59,11 +59,23 @@ class ArticleController extends Controller
         }
     }
 
-    public function editArticle($id)
+    public function updateArticle($id)
     {
         if (isset($_SESSION['user'])) {
-            $article = ModelFactory::get('Article')->getArticleByIdUser($id, $_SESSION['user']['id']);
-            echo $this->twig->render('article/edit.html.twig', ['article' => $article]);
+            if (isset($_POST['updateArticle'])) {
+                $data = [
+                    'title' => $_POST['titleArticle'],
+                    'content' => $_POST['contentArticle'],
+                ];
+                ModelFactory::get('article')->update($id, $data);
+            }
+            $article = ModelFactory::get('article')->read($id, 'id');
+
+            echo $this->twig->render('article/edit.html.twig',
+                [
+                    "article" => $article
+                ]
+            );
         } else {
             header('Location: /');
         }
