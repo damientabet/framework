@@ -45,7 +45,7 @@ class UserController extends Controller
                         'firstname' => $user['firstname'],
                         'email' => $email
                     ];
-                    header('Location: /user/'.$_SESSION['user']['id']);
+                    header('Location: /user/' . $_SESSION['user']['id']);
                 }
             } else {
                 $this->errors[] = 'No matching user';
@@ -84,6 +84,7 @@ class UserController extends Controller
                     'firstname' => $_POST['firstname'],
                     'email' => $_POST['email'],
                     'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'image_name' => 'default.png',
                     'date_add' => date('Y-m-d H:i:s'),
                     'date_upd' => date('Y-m-d H:i:s')
                 ];
@@ -98,7 +99,7 @@ class UserController extends Controller
                     'firstname' => $user['firstname'],
                     'email' => $user['email']
                 ];
-                header('Location: /user/'.$_SESSION['user']['id']);
+                header('Location: /user/' . $_SESSION['user']['id']);
             } else {
                 return $this->errors;
             }
@@ -108,7 +109,33 @@ class UserController extends Controller
     public function updateUser($id)
     {
         if (isset($_SESSION['user'])) {
+            if (isset($_POST['deleteImg'])) {
+                $user = ModelFactory::get('User')->read($id, 'id');
+                ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => null]);
+                unlink('../public/img/user/'.$user['image_name']);
+            }
+
             if (isset($_POST['updateUser'])) {
+                // Ajout de l'image
+                if (isset($_FILES['userImg'])) {
+                    $extension = new \SplFileInfo($_FILES['userImg']['name']);
+                    $extension = $extension->getExtension();
+                    $acceptExtension = ['jpg', 'png'];
+                    if (in_array($extension, $acceptExtension)) {
+                        $imgName = $id . '.' . $extension;
+                        $imgDirname = IMG_USER_DIR.$imgName;
+                        if (move_uploaded_file($_FILES['userImg']['tmp_name'], $imgDirname)) {
+                            ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => $imgName]);
+                            header('Location: /user/edit/'.$id);
+                        } else {
+                            echo 'Erreur lors du téléchargement de l\'image';
+                        }
+                    } else {
+                        echo 'L\'extension de l\'image n\'est pas correct : '.$acceptExtension;
+                    }
+                } else {
+                    return false;
+                }
                 $data = [
                     'firstname' => $_POST['firstname'],
                     'lastname' => $_POST['lastname'],
@@ -134,7 +161,11 @@ class UserController extends Controller
     {
         if (isset($_SESSION['user'])) {
             if (isset($_POST['deleteUser'])) {
+                $user = ModelFactory::get('User')->read($id, 'id');
+                unlink('../public/img/user/'.$user['image_name']);
+                ModelFactory::get('Article')->delete($_SESSION['user']['id'], 'id_user');
                 if (ModelFactory::get('User')->delete($_SESSION['user']['id'])) {
+                    $this->logout();
                     header('Location: /');
                 }
             }
