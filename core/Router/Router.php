@@ -24,6 +24,21 @@ class Router
     /**
      * @param $path
      * @param $callable
+     * @param $method
+     * @return Route
+     */
+    public function dispatch($path, $callable, $method)
+    {
+        if ($method == 'GET') {
+            return $this->get($path, $callable);
+        } elseif ($method == 'POST') {
+            return $this->post($path, $callable);
+        }
+    }
+
+    /**
+     * @param $path
+     * @param $callable
      * @param null $name
      * @return Route
      */
