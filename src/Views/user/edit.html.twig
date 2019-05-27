@@ -2,7 +2,16 @@
 
 {% block body %}
     <h1>Édition du profil</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
+        <div style="margin: 0 auto" class="text-center col-6 mb-3">
+            {% if user.image_name != null %}
+                <img style="max-height: 200px; max-width: 200px;" id="userImg" src="/img/user/{{ user.image_name }}" alt="">
+                <input id="deleteImg" type="submit" name="deleteImg" value="Supprimer" onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}">
+            {% else %}
+                <input id="file" class="input-file" type="file" name="userImg">
+                <p id="file-upload-filename"></p>
+            {% endif %}
+        </div>
         <div class="row">
             <div class="col">
                 <label for="lastname">Nom</label>
