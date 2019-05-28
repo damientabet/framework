@@ -21,7 +21,7 @@ class ArticleController extends Controller
                     ];
 
                     if (ModelFactory::get('Article')->create($data)) {
-                        header('Location: /user/'.$_SESSION['user']['id']);
+                        header('Location: /user/article');
                     } else{
                         $this->errors[] = 'Erreur lors de l\'enregistrement';
                     }
