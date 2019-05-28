@@ -1,14 +1,41 @@
 {% extends "layout.html.twig" %}
-
+{% block title %}{{ user.firstname}} {{ user.lastname }}{% endblock %}
 {% block body %}
-    <h1>Welcome {{ user.firstname }}</h1>
-    <ul>
-        <li><a href="/user/edit/{{ user.id }}">Éditer mon profil</a></li>
-        <li><a href="/article/add">Ajouter un article</a></li>
-        <li><a href="/user/article">Voir mes articles</a></li>
-        <li><form action="/logout" method="post">
-                <input style="border: none; background-color: transparent" class="nav-link" type="submit"
-                       name="logout" value="Se déconnecter">
-            </form></li>
-    </ul>
+    <h1>Mon profil</h1>
+    <div class="card-deck">
+        <a href="/user/edit/{{ user.id }}" class="account-link">
+            <div class="card border-secondary mb-3" style="width: 350px;">
+                <div class="card-body text-secondary">
+                    <h5 class="card-title" style="font-size: 16px;"><b>Mes informations personnelles</b></h5>
+                    <small class="card-text">Depuis cette page, vous pourrez gérer les informations de votre compte.
+                    </small>
+                </div>
+            </div>
+        </a>
+        <a href="/user/article" class="account-link">
+            <div class="card border-secondary mb-3" style="width: 350px">
+                <div class="card-body text-secondary">
+                    <h5 class="card-title" style="font-size: 16px;"><b>Voir mes articles</b></h5>
+                    <small class="card-text">Ici, vous aurez la vue sur tous les articles créés avec votre compte.
+                    </small>
+                </div>
+            </div>
+        </a>
+        <a href="/article/add" class="account-link">
+            <div class="card border-secondary mb-3" style="width: 350px">
+                <div class="card-body text-secondary">
+                    <h5 class="card-title" style="font-size: 16px"><b>Ajouter un article</b></h5>
+                    <small class="card-text">Ajoutez votre nouvel article, grâce à ce formulaire.
+                    </small>
+                </div>
+            </div>
+        </a>
+        <a href="/logout" class="account-link">
+            <div class="card border-secondary mb-3" style="width: 350px">
+                <div class="card-body text-secondary">
+                    <h5 class="card-title" style="font-size: 16px"><b>Se déconnecter</b></h5>
+                </div>
+            </div>
+        </a>
+    </div>
 {% endblock %}
