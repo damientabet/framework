@@ -1,31 +1,46 @@
 {% extends "layout.html.twig" %}
 
+{% block title %}{{ user.firstname }} {{ user.lastname }}{% endblock %}
+
 {% block body %}
     <h1>Édition du profil</h1>
     <form method="post" enctype="multipart/form-data">
+
         <div style="margin: 0 auto" class="text-center col-6 mb-3">
             {% if user.image_name != null %}
-                <img style="max-height: 200px; max-width: 200px;" id="userImg" src="/img/user/{{ user.image_name }}" alt="">
+                <img id="userImg" src="/img/user/{{ user.image_name }}" alt="">
+                <label id="labelDeleteImg" style="cursor: pointer" for="deleteImg" class="col-4 shadow p-3 mt-2 mb-2 bg-white rounded btn btn-default"><i
+                            class="fas fa-trash"></i> Supprimer</label>
                 <input id="deleteImg" type="submit" name="deleteImg" value="Supprimer" onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}">
             {% else %}
+                <label for="file" class="shadow p-3 mb-2 bg-white rounded btn btn-default" id="filename"><i class="fas fa-upload"></i>
+                    Choisir une image</label>
                 <input id="file" class="input-file" type="file" name="userImg">
                 <p id="file-upload-filename"></p>
             {% endif %}
         </div>
+
         <div class="row">
             <div class="col">
                 <label for="lastname">Nom</label>
-                <input class="form-control" id="lastname" type="text" name="lastname" placeholder="Nom" value="{{ user.lastname }}">
+                <input class="form-control" id="lastname" type="text" name="lastname" placeholder="Nom"
+                       value="{{ user.lastname }}">
             </div>
             <div class="col">
                 <label for="firstname">Prénom</label>
-                <input class="form-control" id="firstname" type="text" name="firstname" placeholder="Nom" value="{{ user.firstname }}">
+                <input class="form-control" id="firstname" type="text" name="firstname" placeholder="Nom"
+                       value="{{ user.firstname }}">
             </div>
         </div>
         <label for="email">Email</label>
         <input id="email" class="form-control" type="email" name="email" placeholder="Email" value="{{ user.email }}">
-        <br />
-        <input class="form-control btn btn-primary" type="submit" name="updateUser" value="Modifier mes informations">
+        <br/>
+        <input class="form-control btn btn-success shadow" type="submit" name="updateUser" value="Modifier mon profil">
+        </div>
     </form>
-    <a class="form-control btn btn-danger" href="/user/delete/{{ user.id }}">Supprimer mon compte</a>
+    <div class="container clearfix mt-2">
+        <a href="/user/{{ user.id }}" class="shadow p-3 mb-5 bg-default rounded btn btn-primary"><i class="fas fa-chevron-left"></i> Retour</a>
+        <a href="/user/delete/{{ user.id }}" class="shadow p-3 mb-5 bg-default rounded btn btn-danger float-right"><i class="fas fa-trash"></i>
+            Supprimer mon compte</a>
+    </div>
 {% endblock %}
