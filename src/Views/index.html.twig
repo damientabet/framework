@@ -3,20 +3,16 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <h1>Hello World !</h1>
-    {% for article in articles %}
-        <ul>
-            <li>
-                <p>
-                    <b>{{ article.title }}</b>
-                </p>
-                <p>
-                    {{ article.content }}
-                </p>
-                <p>
-                    {{ article.firstname }} {{ article.lastname }}
-                </p>
+    <ul class="list-unstyled">
+        {% for article in articles %}
+            <li class="media shadow mt-5 p-3" id="index-list">
+                <img style="max-width: 120px; max-height: 120px;" src="/img/user/default.png" class="mr-3" alt="...">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1">{{ article.title }}</h5>
+                    {{ article.content|raw }}
+                    <p>{{ article.firstname }} {{ article.lastname }}</p>
+                </div>
             </li>
-        </ul>
-    {% endfor %}
+        {% endfor %}
+    </ul>
 {% endblock %}

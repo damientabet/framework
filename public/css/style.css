@@ -1,0 +1,51 @@
+a:hover {
+    text-decoration: none!important;
+}
+.card {
+    transition: 200ms;
+}
+.card:hover {
+    box-shadow: 1px 1px 25px 2px #999999;
+    transition: 200ms;
+    /*box-shadow: none;*/
+}
+
+.block-body {
+    margin-top: 20px!important;
+}
+
+footer {
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: block;
+    background-color: #6c757d!important;
+}
+
+.label-file {
+    cursor: pointer;
+}
+.input-file {
+   display: none;
+}
+
+#filename {
+    cursor: pointer;
+}
+
+#userImg {
+    display: block;
+    margin: 0 auto;
+    max-height: 200px;
+    max-width: 200px;
+}
+#deleteImg {
+    display: none;
+}
+
+#labelDeleteImg {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}

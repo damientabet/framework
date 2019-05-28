@@ -6,16 +6,13 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
             {% if session.user %}
                 <li class="nav-item">
                     <a class="nav-link" href="/user/{{ session.user.id }}">Mon compte</a>
                 </li>
                 <li class="nav-item">
-                    <form action="/logout" method="post">
-                        <input style="border: none; background-color: transparent" class="nav-link" type="submit"
-                               name="logout" value="Se déconnecter">
-                    </form>
+                    <a class="nav-link" href="/logout">Se déconnecter</a>
                 </li>
             {% else %}
                 <li class="nav-item">
@@ -25,8 +22,8 @@
                                 aria-expanded="false">
                             Se connecter
                         </button>
-                        <div class="dropdown-menu">
-                            <form action="/authentification" method="post" class="px-4 py-3">
+                        <div class="dropdown-menu dropdown-menu-right bg-dark text-white">
+                            <form action="/authentification" method="post" class="px-3 py-3">
                                 <div class="form-group">
                                     <label for="exampleDropdownFormEmail1">Adresse email</label>
                                     <input name="connection_email" type="email" class="form-control"
@@ -40,7 +37,7 @@
                                 <button name="connection" type="submit" class="form-control btn btn-primary">Se connecter</button>
                             </form>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/authentification">Créer son compte</a>
+                            <a class="dropdown-item text-white" href="/authentification">Vous êtes nouveau ? Inscrivez-vous</a>
                         </div>
                     </div>
                 </li>
