@@ -23,7 +23,7 @@
             <tr style="cursor: pointer" onclick="document.location = '/article/edit/{{ article.id }}'" class="table-row-link">
                 <th scope="row">{{ article.id }}</th>
                 <td>{{ article.title }}</td>
-                <td>{{ article.content|striptags }}</td>
+                <td>{{ article.content|striptags|truncate(100, true) }}</td>
                 <td>{{ article.date_add|date("d/m/Y H:m:i") }}</td>
             </tr>
         {% endfor %}
