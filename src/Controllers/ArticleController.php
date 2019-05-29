@@ -8,6 +8,12 @@ class ArticleController extends Controller
 {
     public $errors;
 
+    public function articleView($id)
+    {
+        $article = ModelFactory::get('Article')->getArticleById($id, 'id_article');
+        echo $this->twig->render('article/index.html.twig', ['article' => $article]);
+    }
+
     public function add()
     {
         if (isset($_SESSION['user'])) {
