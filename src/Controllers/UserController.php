@@ -10,7 +10,7 @@ class UserController extends Controller
 
     public function userIndex($id)
     {
-        $user = ModelFactory::get('User')->read($id, 'id');
+        $user = ModelFactory::get('User')->read($id, 'id_user');
         echo $this->twig->render('user/account.html.twig',
             [
                 "user" => $user
@@ -40,7 +40,7 @@ class UserController extends Controller
             if ($user) {
                 if (password_verify($_POST['connection_password'], $user['password'])) {
                     $_SESSION['user'] = [
-                        'id' => $user['id'],
+                        'id' => $user['id_user'],
                         'lastname' => $user['lastname'],
                         'firstname' => $user['firstname'],
                         'email' => $email
@@ -110,7 +110,7 @@ class UserController extends Controller
     {
         if (isset($_SESSION['user'])) {
             if (isset($_POST['deleteImg'])) {
-                $user = ModelFactory::get('User')->read($id, 'id');
+                $user = ModelFactory::get('User')->read($id, 'id_user');
                 ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => null]);
                 unlink('../public/img/user/'.$user['image_name']);
             }
@@ -145,7 +145,7 @@ class UserController extends Controller
 
                 ModelFactory::get('User')->update($_SESSION['user']['id'], $data);
             }
-            $user = ModelFactory::get('User')->read($_SESSION['user']['id'], 'id');
+            $user = ModelFactory::get('User')->read($_SESSION['user']['id'], 'id_user');
 
             echo $this->twig->render('user/edit.html.twig',
                 [
@@ -161,7 +161,7 @@ class UserController extends Controller
     {
         if (isset($_SESSION['user'])) {
             if (isset($_POST['deleteUser'])) {
-                $user = ModelFactory::get('User')->read($id, 'id');
+                $user = ModelFactory::get('User')->read($id, 'id_user');
                 unlink('../public/img/user/'.$user['image_name']);
                 ModelFactory::get('Article')->delete($_SESSION['user']['id'], 'id_user');
                 if (ModelFactory::get('User')->delete($_SESSION['user']['id'])) {

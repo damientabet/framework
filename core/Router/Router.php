@@ -21,6 +21,41 @@ class Router
         $this->url = $url;
     }
 
+    public function urlProcess($url)
+    {
+        $routeAction = new listRoutes();
+        $routeAction = $routeAction->getRoutes();
+
+        $url = explode('/', $url);
+
+        switch (count($url)){
+            case '2' :
+                if (is_numeric($url[1])) {
+                    $url = $url[0].'/:id';
+                } elseif (is_string($url[1]) && strstr('-', $url[1])) {
+                    $url = $url[0].'/:id-:slug';
+                } else {
+                    $url = implode('/', $url);
+                }
+                break;
+            case '3' :
+                $url = $url[0].'/'.$url[1].'/:id';
+                break;
+            default :
+                $url = implode('/', $url);
+                break;
+        }
+
+        $route = isset($routeAction[$_SERVER['REQUEST_METHOD']][$url]) ? $routeAction[$_SERVER['REQUEST_METHOD']][$url]: null;
+        if ($route != null) {
+            $this->dispatch($url, $route['controller'] . '#' . $route['action'], $_SERVER['REQUEST_METHOD']);
+        } else {
+            $this->dispatch('', 'Index#index', 'GET');
+        }
+
+        $this->run();
+    }
+
     /**
      * @param $path
      * @param $callable

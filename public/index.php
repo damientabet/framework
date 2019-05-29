@@ -1,11 +1,11 @@
 <?php
 
-use App\Controllers\FrontController;
+session_start();
+
+use Core\Router\Router;
 
 require_once "../vendor/autoload.php";
 require_once "../config/config.php";
 
-session_start();
-
-$frontController = new FrontController();
-$frontController->run();
+$router = new Router(isset($_GET['url']) ? $_GET['url'] : '/');
+$router->urlProcess($_GET['url']);
