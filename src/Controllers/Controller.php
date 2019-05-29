@@ -15,6 +15,7 @@ class Controller
 
         $loader = new FilesystemLoader('./../src/Views/');
         $this->twig = new Environment($loader, array('cache' => false));
+        $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
         $this->twig->addGlobal('session', $_SESSION);
     }
 }
