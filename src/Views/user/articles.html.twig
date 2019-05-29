@@ -20,8 +20,8 @@
         </thead>
         <tbody>
         {% for article in articles %}
-            <tr style="cursor: pointer" onclick="document.location = '/article/edit/{{ article.id }}'" class="table-row-link">
-                <th scope="row">{{ article.id }}</th>
+            <tr style="cursor: pointer" onclick="document.location = '/article/edit/{{ article.id_article }}'" class="table-row-link">
+                <th scope="row">{{ article.id_article }}</th>
                 <td>{{ article.title }}</td>
                 <td>{{ article.content|striptags|truncate(100, true) }}</td>
                 <td>{{ article.date_add|date("d/m/Y H:m:i") }}</td>

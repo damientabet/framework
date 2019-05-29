@@ -69,7 +69,7 @@ class ArticleController extends Controller
                 ];
                 ModelFactory::get('article')->update($id, $data);
             }
-            $article = ModelFactory::get('article')->read($id, 'id');
+            $article = ModelFactory::get('article')->read($id, 'id_article');
 
             echo $this->twig->render('article/edit.html.twig',
                 [
