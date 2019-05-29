@@ -111,7 +111,7 @@ class UserController extends Controller
         if (isset($_SESSION['user'])) {
             if (isset($_POST['deleteImg'])) {
                 $user = ModelFactory::get('User')->read($id, 'id_user');
-                ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => null]);
+                ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => null], 'id_user');
                 unlink('../public/img/user/'.$user['image_name']);
             }
 
@@ -125,7 +125,7 @@ class UserController extends Controller
                         $imgName = $id . '.' . $extension;
                         $imgDirname = IMG_USER_DIR.$imgName;
                         if (move_uploaded_file($_FILES['userImg']['tmp_name'], $imgDirname)) {
-                            ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => $imgName]);
+                            ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => $imgName], 'id_user');
                             header('Location: /user/edit/'.$id);
                         } else {
                             echo 'Erreur lors du téléchargement de l\'image';
@@ -133,8 +133,6 @@ class UserController extends Controller
                     } else {
                         echo 'L\'extension de l\'image n\'est pas correct : '.$acceptExtension;
                     }
-                } else {
-                    return false;
                 }
                 $data = [
                     'firstname' => $_POST['firstname'],
@@ -143,8 +141,9 @@ class UserController extends Controller
                     'date_upd' => date('Y-m-d H:i:s')
                 ];
 
-                ModelFactory::get('User')->update($_SESSION['user']['id'], $data);
+                ModelFactory::get('User')->update($_SESSION['user']['id'], $data, 'id_user');
             }
+
             $user = ModelFactory::get('User')->read($_SESSION['user']['id'], 'id_user');
 
             echo $this->twig->render('user/edit.html.twig',

@@ -4,10 +4,10 @@
     <h1>Modification de l'article #{{ article.id_article }}</h1>
     <div class="shadow p-5 mt-5 bg-white rounded">
         <nav class="nav justify-content-end">
-            <a href="javascript:history.go(-1)" class="nav-link" title="Retour"><i class="fas fa-chevron-left align-middle"></i></a>
+            <a href="/user/article" class="nav-link" title="Retour"><i class="fas fa-chevron-left align-middle"></i></a>
             <a class="nav-link" href="/article/delete/{{ article.id }}" title="Supprimer"><i style="color: red;" class="fas fa-trash align-middle"></i></a>
         </nav>
-        <form action="/article/edit/{{ article.id }}" method="post">
+        <form action="/article/edit/{{ article.id_article }}" method="post">
             <label for="title">Titre</label>
             <input id="title" class="form-control" type="text" name="titleArticle" value="{{ article.title }}">
 

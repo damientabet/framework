@@ -8,6 +8,12 @@ class ArticleController extends Controller
 {
     public $errors;
 
+    public function articleView($id)
+    {
+        $article = ModelFactory::get('Article')->getArticleById($id, 'id_article');
+        echo $this->twig->render('article/index.html.twig', ['article' => $article]);
+    }
+
     public function add()
     {
         if (isset($_SESSION['user'])) {
@@ -67,7 +73,7 @@ class ArticleController extends Controller
                     'title' => $_POST['titleArticle'],
                     'content' => $_POST['contentArticle'],
                 ];
-                ModelFactory::get('article')->update($id, $data);
+                ModelFactory::get('article')->update($id, $data, 'id_article');
             }
             $article = ModelFactory::get('article')->read($id, 'id_article');
 
