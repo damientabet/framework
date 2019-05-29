@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <ul>
+        <li>{{ article.title }}</li>
+        <li>{{ article.content|raw }}</li>
+        <li>{{ article.firstname }} {{ article.lastname }}</li>
+    </ul>
+{% endblock %}
