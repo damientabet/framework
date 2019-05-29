@@ -67,7 +67,7 @@ class ArticleController extends Controller
                     'title' => $_POST['titleArticle'],
                     'content' => $_POST['contentArticle'],
                 ];
-                ModelFactory::get('article')->update($id, $data);
+                ModelFactory::get('article')->update($id, $data, 'id_article');
             }
             $article = ModelFactory::get('article')->read($id, 'id_article');
 

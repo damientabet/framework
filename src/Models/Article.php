@@ -16,9 +16,9 @@ class Article extends Model
 
     public function getArticleById($id)
     {
-        $query = 'SELECT * FROM `article` a
-                LEFT JOIN `user` u
-                    ON (a.`id_user` = u.`id_user`)
+        $query = 'SELECT * FROM `article` a 
+                    LEFT JOIN `user` u 
+                        ON (a.`id_user` = u.`id_user`) 
                     WHERE a.`id_article` = '.$id;
         return $this->database->result($query);
     }
