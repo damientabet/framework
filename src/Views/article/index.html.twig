@@ -1,9 +1,14 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <ul>
-        <li>{{ article.title }}</li>
-        <li>{{ article.content|raw }}</li>
-        <li>{{ article.firstname }} {{ article.lastname }}</li>
-    </ul>
+    <div style="height: 500px; background-color: black"></div>
+    <div class="p-3 shadow">
+        <h2 class="m-4 text-center">{{ article.title }}
+            {% if "now"|date("d/m/Y h:i:s") < article.date_add|date_modify("+7 days")|date("d/m/Y h:i:s") %}
+                <span class="badge badge-warning">Nouveau</span>
+            {% endif %}
+        </h2>
+        <p class="text-justify">{{ article.content|raw }}</p>
+        {{ article.firstname }} {{ article.lastname }} - {{ article.date_add|date("d/m/Y h:i:s") }}
+    </div>
 {% endblock %}
