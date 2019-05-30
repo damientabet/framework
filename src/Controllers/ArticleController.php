@@ -29,9 +29,10 @@ class ArticleController extends Controller
     {
         if (isset($_SESSION['user'])) {
             if (isset($_POST['addArticle'])) {
-                if (!empty($_POST['titleArticle']) || !empty($_POST['contentArticle'])) {
+                if (!empty($_POST['titleArticle']) || !empty($_POST['contentArticle']) || !empty($_POST['descArticle'])) {
                     $data = [
                         'title' => $_POST['titleArticle'],
+                        'description' => $_POST['descArticle'],
                         'content' => $_POST['contentArticle'],
                         'id_user' => $_SESSION['user']['id'],
                         'date_add' => date('Y-m-d H:i:s')
@@ -82,6 +83,7 @@ class ArticleController extends Controller
             if (isset($_POST['updateArticle'])) {
                 $data = [
                     'title' => $_POST['titleArticle'],
+                    'description' => $_POST['descArticle'],
                     'content' => $_POST['contentArticle'],
                 ];
                 ModelFactory::get('article')->update($id, $data, 'id_article');
