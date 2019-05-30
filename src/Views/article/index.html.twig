@@ -8,6 +8,7 @@
                 <span class="badge badge-warning">Nouveau</span>
             {% endif %}
         </h2>
+        <p class="text-justify mb-5">{{ article.description }}</p>
         <p class="text-justify">{{ article.content|raw }}</p>
         <hr>
         {{ article.firstname }} {{ article.lastname }} - {{ article.add_article|date("d/m/Y h:i:s") }}

@@ -14,7 +14,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Titre</th>
-            <th scope="col">Contenu</th>
+            <th scope="col">Description</th>
             <th scope="col">Date d'ajout</th>
         </tr>
         </thead>
@@ -23,7 +23,7 @@
             <tr style="cursor: pointer" onclick="document.location = '/article/edit/{{ article.id_article }}'" class="table-row-link">
                 <th scope="row">{{ article.id_article }}</th>
                 <td>{{ article.title }}</td>
-                <td>{{ article.content|striptags|truncate(100, true) }}</td>
+                <td>{{ article.description|striptags|truncate(100, true) }}</td>
                 <td>{{ article.date_add|date("d/m/Y H:m:i") }}</td>
             </tr>
         {% endfor %}

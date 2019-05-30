@@ -9,7 +9,7 @@
                 <img style="max-width: 120px; max-height: 120px;" src="/img/user/default.png" class="mr-3" alt="...">
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">{{ article.title }}</h5>
-                    {{ article.content|truncate(300, true)|raw }}
+                    {{ article.description|truncate(300, true)|raw }}
                     <p>{{ article.firstname }} {{ article.lastname }}</p>
                 </div>
             </li>

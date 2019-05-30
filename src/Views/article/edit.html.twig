@@ -11,6 +11,9 @@
             <label for="title">Titre</label>
             <input id="title" class="form-control" type="text" name="titleArticle" value="{{ article.title }}">
 
+            <label id="labelDesc" for="articleDescription">Description <span id="length"></span>/1024</label>
+            <textarea id="articleDescription" class="form-control" name="descArticle" rows="2" maxlength="1024">{{ article.description }}</textarea>
+
             <label for="content">Contenu</label>
             <textarea id="mytextarea" class="form-control" name="contentArticle" cols="30" rows="10">{{ article.content }}</textarea>
 
