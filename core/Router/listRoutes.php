@@ -73,6 +73,11 @@ class listRoutes
                     "controller" => "Article",
                     "action" => "add"
                 ),
+            'article/:id' =>
+                array(
+                    "controller" => "Comment",
+                    "action" => "addComment"
+                ),
             'user/delete/:id' =>
                 array(
                     "controller" => "User",

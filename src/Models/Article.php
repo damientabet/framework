@@ -10,13 +10,15 @@ class Article extends Model
     {
         $query = 'SELECT * FROM `article` a 
                     LEFT JOIN `user` u
-                    ON (a.`id_user` = u.`id_user`)';
+                    ON (a.`id_user` = u.`id_user`)
+                    ORDER BY a.`id_article` DESC';
         return $this->database->results($query);
     }
 
     public function getArticleById($id)
     {
-        $query = 'SELECT * FROM `article` a 
+        $query = 'SELECT a.`id_article`, a.`title`, a.`content`, a.`id_user`, a.`date_add` AS "add_article", u.`firstname`, u.`lastname` 
+                    FROM `article` a 
                     LEFT JOIN `user` u 
                         ON (a.`id_user` = u.`id_user`) 
                     WHERE a.`id_article` = '.$id;

@@ -10,8 +10,19 @@ class ArticleController extends Controller
 
     public function articleView($id)
     {
+        if (isset($_POST['addComment'])) {
+            $comment = new CommentController();
+            $comment->addComment($id);
+            header('Location: /article/'.$id);
+        }
+
         $article = ModelFactory::get('Article')->getArticleById($id, 'id_article');
-        echo $this->twig->render('article/index.html.twig', ['article' => $article]);
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle($id);
+        echo $this->twig->render('article/index.html.twig',
+            [
+                'article' => $article,
+                'comments' => $comments
+            ]);
     }
 
     public function add()
