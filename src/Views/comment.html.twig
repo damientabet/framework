@@ -1,0 +1,18 @@
+<div class="mt-5">
+    <h2>Commentaires</h2>
+    {% for comment in comments %}
+        <div class="p-3 mb-2">
+            <p>{{ comment.content }}</p>
+            <p>{{ comment.firstname }} {{ comment.lastname }} - {{ comment.date_add|date('d/m/Y h:i:s') }}</p>
+        </div>
+    {% endfor %}
+    {% if session.user is defined %}
+        <form action="/article/{{ article.id_article }}" class="form-group" method="POST">
+            <textarea class="form-control" name="comment" id="" rows="5"></textarea>
+            <input class="form-control btn btn-default shadow" type="submit" name="addComment"
+                   value="Ajouter un commentaire">
+        </form>
+    {% else %}
+        Veuillez vous connecter pour ajouter un commentaire
+    {% endif %}
+</div>

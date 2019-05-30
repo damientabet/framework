@@ -4,11 +4,13 @@
     <div style="height: 500px; background-color: black"></div>
     <div class="p-3 shadow">
         <h2 class="m-4 text-center">{{ article.title }}
-            {% if "now"|date("d/m/Y h:i:s") < article.date_add|date_modify("+7 days")|date("d/m/Y h:i:s") %}
+            {% if "now"|date("d-m-Y") < (article.add_article|date_modify("+7 days")|date("d-m-Y")) %}
                 <span class="badge badge-warning">Nouveau</span>
             {% endif %}
         </h2>
         <p class="text-justify">{{ article.content|raw }}</p>
-        {{ article.firstname }} {{ article.lastname }} - {{ article.date_add|date("d/m/Y h:i:s") }}
+        <hr>
+        {{ article.firstname }} {{ article.lastname }} - {{ article.add_article|date("d/m/Y h:i:s") }}
     </div>
+    {% include 'comment.html.twig' %}
 {% endblock %}
