@@ -53,11 +53,11 @@ class Route
         return '([^/]+)';
     }
 
-    public function call()
+    public function call($test)
     {
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
-            $controller = "App\\Controllers\\" . ucfirst($params[0]) . 'Controller';
+            $controller = "App\\Controllers\\". $test . '\\' . ucfirst($params[0]) . 'Controller';
             $controller = new $controller();
             return call_user_func_array([$controller, $params[1]], $this->matches);
         } else {

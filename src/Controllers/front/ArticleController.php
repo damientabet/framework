@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\front;
 
 use Core\Model\ModelFactory;
 
-class ArticleController extends Controller
+class ArticleController extends FrontController
 {
     public $errors;
 
@@ -18,7 +18,7 @@ class ArticleController extends Controller
 
         $article = ModelFactory::get('Article')->getArticleById($id, 'id_article');
         $comments = ModelFactory::get('Comment')->getCommentsByArticle($id);
-        echo $this->twig->render('article/index.html.twig',
+        echo $this->twig->render('front/article/index.html.twig',
             [
                 'article' => $article,
                 'comments' => $comments
@@ -48,7 +48,7 @@ class ArticleController extends Controller
                 }
             }
 
-            echo $this->twig->render('article/add.html.twig', ['errors' => $this->errors]);
+            echo $this->twig->render('front/article/add.html.twig', ['errors' => $this->errors]);
         } else {
             header('Location: /');
         }
@@ -61,7 +61,7 @@ class ArticleController extends Controller
                 ModelFactory::get('Article')->delete($id);
                 header('Location: /user/article');
             }
-            echo $this->twig->render('article/delete.html.twig', ['article_id' => $id]);
+            echo $this->twig->render('front/article/delete.html.twig', ['article_id' => $id]);
         } else {
             header('Location: /');
         }
@@ -71,7 +71,7 @@ class ArticleController extends Controller
     {
         if (isset($_SESSION['user'])) {
             $articles = ModelFactory::get('Article')->list($_SESSION['user']['id'], 'id_user');
-            echo $this->twig->render('user/articles.html.twig', ['articles' => $articles]);
+            echo $this->twig->render('front/user/articles.html.twig', ['articles' => $articles]);
         } else {
             header('Location: /');
         }
@@ -90,7 +90,7 @@ class ArticleController extends Controller
             }
             $article = ModelFactory::get('article')->read($id, 'id_article');
 
-            echo $this->twig->render('article/edit.html.twig',
+            echo $this->twig->render('front/article/edit.html.twig',
                 [
                     "article" => $article
                 ]
