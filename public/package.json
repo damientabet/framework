@@ -1,0 +1,22 @@
+{
+  "name": "framework",
+  "description": "Project N°5",
+  "main": "index.php",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/damientabet/framework.git"
+  },
+  "author": "Damien Tabet <tabetdamien@free.fr>",
+  "bugs": {
+    "url": "https://github.com/damientabet/framework/issues"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0",
+    "tinymce": "^5.0.7"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0"
+  }
+}
