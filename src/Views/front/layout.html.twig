@@ -6,17 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
 
-    {# Bootstrap CSS CDN link #}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    {# FontAwesome CDN Link #}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    {# Bootstrap CSS link #}
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    {# FontAwesome Link #}
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     {# CSS link #}
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-{% include 'include/navbar.html.twig' %}
+{% include 'front/include/navbar.html.twig' %}
 <div id="indexImg" style="background-color: black; width: 100%; height: 500px;"></div>
 <main class="container">
     {% block body %}
@@ -44,7 +42,7 @@
                 <h5 class="text-uppercase">Links</h5>
                 <ul class="list-unstyled">
                     <li><a href="#!">CV</a></li>
-                    <li><a href="#!">Link 2</a></li>
+                    <li><a href="/admin">Administration</a></li>
                     <li><a href="#!">Link 3</a></li>
                     <li><a href="#!">Link 4</a></li>
                 </ul>
@@ -57,7 +55,7 @@
 </footer>
 
 {# TinyMCE #}
-<script src='https://cloud.tinymce.com/5/tinymce.min.js?apiKey=67h8p5zi645zw02i94e3591zxinuabulfbi6b6mrgcrak40q'></script>
+<script src='/node_modules/tinymce/tinymce.js'></script>
 <script>
     tinymce.init({
         selector: '#mytextarea',
@@ -69,17 +67,9 @@
 
 {# Custom JavaScript #}
 <script src='/js/index.js'></script>
-{# Jquery CDN #}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-{# Popper CDN (use in Bootstrap) #}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-{# Bootstrap JS CDN #}
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+{# Jquery #}
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{# Bootstrap JS #}
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

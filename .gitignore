@@ -2,3 +2,4 @@
 vendor/
 \.DS_Store
 public/img/
+public/node_modules

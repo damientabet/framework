@@ -11,6 +11,7 @@ class Router
     private $url;
     private $routes = [];
     private $namedRoutes = [];
+    private $test;
 
     /**
      * Router constructor.
@@ -47,13 +48,16 @@ class Router
         }
 
         $route = isset($routeAction[$_SERVER['REQUEST_METHOD']][$url]) ? $routeAction[$_SERVER['REQUEST_METHOD']][$url]: null;
+
+        $this->test = ($route != null) ? $route['test'] : 'front';
+
         if ($route != null) {
             $this->dispatch($url, $route['controller'] . '#' . $route['action'], $_SERVER['REQUEST_METHOD']);
         } else {
             $this->dispatch('', 'Index#index', 'GET');
         }
 
-        $this->run();
+        $this->run($this->test);
     }
 
     /**
@@ -118,7 +122,7 @@ class Router
      * @return mixed
      * @throws RouterException
      */
-    public function run()
+    public function run($test)
     {
         if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
             throw new RouterException('REQUEST_METHOD does not exist');
@@ -126,7 +130,7 @@ class Router
 
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
             if ($route->match($this->url)) {
-                return $route->call();
+                return $route->call($test);
             }
         }
         throw new RouterException('No matching routes');

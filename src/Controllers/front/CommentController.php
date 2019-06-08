@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\front;
 
 use Core\Model\ModelFactory;
 
-class CommentController extends Controller
+class CommentController extends FrontController
 {
     public function addComment($id)
     {

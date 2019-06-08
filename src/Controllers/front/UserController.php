@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\front;
 
 use Core\Model\ModelFactory;
 
-class UserController extends Controller
+class UserController extends FrontController
 {
     public $errors = [];
 
     public function userIndex($id)
     {
         $user = ModelFactory::get('User')->read($id, 'id_user');
-        echo $this->twig->render('user/account.html.twig',
+        echo $this->twig->render('front/user/account.html.twig',
             [
                 "user" => $user
             ]
@@ -23,7 +23,7 @@ class UserController extends Controller
         $this->connectionUser();
         $this->createUser();
 
-        echo $this->twig->render('authentification.html.twig',
+        echo $this->twig->render('front/authentification.html.twig',
             [
                 'errors' => $this->errors
             ]);
@@ -146,7 +146,7 @@ class UserController extends Controller
 
             $user = ModelFactory::get('User')->read($_SESSION['user']['id'], 'id_user');
 
-            echo $this->twig->render('user/edit.html.twig',
+            echo $this->twig->render('front/user/edit.html.twig',
                 [
                     "user" => $user
                 ]
@@ -168,7 +168,7 @@ class UserController extends Controller
                     header('Location: /');
                 }
             }
-            echo $this->twig->render('user/delete.html.twig', ['user_id' => $_SESSION['user']['id']]);
+            echo $this->twig->render('front/user/delete.html.twig', ['user_id' => $_SESSION['user']['id']]);
         } else {
             header('Location: /');
         }
