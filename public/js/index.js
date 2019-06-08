@@ -1,4 +1,4 @@
-'use script';
+'use strict';
 
 document.addEventListener('DOMContentLoaded', function() {
     var input = document.getElementById('file');

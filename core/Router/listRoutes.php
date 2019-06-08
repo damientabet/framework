@@ -8,25 +8,25 @@ class listRoutes
         "GET" => array(
             'admin/article/:id' =>
                 array(
-                    "controller" => "Admin",
+                    "controller" => "AdminArticle",
                     "action" => "viewArticle",
                     "test" => 'admin'
                 ),
             'admin/articles' =>
                 array(
-                    "controller" => "Admin",
+                    "controller" => "AdminArticle",
                     "action" => "articlePanel",
                     "test" => 'admin'
                 ),
             'admin/user/:id' =>
                 array(
-                    "controller" => "Admin",
+                    "controller" => "AdminUser",
                     "action" => "viewUser",
                     "test" => 'admin'
                 ),
             'admin/users' =>
                 array(
-                    "controller" => "Admin",
+                    "controller" => "AdminUser",
                     "action" => "userPanel",
                     "test" => 'admin'
                 ),
@@ -112,7 +112,7 @@ class listRoutes
         "POST" => array(
             'admin/article/:id' =>
                 array(
-                    "controller" => "Admin",
+                    "controller" => "AdminArticle",
                     "action" => "viewArticle",
                     'test' => 'admin'
                 ),
