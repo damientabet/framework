@@ -116,6 +116,12 @@ class listRoutes
                 ),
         ),
         "POST" => array(
+            'admin/users' =>
+                array(
+                    "controller" => "AdminUser",
+                    "action" => "userPanel",
+                    'controllerType' => 'admin'
+                ),
             'admin/article/:id' =>
                 array(
                     "controller" => "AdminArticle",

@@ -69,7 +69,9 @@
                                     <td>{{ user.lastname }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.date_add|date('d/m/Y H:i:s') }}</td>
-                                    <td><a href="/admin/user/{{ user.id_user }}">Voir</a> <a class="text-danger" href="/user/delete/{{ user.id_user }}">Supprimer</a></td>
+                                    <td><form action="/admin/users" method="POST"><a href="/admin/user/{{ user.id_user }}"><i class="fas fa-edit"></i></a>
+                                            <button class="btn btn-default text-danger" name="deleteUser" onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}"><i class="fas fa-trash"></i></button>
+                                            <input type="hidden" name="id_user" value="{{ user.id_user }}"></form></td>
                                 </tr>
                             {% endfor %}
                             </tbody>
