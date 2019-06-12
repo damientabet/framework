@@ -19,29 +19,71 @@
             <h1 class="h3 mb-2 text-gray-800">Utilisateur #{{ user.id_user }}</h1>
             <p class="mb-4">Ici vous trouverez la liste de tous les utilisateus s'étend inscrit sur votre site. Vous
                 pourrez consulter leurs informationsn ainsi que participer à leur gestion</p>
-            <div class="col-xl-4 col-lg-5">
+            <div>
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Mon utilisateur</h6>
-                        <a id="test" class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="ml-auto">
-                                <div class="icon-circle bg-success">
-                                    <i class="fas fa-check text-white"></i>
-                                </div>
+                        <h6 class="m-0 font-weight-bold text-primary">Utilisateur</h6>
+                        <form action="/admin/users" method="POST">
+                            <div class="form-row">
+                                <a style="cursor: pointer;" class="btn btn-default" id="test">
+                                    <div class="ml-auto">
+                                        <div class="icon-circle bg-dark">
+                                            <i class="fas fa-edit text-white"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                <button class="btn btn-default text-danger" name="deleteUser"
+                                        onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}">
+                                    <div class="ml-auto">
+                                        <div class="icon-circle bg-danger">
+                                            <i class="fas fa-trash text-white"></i>
+                                        </div>
+                                    </div>
+                                </button>
                             </div>
-                        </a>
+                            <input type="hidden" name="id_user" value="{{ user.id_user }}">
+                        </form>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
                         <div>
-                            <p>{{ user.firstname }} {{ user.lastname }}</p>
+                            <p class="font-weight-bold">{{ user.firstname }} {{ user.lastname }}</p>
+                            <p>{{ user.email }}</p>
                             <p>{{ user.date_add|date('d/m/Y') }}</p>
                         </div>
-                        <form id="formAdmin" class="d-none" action="">
-                            <input class="form-control" type="text" value="{{ user.firstname }}">
-                            <input class="form-control" type="text" value="{{ user.lastname }}">
-                            <input class="btn btn-success" type="submit" value="Modifier">
+                        <form action="/admin/users" method="POST" id="formAdmin" class="d-none">
+                            <div class="form-group row">
+                                <label for="lastname" class="col-sm-2 col-form-label font-weight-bold">Nom</label>
+                                <div class="col-sm-10">
+                                    <input id="lastname" class="form-control" type="text" name="lastname" value="{{ user.lastname }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="firstname" class="col-sm-2 col-form-label font-weight-bold">Prénom</label>
+                                <div class="col-sm-10">
+                                    <input id="firstname" class="form-control" type="text" name="firstname" value="{{ user.firstname }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label font-weight-bold">Email</label>
+                                <div class="col-sm-10">
+                                    <input id="email" class="form-control" type="text" name="email" value="{{ user.email }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-2 col-form-label font-weight-bold">Mot de passe</label>
+                                <div class="col-sm-10">
+                                    <input id="password" type="password" class="form-control" name="password">
+                                    <small id="emailHelp" class="form-text text-muted">Laisser ce champ vide si vous ne voulez pas modifier le mot de passe</small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <input type="submit" name="editUser" class="btn btn-primary" value="Modifier">
+                                    <input type="hidden" name="id_user" class="btn btn-primary" value="{{ user.id_user }}">
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

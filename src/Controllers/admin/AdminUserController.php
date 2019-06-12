@@ -12,6 +12,10 @@ class AdminUserController extends AdminController
             $this->deleteUser($_POST['id_user']);
             header('Location: /admin/users');
         }
+        if (isset($_POST['editUser'])) {
+            $this->editUser($_POST['id_user']);
+            header('Location: /admin/users');
+        }
         $users = ModelFactory::get('User')->list(null, null, 1);
         echo $this->twig->render('users/usersList.html.twig', ['users' => $users]);
     }
@@ -33,6 +37,24 @@ class AdminUserController extends AdminController
                 $this->logout();
                 header('Location: /admin/users');
             }
+        }
+    public function editUser($id)
+    {
+        if (isset($_POST['editUser'])) {
+            $data = [
+                'firstname' => $_POST['firstname'],
+                'lastname' => $_POST['lastname'],
+                'email' => $_POST['email'],
+                'date_upd' => date('Y-m-d H:i:s')
+            ];
+
+            if (!empty($_POST['password'])) {
+                $data += [
+                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                ];
+            }
+            
+            ModelFactory::get('User')->update($id, $data, 'id_user');
         }
     }
 }
