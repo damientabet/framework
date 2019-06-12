@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}Utilisateurs{% endblock %}
+
 {% block body %}
     <body id="page-top">
 
@@ -46,6 +48,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Prénom</th>
                                 <th>Nom</th>
                                 <th>Adresse Email</th>
@@ -55,6 +58,7 @@
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>ID</th>
                                 <th>Prénom</th>
                                 <th>Nom</th>
                                 <th>Adresse Email</th>
@@ -65,6 +69,7 @@
                             <tbody>
                             {% for user in users %}
                                 <tr>
+                                    <td>{{ user.id_user }}</td>
                                     <td>{{ user.firstname }}</td>
                                     <td>{{ user.lastname }}</td>
                                     <td>{{ user.email }}</td>
