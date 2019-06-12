@@ -31,13 +31,14 @@ class AdminUserController extends AdminController
         if (isset($_POST['deleteUser'])) {
             $user = ModelFactory::get('User')->read($id, 'id_user');
             unlink('../public/img/user/'.$user['image_name']);
-            ModelFactory::get('Article')->delete($_SESSION['user']['id'], 'id_user');
-            ModelFactory::get('Comment')->delete($_SESSION['user']['id'], 'id_user');
-            if (ModelFactory::get('User')->delete($_SESSION['user']['id'], 'id_user')) {
-                $this->logout();
+            ModelFactory::get('Article')->delete($user['id_user'], 'id_user');
+            ModelFactory::get('Comment')->delete($user['id_user'], 'id_user');
+            if (ModelFactory::get('User')->delete($user['id_user'], 'id_user')) {
                 header('Location: /admin/users');
             }
         }
+    }
+
     public function editUser($id)
     {
         if (isset($_POST['editUser'])) {
