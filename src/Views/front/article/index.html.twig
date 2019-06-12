@@ -1,4 +1,4 @@
-{% extends 'front/layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block body %}
     <div style="height: 500px; background-color: black"></div>
@@ -13,5 +13,5 @@
         <hr>
         {{ article.firstname }} {{ article.lastname }} - {{ article.add_article|date("d/m/Y h:i:s") }}
     </div>
-    {% include 'front/include/comment.html.twig' %}
+    {% include 'include/comment.html.twig' %}
 {% endblock %}

@@ -9,12 +9,12 @@ class AdminUserController extends AdminController
     public function userPanel()
     {
         $users = ModelFactory::get('User')->list(null, null, 1);
-        echo $this->twig->render('admin/user.html.twig', ['users' => $users]);
+        echo $this->twig->render('user.html.twig', ['users' => $users]);
     }
 
     public function viewUser($id)
     {
         $user = ModelFactory::get('User')->read($id, 'id_user');
-        echo $this->twig->render('admin/viewUser.html.twig', ['user' => $user]);
+        echo $this->twig->render('viewUser.html.twig', ['user' => $user]);
     }
 }

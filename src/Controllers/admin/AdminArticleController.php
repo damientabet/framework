@@ -9,7 +9,7 @@ class AdminArticleController extends AdminController
     public function articlePanel()
     {
         $articles = ModelFactory::get('Article')->getAllArticles();
-        echo $this->twig->render('admin/articles.html.twig', ['articles' => $articles]);
+        echo $this->twig->render('articles.html.twig', ['articles' => $articles]);
     }
 
     public function viewArticle($id)
@@ -37,7 +37,7 @@ class AdminArticleController extends AdminController
             }
             $article = ModelFactory::get('Article')->getArticleById($id);
 
-            echo $this->twig->render('admin/viewArticle.html.twig', ['article' => $article]);
+            echo $this->twig->render('viewArticle.html.twig', ['article' => $article]);
         } else {
             header('Location: /admin/login');
         }
