@@ -65,7 +65,7 @@ class UserController extends FrontController
                 // TODO : A checker !
                 // $session = $_SESSION['user']['id'];
                 $_SESSION['user'] = [
-                    'id' => $user['id'],
+                    'id' => $user['id_user'],
                     'lastname' => $user['lastname'],
                     'firstname' => $user['firstname'],
                     'email' => $user['email']

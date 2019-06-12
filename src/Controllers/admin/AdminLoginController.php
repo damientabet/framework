@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\admin;
 
-use App\Controllers\admin\AdminController;
 use Core\Model\ModelFactory;
 
 class AdminLoginController extends AdminController
 {
-    public function loginAdmin()
+    public function index()
     {
         echo $this->twig->render('login.html.twig');
     }
 
-    public function connectionAdmin()
+    public function login()
     {
         if (isset($_POST['connectionAdmin'])) {
             $email = $_POST['connectionAdminEmail'];
@@ -42,7 +41,7 @@ class AdminLoginController extends AdminController
         //}
     }
 
-    public function logoutAdmin()
+    public function logout()
     {
         session_destroy();
         header('Location: /admin/login');
