@@ -32,14 +32,14 @@ class listRoutes
                 ),
             'admin/login' =>
                 array(
-                    "controller" => "Admin",
-                    "action" => "loginAdmin",
+                    "controller" => "AdminLogin",
+                    "action" => "index",
                     "controllerType" => 'admin'
                 ),
             'admin/logout' =>
                 array(
-                    "controller" => "Admin",
-                    "action" => "logoutAdmin",
+                    "controller" => "AdminLogin",
+                    "action" => "logout",
                     "controllerType" => 'admin'
                 ),
             'admin' =>
@@ -124,8 +124,8 @@ class listRoutes
                 ),
             'admin/authentification' =>
                 array(
-                    "controller" => "Admin",
-                    "action" => "connectionAdmin",
+                    "controller" => "AdminLogin",
+                    "action" => "login",
                     'controllerType' => 'admin'
                 ),
             'article/delete/:id' =>
