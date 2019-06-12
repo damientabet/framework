@@ -22,6 +22,16 @@ class UserController extends FrontController
         }
     }
 
+    public function authentification()
+    {
+        $this->createUser();
+
+        echo $this->twig->render('authentification.html.twig',
+            [
+                'errors' => $this->errors
+            ]);
+    }
+
     public function createUser()
     {
         if (isset($_POST['addUser'])) {
