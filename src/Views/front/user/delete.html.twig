@@ -1,5 +1,7 @@
 {% extends "layout.html.twig" %}
 
+{% block title %}Mon profil - Supprimer mon article{% endblock %}
+
 {% block body %}
     <h1>Are you sure ?</h1>
     <form action="/user/delete/{{ user_id }}" method="post" name="deleteForm">
