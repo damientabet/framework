@@ -8,6 +8,10 @@ class AdminArticleController extends AdminController
 {
     public function articlePanel()
     {
+        if (isset($_POST['deleteArticle'])) {
+            $this->deleteArticle($_POST['id_article']);
+            header('Location: /admin/articles');
+        }
         $articles = ModelFactory::get('Article')->getAllArticles();
         echo $this->twig->render('articles/articlesList.html.twig', ['articles' => $articles]);
     }
@@ -23,7 +27,7 @@ class AdminArticleController extends AdminController
             }
 
             if (isset($_POST['deleteArticle'])) {
-                ModelFactory::get('Article')->deleteArticle($id);
+                $this->deleteArticle($_POST['id_article']);
                 header('Location: /admin/articles');
             }
 
@@ -40,6 +44,15 @@ class AdminArticleController extends AdminController
             echo $this->twig->render('articles/article.html.twig', ['article' => $article]);
         } else {
             header('Location: /admin/login');
+        }
+    }
+
+    public function deleteArticle($id)
+    {
+        if (isset($_POST['deleteArticle'])) {
+            ModelFactory::get('Comment')->delete($id, 'id_article');
+            ModelFactory::get('Article')->delete($id, 'id_article');
+            header('Location: /admin/articles');
         }
     }
 }

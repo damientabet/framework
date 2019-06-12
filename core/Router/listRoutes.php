@@ -122,6 +122,12 @@ class listRoutes
                     "action" => "viewArticle",
                     'controllerType' => 'admin'
                 ),
+            'admin/articles' =>
+                array(
+                    "controller" => "AdminArticle",
+                    "action" => "articlePanel",
+                    'controllerType' => 'admin'
+                ),
             'admin/authentification' =>
                 array(
                     "controller" => "AdminLogin",
