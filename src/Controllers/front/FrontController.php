@@ -4,13 +4,14 @@ namespace App\Controllers\front;
 
 use App\Controllers\Controller;
 use Core\Model\ModelFactory;
+use Twig\Loader\FilesystemLoader;
 
 class FrontController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $articles = ModelFactory::get('Article')->getAllArticles();
-        echo $this->twig->render('front/index.html.twig', ['articles' => $articles]);
+        $loader = new FilesystemLoader('./../src/Views/front');
+        parent::__construct($loader);
     }
 
     public function authentification()

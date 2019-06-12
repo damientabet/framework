@@ -4,9 +4,16 @@ namespace App\Controllers\admin;
 
 use App\Controllers\Controller;
 use Core\Model\ModelFactory;
+use Twig\Loader\FilesystemLoader;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $loader = new FilesystemLoader('./../src/Views/admin');
+        return parent::__construct($loader);
+    }
+
     public function index()
     {
         if (isset($_SESSION['admin'])) {
