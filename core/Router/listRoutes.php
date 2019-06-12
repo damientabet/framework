@@ -10,103 +10,109 @@ class listRoutes
                 array(
                     "controller" => "AdminArticle",
                     "action" => "viewArticle",
-                    "test" => 'admin'
+                    "controllerType" => 'admin'
                 ),
             'admin/articles' =>
                 array(
                     "controller" => "AdminArticle",
                     "action" => "articlePanel",
-                    "test" => 'admin'
+                    "controllerType" => 'admin'
                 ),
             'admin/user/:id' =>
                 array(
                     "controller" => "AdminUser",
                     "action" => "viewUser",
-                    "test" => 'admin'
+                    "controllerType" => 'admin'
                 ),
             'admin/users' =>
                 array(
                     "controller" => "AdminUser",
                     "action" => "userPanel",
-                    "test" => 'admin'
+                    "controllerType" => 'admin'
                 ),
             'admin/login' =>
                 array(
                     "controller" => "Admin",
                     "action" => "loginAdmin",
-                    "test" => 'admin'
+                    "controllerType" => 'admin'
                 ),
             'admin/logout' =>
                 array(
                     "controller" => "Admin",
                     "action" => "logoutAdmin",
-                    "test" => 'admin'
+                    "controllerType" => 'admin'
                 ),
             'admin' =>
                 array(
                     "controller" => "Admin",
                     "action" => "index",
-                    "test" => 'admin'
+                    "controllerType" => 'admin'
                 ),
             'article/:id' =>
                 array(
                     "controller" => "Article",
                     "action" => "articleView",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'article/add' =>
                 array(
                     "controller" => "Article",
                     "action" => "add",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'article/edit/:id' =>
                 array(
                     "controller" => "Article",
                     "action" => "updateArticle",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'article/delete/:id' =>
                 array(
                     "controller" => "Article",
                     "action" => "deleteArticle",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'authentification' =>
                 array(
-                    "controller" => "User",
+                    "controller" => "Login",
                     "action" => "authentification",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'user/:id' =>
                 array(
                     "controller" => "User",
                     "action" => "userIndex",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'user/article' =>
                 array(
                     "controller" => "Article",
                     "action" => "articlesByUser",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'user/edit/:id' =>
                 array(
                     "controller" => "User",
                     "action" => "updateUser",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'user/delete/:id' =>
                 array(
                     "controller" => "User",
                     "action" => "deleteUser",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'logout' =>
                 array(
-                    "controller" => "User",
+                    "controller" => "Login",
                     "action" => "logout",
-                    'test' => 'front'
+                    'controllerType' => 'front'
+                ),
+            '' =>
+                array(
+                    "controller" => "Front",
+                    "action" => "index",
+                    'controllerType' => 'front'
                 ),
         ),
         "POST" => array(
@@ -114,55 +120,55 @@ class listRoutes
                 array(
                     "controller" => "AdminArticle",
                     "action" => "viewArticle",
-                    'test' => 'admin'
+                    'controllerType' => 'admin'
                 ),
             'admin/authentification' =>
                 array(
                     "controller" => "Admin",
                     "action" => "connectionAdmin",
-                    'test' => 'admin'
+                    'controllerType' => 'admin'
                 ),
             'article/delete/:id' =>
                 array(
                     "controller" => "Article",
                     "action" => "deleteArticle",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'article/edit/:id' =>
                 array(
                     "controller" => "Article",
                     "action" => "updateArticle",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'article/add' =>
                 array(
                     "controller" => "Article",
                     "action" => "add",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'article/:id' =>
                 array(
                     "controller" => "Comment",
                     "action" => "addComment",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'user/delete/:id' =>
                 array(
                     "controller" => "User",
                     "action" => "deleteUser",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'user/edit/:id' =>
                 array(
                     "controller" => "User",
                     "action" => "updateUser",
-                    'test' => 'front'
+                    'controllerType' => 'front'
                 ),
             'authentification' =>
                 array(
-                    "controller" => "User",
-                    "action" => "authentification",
-                    'test' => 'front'
+                    "controller" => "Login",
+                    "action" => "login",
+                    'controllerType' => 'front'
                 ),
         )
     );
