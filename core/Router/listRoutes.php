@@ -182,6 +182,12 @@ class listRoutes
                     "action" => "updateUser",
                     'controllerType' => 'front'
                 ),
+            'contact' =>
+                array(
+                    "controller" => "Contact",
+                    "action" => "sendMail",
+                    'controllerType' => 'front'
+                ),
             'authentification' =>
                 array(
                     "controller" => "User",
