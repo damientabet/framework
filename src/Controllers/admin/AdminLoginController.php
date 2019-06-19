@@ -18,7 +18,6 @@ class AdminLoginController extends AdminController
             $admin = ModelFactory::get('Admin')->read($email, 'email');
             if (empty($_POST['connectionAdminEmail']) || empty($_POST['connectionAdminPasswd'])) {
                 header('Location: /admin/login');
-                // return $this->errors[] = 'Please fill fields';
             }
             if ($admin) {
                 if (password_verify($_POST['connectionAdminPasswd'], $admin['password'])) {
@@ -34,11 +33,6 @@ class AdminLoginController extends AdminController
                 $this->errors[] = 'No matching user';
             }
         }
-        //else {
-        //header('Location: /admin/login');
-        //continue;
-        // return false;
-        //}
     }
 
     public function logout()

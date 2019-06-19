@@ -6,6 +6,14 @@ use Core\Model\ModelFactory;
 
 class AdminUserController extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        if (!isset($_SESSION['admin'])) {
+            header('Location: /admin/login');
+        }
+    }
+
     public function userPanel()
     {
         if (isset($_POST['deleteUser'])) {
