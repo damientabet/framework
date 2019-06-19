@@ -11,11 +11,25 @@ class UserController extends FrontController
     public function userIndex($id)
     {
         $user = ModelFactory::get('User')->read($id, 'id_user');
-        echo $this->twig->render('front/user/account.html.twig',
+        if (isset($_SESSION['user'])) {
+            echo $this->twig->render('user/account.html.twig',
+                [
+                    "user" => $user
+                ]
+            );
+        } else {
+            header('Location: /');
+        }
+    }
+
+    public function authentification()
+    {
+        $this->createUser();
+
+        echo $this->twig->render('authentification.html.twig',
             [
-                "user" => $user
-            ]
-        );
+                'errors' => $this->errors
+            ]);
     }
 
     public function createUser()
@@ -51,7 +65,7 @@ class UserController extends FrontController
                 // TODO : A checker !
                 // $session = $_SESSION['user']['id'];
                 $_SESSION['user'] = [
-                    'id' => $user['id'],
+                    'id' => $user['id_user'],
                     'lastname' => $user['lastname'],
                     'firstname' => $user['firstname'],
                     'email' => $user['email']
@@ -103,7 +117,7 @@ class UserController extends FrontController
 
             $user = ModelFactory::get('User')->read($_SESSION['user']['id'], 'id_user');
 
-            echo $this->twig->render('front/user/edit.html.twig',
+            echo $this->twig->render('user/edit.html.twig',
                 [
                     "user" => $user
                 ]
@@ -125,7 +139,7 @@ class UserController extends FrontController
                     header('Location: /');
                 }
             }
-            echo $this->twig->render('front/user/delete.html.twig', ['user_id' => $_SESSION['user']['id']]);
+            echo $this->twig->render('user/delete.html.twig', ['user_id' => $_SESSION['user']['id']]);
         } else {
             header('Location: /');
         }

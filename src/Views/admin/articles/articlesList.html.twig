@@ -1,4 +1,6 @@
-{% extends 'admin/layout.html.twig' %}
+{% extends 'layout.html.twig' %}
+
+{% block title %}Articles{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -69,9 +71,11 @@
                   <td>{{ article.id_article }}</td>
                   <td>{{ article.title }}</td>
                   <td>{{ article.firstname }} {{ article.lastname }}</td>
-                  <td>{{ article.approved }}</td>
+                  <td class="text-center">{% if article.approved == 1 %}<i class="fas fa-check text-success"></i>{% elseif article.approved == 0 %}<i class="fas fa-times text-danger"></i>{% endif %}</td>
                   <td>{{ article.add_article|date('d/m/Y H:i:s') }}</td>
-                  <td><a href="/admin/article/{{ article.id_article }}">Voir</a> <a class="text-danger" href="/article/delete/{{ article.id_article }}">Supprimer</a></td>
+                  <td><form action="/admin/articles" method="POST"><a href="/admin/article/{{ article.id_article }}"><i class="fas fa-edit"></i></a>
+                    <button class="btn btn-default text-danger" name="deleteArticle" onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}"><i class="fas fa-trash"></i></button>
+                      <input type="hidden" name="id_article" value="{{ article.id_article }}"></form></td>
                 </tr>
               {% endfor %}
               </tbody>
