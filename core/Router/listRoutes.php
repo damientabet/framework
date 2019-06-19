@@ -108,6 +108,12 @@ class listRoutes
                     "action" => "logout",
                     'controllerType' => 'front'
                 ),
+            'contact' =>
+                array(
+                    "controller" => "Contact",
+                    "action" => "index",
+                    'controllerType' => 'front'
+                ),
             '' =>
                 array(
                     "controller" => "Front",
@@ -174,6 +180,12 @@ class listRoutes
                 array(
                     "controller" => "User",
                     "action" => "updateUser",
+                    'controllerType' => 'front'
+                ),
+            'contact' =>
+                array(
+                    "controller" => "Contact",
+                    "action" => "sendMail",
                     'controllerType' => 'front'
                 ),
             'authentification' =>
