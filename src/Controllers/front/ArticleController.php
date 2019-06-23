@@ -8,6 +8,15 @@ class ArticleController extends FrontController
 {
     public $errors;
 
+    public function index()
+    {
+        $articles = ModelFactory::get('Article')->getAllArticles();
+        echo $this->twig->render('article/index.html.twig',
+            [
+                'articles' => $articles
+            ]);
+    }
+
     public function articleView($id)
     {
         if (isset($_POST['addComment'])) {
@@ -18,7 +27,7 @@ class ArticleController extends FrontController
 
         $article = ModelFactory::get('Article')->getArticleById($id, 'id_article');
         $comments = ModelFactory::get('Comment')->getCommentsByArticle($id);
-        echo $this->twig->render('article/index.html.twig',
+        echo $this->twig->render('article/article.html.twig',
             [
                 'article' => $article,
                 'comments' => $comments
