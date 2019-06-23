@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Article #{{ article.id_article }}{% endblock %}
+
+{% block body %}
+    <div style="height: 500px; background-color: black"></div>
+    <div class="p-3 shadow">
+        <h2 class="m-4 text-center">{{ article.title }}
+            {% if "now"|date("d-m-Y") < (article.add_article|date_modify("+7 days")|date("d-m-Y")) %}
+                <span class="badge badge-warning">Nouveau</span>
+            {% endif %}
+        </h2>
+        <p class="text-justify mb-5">{{ article.description }}</p>
+        <p class="text-justify">{{ article.content|raw }}</p>
+        <hr>
+        {{ article.firstname }} {{ article.lastname }} - {{ article.add_article|date("d/m/Y h:i:s") }}
+    </div>
+    {% include 'include/comment.html.twig' %}
+{% endblock %}
