@@ -14,6 +14,10 @@ a:hover {
     margin-top: 20px!important;
 }
 
+.articles-card:hover {
+    box-shadow: 1px 1px 25px 2px #999999;
+}
+
 footer {
     right: 0;
     left: 0;
