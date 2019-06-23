@@ -190,8 +190,8 @@ class listRoutes
                 ),
             'authentification' =>
                 array(
-                    "controller" => "User",
-                    "action" => "authentification",
+                    "controller" => "Login",
+                    "action" => "login",
                     'controllerType' => 'front'
                 ),
         )
