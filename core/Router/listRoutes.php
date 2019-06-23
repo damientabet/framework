@@ -72,6 +72,12 @@ class listRoutes
                     "action" => "deleteArticle",
                     'controllerType' => 'front'
                 ),
+            'articles' =>
+                array(
+                    "controller" => "Article",
+                    "action" => "index",
+                    'controllerType' => 'front'
+                ),
             'authentification' =>
                 array(
                     "controller" => "User",
