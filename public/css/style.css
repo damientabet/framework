@@ -53,3 +53,10 @@ footer {
     display: block;
     margin: 0 auto;
 }
+
+.active a{
+    color: white!important;
+    border-bottom: 2px solid #1cc88a;
+    padding-bottom: 13px;
+    margin-bottom: -15px;
+}
