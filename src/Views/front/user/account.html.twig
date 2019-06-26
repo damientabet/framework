@@ -3,8 +3,8 @@
 {% block title %}Mon Profil - {{ user.firstname }} {{ user.lastname }}{% endblock %}
 
 {% block body %}
-    <h1>Mon profil</h1>
-    <div class="row">
+    <h1 class="mt-3 mb-3">Mon profil</h1>
+    <div style="margin-bottom: 31%" class="row">
         <div class="col-sm-6 mb-3">
             <a href="/user/edit/{{ user.id_user }}" class="account-link">
             <div class="card border-secondary myaccount-card">
