@@ -3,8 +3,8 @@
 {% block title %}Mon profil - Modification de l'article {{ article.id_article }}{% endblock %}
 
 {% block body %}
-    <h1>Modification de l'article #{{ article.id_article }}</h1>
-    <div class="shadow p-5 mt-5 bg-white rounded">
+    <h1 class="mt-3">Modification de l'article #{{ article.id_article }}</h1>
+    <div class="shadow p-5 mt-3 bg-white rounded">
         <nav class="nav justify-content-end">
             <a href="/user/article" class="nav-link" title="Retour"><i class="fas fa-chevron-left align-middle"></i></a>
             <a class="nav-link" href="/article/delete/{{ article.id }}" title="Supprimer"><i style="color: red;" class="fas fa-trash align-middle"></i></a>
