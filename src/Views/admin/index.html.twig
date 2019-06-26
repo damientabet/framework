@@ -83,7 +83,7 @@
             <div class="row">
 
                 <!-- Area Chart -->
-                <div class="col-xl-12 col-lg-12">
+                <div class="col-xl-6 col-lg-6">
                     <div class="card shadow mb-4">
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -100,11 +100,12 @@
                                             <span class="text">{{ article.title }} - {{ article.date_add|date('d/m/Y') }}</span>
                                         </a>
                                         <form action="/admin/article/{{ article.id_article }}" method="POST">
-                                            <label style="cursor: pointer;" for="approved"
-                                                   class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm"><span
-                                                        class="icon text-white"><i
-                                                            class="fas fa-check fa-sm text-white"></i></span><span
-                                                        class="text"></span></label>
+                                            <label style="cursor: pointer;" for="approved" class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm">
+                                                <span class="icon text-white" title="Approuver">
+                                                    <i class="fas fa-check fa-sm text-white"></i>
+                                                </span>
+                                                <span class="text"></span>
+                                            </label>
                                             <input id="approved" type="submit" name="approvedArticle" class="d-none">
                                         </form>
                                     </div>
@@ -114,45 +115,36 @@
                     </div>
                 </div>
 
-{#                <div class="col-lg-4">#}
-{#                    <div class="card shadow mb-4">#}
-{#                        <div class="card-header py-3">#}
-{#                            <h6 class="m-0 font-weight-bold text-primary">Projects</h6>#}
-{#                        </div>#}
-{#                        <div class="card-body">#}
-{#                            <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span>#}
-{#                            </h4>#}
-{#                            <div class="progress mb-4">#}
-{#                                <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"#}
-{#                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#                            </div>#}
-{#                            <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span>#}
-{#                            </h4>#}
-{#                            <div class="progress mb-4">#}
-{#                                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"#}
-{#                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#                            </div>#}
-{#                            <h4 class="small font-weight-bold">Customer Database <span#}
-{#                                        class="float-right">60%</span></h4>#}
-{#                            <div class="progress mb-4">#}
-{#                                <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60"#}
-{#                                     aria-valuemin="0" aria-valuemax="100"></div>#}
-{#                            </div>#}
-{#                            <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span>#}
-{#                            </h4>#}
-{#                            <div class="progress mb-4">#}
-{#                                <div class="progress-bar bg-info" role="progressbar" style="width: 80%"#}
-{#                                     aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#                            </div>#}
-{#                            <h4 class="small font-weight-bold">Account Setup <span#}
-{#                                        class="float-right">Complete!</span></h4>#}
-{#                            <div class="progress">#}
-{#                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%"#}
-{#                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Commentaires à approuver</h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <!-- Page Heading -->
+                            {% for comment in comments %}
+                                {% if comment.approved == 0 %}
+                                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                        <a href="/admin/article/{{ comment.id_article }}" class="d-none d-sm-inline-block">
+                                            <span class="text">#{{ comment.id_article }} / {{ comment.content|truncate(80, true) }} - {{ comment.date_add|date('d/m/Y') }}</span>
+                                        </a>
+                                        <form action="/admin/comment/{{ comment.id_comment }}" method="POST">
+                                            <label style="cursor: pointer;" for="approvedComment" class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm" title="Approuver">
+                                                <span class="icon text-white">
+                                                    <i class="fas fa-check fa-sm text-white"></i>
+                                                </span>
+                                                <span class="text"></span>
+                                            </label>
+                                            <input id="approvedComment" type="submit" name="approvedComment" class="d-none">
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- End of Main Content -->
