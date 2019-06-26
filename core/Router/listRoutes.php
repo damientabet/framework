@@ -128,6 +128,12 @@ class listRoutes
                 ),
         ),
         "POST" => array(
+            'admin/comment/:id' =>
+                array(
+                    "controller" => "AdminComment",
+                    "action" => "approvedComment",
+                    'controllerType' => 'admin'
+                ),
             'admin/users' =>
                 array(
                     "controller" => "AdminUser",
