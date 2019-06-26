@@ -1,10 +1,10 @@
 a:hover {
     text-decoration: none!important;
 }
-.card {
+.myaccount-card {
     transition: 200ms;
 }
-.card:hover {
+.myaccount-card:hover {
     box-shadow: 1px 1px 25px 2px #999999;
     transition: 200ms;
     /*box-shadow: none;*/
@@ -52,4 +52,11 @@ footer {
     cursor: pointer;
     display: block;
     margin: 0 auto;
+}
+
+.active a{
+    color: white!important;
+    border-bottom: 2px solid #1cc88a;
+    padding-bottom: 13px;
+    margin-bottom: -15px;
 }

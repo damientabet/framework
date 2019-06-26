@@ -47,8 +47,14 @@ class AdminArticleController extends AdminController
             ModelFactory::get('Article')->update($id, $data, 'id_article');
         }
         $article = ModelFactory::get('Article')->getArticleById($id);
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle($id);
 
-        echo $this->twig->render('articles/article.html.twig', ['article' => $article]);
+        echo $this->twig->render('articles/article.html.twig',
+            [
+                'article' => $article,
+                'comments' => $comments
+            ]
+        );
     }
 
     public function deleteArticle($id)

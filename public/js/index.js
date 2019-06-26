@@ -1,6 +1,7 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function() {
+    setActive();
     var input = document.getElementById('file');
 
     if (input != null) {
@@ -48,5 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
             var articleTitle = document.getElementById('articleTitle');
             articleTitle.classList.add('d-none');
         });
+    }
+
+    function setActive() {
+        var liObj = document.getElementById('accordionSidebar').getElementsByTagName('li');
+        for(var i = 0; i < liObj.length; i++) {
+            if(document.location.href === liObj[i].getElementsByTagName('a')[0].href) {
+                liObj[i].classList.add('active');
+            }
+        }
     }
 });

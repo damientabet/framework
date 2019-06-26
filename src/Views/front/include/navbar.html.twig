@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Accueil</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="accordionSidebar">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,6 +6,9 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Accueil</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/articles">Liste des articles</a>
             </li>
@@ -31,7 +33,7 @@
                             Se connecter
                         </button>
                         <div class="dropdown-menu dropdown-menu-right bg-dark text-white">
-                            <form action="/authentification" method="post" class="px-3 py-3">
+                            <form action="/login" method="post" class="px-3 py-3">
                                 <div class="form-group">
                                     <label for="exampleDropdownFormEmail1">Adresse email</label>
                                     <input name="connection_email" type="email" class="form-control"
@@ -45,7 +47,7 @@
                                 <button name="connection" type="submit" class="form-control btn btn-primary">Se connecter</button>
                             </form>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-white" href="/authentification">Vous êtes nouveau ? Inscrivez-vous</a>
+                            <a class="dropdown-item bg-dark text-white" href="/authentification">Vous êtes nouveau ? Inscrivez-vous</a>
                         </div>
                     </div>
                 </li>

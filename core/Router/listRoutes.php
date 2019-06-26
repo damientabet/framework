@@ -128,6 +128,12 @@ class listRoutes
                 ),
         ),
         "POST" => array(
+            'admin/comment/:id' =>
+                array(
+                    "controller" => "AdminComment",
+                    "action" => "approvedComment",
+                    'controllerType' => 'admin'
+                ),
             'admin/users' =>
                 array(
                     "controller" => "AdminUser",
@@ -195,6 +201,12 @@ class listRoutes
                     'controllerType' => 'front'
                 ),
             'authentification' =>
+                array(
+                    "controller" => "User",
+                    "action" => "authentification",
+                    'controllerType' => 'front'
+                ),
+            'login' =>
                 array(
                     "controller" => "Login",
                     "action" => "login",

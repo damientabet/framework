@@ -19,7 +19,7 @@ class AdminController extends Controller
         if (isset($_SESSION['admin'])) {
         $users = ModelFactory::get('User')->list(null, null, 1);
         $articles = ModelFactory::get('Article')->getAllArticles();
-        $comments = ModelFactory::get('Comment')->list(null, null, 1);
+        $comments = ModelFactory::get('Comment')->getAllComments();
             echo $this->twig->render('index.html.twig',
                 [
                     'users' => count($users),
