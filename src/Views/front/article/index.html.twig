@@ -6,13 +6,15 @@
     <h1 class="mt-5 mb-3">Tous les articles</h1>
 
     {% for article in articles %}
-        <a class="text-secondary" href="/article/{{ article.id_article }}">
-            <div class="card mb-2 articles-card">
-                <div class="card-body clearfix p-3">
-                    <span class="float-left">{{ article.title }}</span>
-                    <span class="float-right">{{ article.firstname }} {{ article.lastname }} - {{ article.add_article|date('d/m/Y') }}</span>
+        {% if article.approved == 0 %}
+            <a class="text-secondary" href="/article/{{ article.id_article }}">
+                <div class="card mb-2 articles-card">
+                    <div class="card-body clearfix p-3">
+                        <span class="float-left">{{ article.title }}</span>
+                        <span class="float-right">{{ article.firstname }} {{ article.lastname }} - {{ article.add_article|date('d/m/Y') }}</span>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        {% endif %}
     {% endfor %}
 {% endblock %}

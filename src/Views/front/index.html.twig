@@ -5,14 +5,19 @@
 {% block body %}
     <ul class="list-unstyled">
         {% for article in articles %}
-            <li style="cursor: pointer;" onclick="document.location = '/article/{{ article.id_article }}'" class="media shadow mt-5 p-3" id="index-list">
-                <img style="max-width: 120px; max-height: 120px;" src="/img/user/default.png" class="mr-3" alt="...">
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">{{ article.title }}</h5>
-                    {{ article.description|truncate(300, true)|raw }}
-                    <p>{{ article.firstname }} {{ article.lastname }}</p>
-                </div>
-            </li>
+            {% if article.approved == 1 %}
+                <a style="color: black" href="/article/{{ article.id_article }}">
+                    <li class="media shadow mt-5 p-3" id="index-list">
+                        <img style="max-width: 120px; max-height: 120px;" src="/img/user/default.png" class="mr-3"
+                             alt="...">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">{{ article.title }}</h5>
+                            {{ article.description|truncate(300, true)|raw }}
+                            <p>{{ article.firstname }} {{ article.lastname }}</p>
+                        </div>
+                    </li>
+                </a>
+            {% endif %}
         {% endfor %}
     </ul>
 {% endblock %}
