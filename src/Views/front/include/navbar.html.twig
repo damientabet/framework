@@ -1,57 +1,64 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="accordionSidebar">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0" id="accordionSidebar">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Accueil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/articles">Liste des articles</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/contact">Contact</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            {% if session.user %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/{{ session.user.id }}">Mon compte</a>
+        <div class="collapse navbar-collapse align-items-stretch pt-2" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item text-center">
+                    <a class="nav-link h-100 d-lg-flex align-items-lg-center" href="/">Accueil</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Se déconnecter</a>
+                <li class="nav-item text-center">
+                    <a class="nav-link h-100 d-lg-flex align-items-lg-center" href="/articles">Articles</a>
                 </li>
-            {% else %}
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button style="border: none; background-color: transparent" class="nav-link" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            Se connecter
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right bg-dark text-white">
-                            <form action="/login" method="post" class="px-3 py-3">
-                                <div class="form-group">
-                                    <label for="exampleDropdownFormEmail1">Adresse email</label>
-                                    <input name="connection_email" type="email" class="form-control"
-                                           id="exampleDropdownFormEmail1" placeholder="email@example.com">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleDropdownFormPassword1">Mot de passe</label>
-                                    <input name="connection_password" type="password" class="form-control"
-                                           id="exampleDropdownFormPassword1" placeholder="Mot de passe">
-                                </div>
-                                <button name="connection" type="submit" class="form-control btn btn-primary">Se connecter</button>
-                            </form>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item bg-dark text-white" href="/authentification">Vous êtes nouveau ? Inscrivez-vous</a>
+                <li class="nav-item text-center">
+                    <a class="nav-link h-100 d-lg-flex align-items-lg-center" href="/contact">Contact</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if session.user %}
+                    <li class="nav-item text-center">
+                        <a class="nav-link pt-3" href="/user/{{ session.user.id }}">
+                            <i class="far fa-user fa-lg d-block"></i> <span style="font-size: 13px">Mon compte</span></a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link pt-3" href="/logout"><i class="fas fa-sign-out-alt fa-lg d-block"></i> <span style="font-size: 13px">Se déconnecter</span></a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button style="border: none; background-color: transparent" class="nav-link" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <i class="far fa-user fa-lg d-block mt-2 mb-1"></i>
+                                <span style="font-size: 13px">Se connecter</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right bg-dark text-white">
+                                <form action="/login" method="post" class="px-3 py-3">
+                                    <div class="form-group">
+                                        <label for="exampleDropdownFormEmail1">Adresse email</label>
+                                        <input name="connection_email" type="email" class="form-control"
+                                               id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleDropdownFormPassword1">Mot de passe</label>
+                                        <input name="connection_password" type="password" class="form-control"
+                                               id="exampleDropdownFormPassword1" placeholder="Mot de passe">
+                                    </div>
+                                    <button name="connection" type="submit" class="form-control btn btn-primary">Se
+                                        connecter
+                                    </button>
+                                </form>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item bg-dark text-white" href="/authentification">Vous êtes nouveau ?
+                                    Inscrivez-vous</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            {% endif %}
-        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
