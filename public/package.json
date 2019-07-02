@@ -1,7 +1,15 @@
 {
-  "name": "framework",
-  "description": "Project N°5",
+  "name": "blog-projet5",
+  "version": "0.1.0",
+  "description": "OpenClassrooms PHP/SYMFONY - Projet 5",
   "main": "index.php",
+  "keywords": [
+    "framework",
+    "blog",
+    "php",
+    "bootstrap"
+  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/damientabet/framework.git"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "941ccafa30505a8f85ccc904fd2fa1fc",
+    "content-hash": "c6ddb6826ac326f22aca0ae7a82827d2",
     "packages": [
         {
             "name": "symfony/polyfill-ctype",
@@ -180,16 +180,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.3.0",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "2fd2ecf7913fb96f0c2e941ca15bb702184c6574"
+                "reference": "45d6ef73671995aca565a1aa3d9a432a3ea63f91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/2fd2ecf7913fb96f0c2e941ca15bb702184c6574",
-                "reference": "2fd2ecf7913fb96f0c2e941ca15bb702184c6574",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/45d6ef73671995aca565a1aa3d9a432a3ea63f91",
+                "reference": "45d6ef73671995aca565a1aa3d9a432a3ea63f91",
                 "shasum": ""
             },
             "require": {
@@ -252,20 +252,20 @@
                 "debug",
                 "dump"
             ],
-            "time": "2019-05-01T12:55:49+00:00"
+            "time": "2019-06-17T17:37:00+00:00"
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.6.2",
+            "version": "v2.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "9a6513089a836744e70af0910ad45f50e603dcf5"
+                "reference": "7613eeff265b49a865add75360d1962449e3c12f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/9a6513089a836744e70af0910ad45f50e603dcf5",
-                "reference": "9a6513089a836744e70af0910ad45f50e603dcf5",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/7613eeff265b49a865add75360d1962449e3c12f",
+                "reference": "7613eeff265b49a865add75360d1962449e3c12f",
                 "shasum": ""
             },
             "require": {
@@ -319,7 +319,7 @@
                 "nette",
                 "profiler"
             ],
-            "time": "2019-04-03T20:29:00+00:00"
+            "time": "2019-06-18T12:20:11+00:00"
         },
         {
             "name": "twig/extensions",
@@ -378,16 +378,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.10.0",
+            "version": "v2.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b"
+                "reference": "699ed2342557c88789a15402de5eb834dedd6792"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5240e21982885b76629552d83b4ebb6d41ccde6b",
-                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/699ed2342557c88789a15402de5eb834dedd6792",
+                "reference": "699ed2342557c88789a15402de5eb834dedd6792",
                 "shasum": ""
             },
             "require": {
@@ -398,12 +398,12 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.10-dev"
+                    "dev-master": "2.11-dev"
                 }
             },
             "autoload": {
@@ -441,7 +441,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-05-14T12:03:52+00:00"
+            "time": "2019-06-18T15:37:11+00:00"
         }
     ],
     "packages-dev": [],
