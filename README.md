@@ -1,5 +1,5 @@
-# OpenClassrooms PHP/SYMFONY - Projet 5  
-## Résumé du projet  
+# OpenClassrooms PHP/SYMFONY - Projet 5
+## Résumé du projet
 Le projet est donc de développer votre blog professionnel.  
 Ce site web se décompose en deux grands groupes de pages :  
 -   les pages utiles à tous les visiteurs  
@@ -45,29 +45,29 @@ Sur la page présentant le détail d’un blog post, il faut afficher les inform
 
 Sur la page permettant de modifier un blog post, l’utilisateur a la possibilité de modifier les champs titre, chapô, auteur et contenu.  
 Dans le footer menu, il doit figurer un lien pour accéder à l’administration du blog.  
-## Processus d'installation  
-### Étape 1  
+## Processus d'installation
+### Étape 1
 -   Assurez-vous d'avoir Git installé sur votre machine  
 
     www.git-scm.com  
-### Étape 2  
+### Étape 2
 -   Cloner le repository sur votre serveur local  
 ``git clone https://github.com/damientabet/framework.git``  
-### Étape 3  
+### Étape 3
 -   Bien s'assurer que composer est installé sur votre machine  
   
     www.getcomposer.org/doc/00-intro.md  
 -   Après avoir installé composer, lancer ``composer install`` à la racine de votre projet  
 Toutes les dépendances vont s'installer et se stocker dans le dossier **vendor/**  
-### Étape 4  
+### Étape 4
 -  Assurez-vous que npm est installer sur votre machine  
 
     www.npmjs.com/get-npm  
 -   Se rendre, avec la console, dans le dossier **/public**  ``cd public/``  
 -   Lancer ``npm install``  
 Toutes les dépendances vont s'installer et se stocker dans le dossier **node_modules/**  
-### Étape 5  
+### Étape 5
 Modifier votre fichier **host** afin de faire pointer une url directement vers le fichier **index.php** du dossier **/public**  
-## Lancer le projet  
+## Lancer le projet
 Après installé le projet et modifier votre fichier host.  
 Rendez-vous sur votre **navigateur web** pour lancer la page d'accueil du site.  
