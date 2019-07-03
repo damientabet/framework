@@ -8,12 +8,20 @@ use Twig\Loader\FilesystemLoader;
 
 class AdminController extends Controller
 {
+    /**
+     * AdminController constructor.
+     */
     public function __construct()
     {
         $loader = new FilesystemLoader('./../src/Views/admin');
         return parent::__construct($loader);
     }
 
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function index()
     {
         if (isset($_SESSION['admin'])) {

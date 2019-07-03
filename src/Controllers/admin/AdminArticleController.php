@@ -6,6 +6,9 @@ use Core\Model\ModelFactory;
 
 class AdminArticleController extends AdminController
 {
+    /**
+     * AdminArticleController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +17,11 @@ class AdminArticleController extends AdminController
         }
     }
 
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function articlePanel()
     {
         if (isset($_POST['deleteArticle'])) {
@@ -24,7 +32,13 @@ class AdminArticleController extends AdminController
         echo $this->twig->render('articles/articlesList.html.twig', ['articles' => $articles]);
     }
 
-    public function viewArticle($id)
+    /**
+     * @param int $id
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function viewArticle(int $id)
     {
         if (isset($_POST['approvedArticle'])) {
             $data = [
@@ -44,10 +58,10 @@ class AdminArticleController extends AdminController
                 'description' => $_POST['descArticle'],
                 'content' => $_POST['contentArticle'],
             ];
-            ModelFactory::get('Article')->update($id, $data, 'id_article');
+            ModelFactory::get('Article')->update((int)$id, (array)$data, 'id_article');
         }
-        $article = ModelFactory::get('Article')->getArticleById($id);
-        $comments = ModelFactory::get('Comment')->getCommentsByArticle($id);
+        $article = ModelFactory::get('Article')->getArticleById((int)$id);
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
 
         echo $this->twig->render('articles/article.html.twig',
             [
@@ -57,11 +71,14 @@ class AdminArticleController extends AdminController
         );
     }
 
-    public function deleteArticle($id)
+    /**
+     * @param int $id
+     */
+    public function deleteArticle(int $id)
     {
         if (isset($_POST['deleteArticle'])) {
-            ModelFactory::get('Comment')->delete($id, 'id_article');
-            ModelFactory::get('Article')->delete($id, 'id_article');
+            ModelFactory::get('Comment')->delete((int)$id, 'id_article');
+            ModelFactory::get('Article')->delete((int)$id, 'id_article');
             header('Location: /admin/articles');
         }
     }

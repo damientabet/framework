@@ -8,9 +8,15 @@ class UserController extends FrontController
 {
     public $errors = [];
 
-    public function userIndex($id)
+    /**
+     * @param int $id
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function userIndex(int $id)
     {
-        $user = ModelFactory::get('User')->read($id, 'id_user');
+        $user = ModelFactory::get('User')->read((int)$id, 'id_user');
         if (isset($_SESSION['user'])) {
             echo $this->twig->render('user/account.html.twig',
                 [
@@ -22,6 +28,11 @@ class UserController extends FrontController
         }
     }
 
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function authentification()
     {
         $this->createUser();
@@ -32,6 +43,9 @@ class UserController extends FrontController
             ]);
     }
 
+    /**
+     * @return array
+     */
     public function createUser()
     {
         if (isset($_POST['addUser'])) {
@@ -51,24 +65,24 @@ class UserController extends FrontController
 
             if (!$this->errors) {
                 $data = [
-                    'lastname' => $_POST['lastname'],
-                    'firstname' => $_POST['firstname'],
-                    'email' => $_POST['email'],
+                    'lastname' => (string)$_POST['lastname'],
+                    'firstname' => (string)$_POST['firstname'],
+                    'email' => (string)$_POST['email'],
                     'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                     'image_name' => 'default.png',
                     'date_add' => date('Y-m-d H:i:s'),
                     'date_upd' => date('Y-m-d H:i:s')
                 ];
-                ModelFactory::get('User')->create($data);
+                ModelFactory::get('User')->create((array)$data);
 
                 $user = ModelFactory::get('User')->read($data['email'], 'email');
                 // TODO : A checker !
                 // $session = $_SESSION['user']['id'];
                 $_SESSION['user'] = [
-                    'id' => $user['id_user'],
-                    'lastname' => $user['lastname'],
-                    'firstname' => $user['firstname'],
-                    'email' => $user['email']
+                    'id' => (string)$user['id_user'],
+                    'lastname' => (string)$user['lastname'],
+                    'firstname' => (string)$user['firstname'],
+                    'email' => (string)$user['email']
                 ];
                 header('Location: /user/' . $_SESSION['user']['id']);
             } else {
@@ -77,11 +91,17 @@ class UserController extends FrontController
         }
     }
 
-    public function updateUser($id)
+    /**
+     * @param int $id
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError(string)
+     */
+    public function updateUser(int $id)
     {
         if (isset($_SESSION['user'])) {
             if (isset($_POST['deleteImg'])) {
-                $user = ModelFactory::get('User')->read($id, 'id_user');
+                $user = ModelFactory::get('User')->read((int)$id, 'id_user');
                 ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => null], 'id_user');
                 unlink('../public/img/user/'.$user['image_name']);
             }
@@ -93,11 +113,11 @@ class UserController extends FrontController
                     $extension = $extension->getExtension();
                     $acceptExtension = ['jpg', 'png'];
                     if (in_array($extension, $acceptExtension)) {
-                        $imgName = $id . '.' . $extension;
+                        $imgName = (int)$id . '.' . $extension;
                         $imgDirname = IMG_USER_DIR.$imgName;
                         if (move_uploaded_file($_FILES['userImg']['tmp_name'], $imgDirname)) {
                             ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => $imgName], 'id_user');
-                            header('Location: /user/edit/'.$id);
+                            header('Location: /user/edit/'.(int)$id);
                         } else {
                             echo 'Erreur lors du téléchargement de l\'image';
                         }
@@ -106,9 +126,9 @@ class UserController extends FrontController
                     }
                 }
                 $data = [
-                    'firstname' => $_POST['firstname'],
-                    'lastname' => $_POST['lastname'],
-                    'email' => $_POST['email'],
+                    'firstname' => (string)$_POST['firstname'],
+                    'lastname' => (string)$_POST['lastname'],
+                    'email' => (string)$_POST['email'],
                     'date_upd' => date('Y-m-d H:i:s')
                 ];
 
@@ -127,19 +147,25 @@ class UserController extends FrontController
         }
     }
 
-    public function deleteUser($id)
+    /**
+     * @param int $id
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function deleteUser(int $id)
     {
         if (isset($_SESSION['user'])) {
             if (isset($_POST['deleteUser'])) {
-                $user = ModelFactory::get('User')->read($id, 'id_user');
+                $user = ModelFactory::get('User')->read((int)$id, 'id_user');
                 unlink('../public/img/user/'.$user['image_name']);
-                ModelFactory::get('Article')->delete($_SESSION['user']['id'], 'id_user');
-                if (ModelFactory::get('User')->delete($_SESSION['user']['id'])) {
+                ModelFactory::get('Article')->delete((int)$_SESSION['user']['id'], 'id_user');
+                if (ModelFactory::get('User')->delete((int)$_SESSION['user']['id'])) {
                     $this->logout();
                     header('Location: /');
                 }
             }
-            echo $this->twig->render('user/delete.html.twig', ['user_id' => $_SESSION['user']['id']]);
+            echo $this->twig->render('user/delete.html.twig', ['user_id' => (int)$_SESSION['user']['id']]);
         } else {
             header('Location: /');
         }

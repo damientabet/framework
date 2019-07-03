@@ -6,6 +6,11 @@ use Core\Model\ModelFactory;
 
 class AdminLoginController extends AdminController
 {
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function index()
     {
         echo $this->twig->render('login.html.twig');
@@ -22,10 +27,10 @@ class AdminLoginController extends AdminController
             if ($admin) {
                 if (password_verify($_POST['connectionAdminPasswd'], $admin['password'])) {
                     $_SESSION['admin'] = [
-                        'id' => $admin['id_admin'],
-                        'lastname' => $admin['lastname'],
-                        'firstname' => $admin['firstname'],
-                        'email' => $email
+                        'id' => (int)$admin['id_admin'],
+                        'lastname' => (string)$admin['lastname'],
+                        'firstname' => (string)$admin['firstname'],
+                        'email' => (string)$email
                     ];
                     header('Location: /admin');
                 }

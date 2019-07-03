@@ -10,19 +10,33 @@ class Route
     private $matches;
     private $params = [];
 
-    public function __construct($path, $callable)
+    /**
+     * Route constructor.
+     * @param string $path
+     * @param string $callable
+     */
+    public function __construct(string $path, string $callable)
     {
-        $this->path = trim($path, '/');
+        $this->path = trim((string)$path, '/');
         $this->callable = $callable;
     }
 
-    public function with($params, $regex)
+    /**
+     * @param string $params
+     * @param string $regex
+     * @return $this
+     */
+    public function with(string $params, string $regex)
     {
         $this->params[$params] = str_ireplace('(', '(?:', $regex);
         return $this;
     }
 
-    public function match($url)
+    /**
+     * @param string $url
+     * @return bool
+     */
+    public function match(string $url)
     {
         $url = trim($url, '/');
         $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->path);
@@ -36,7 +50,11 @@ class Route
         return true;
     }
 
-    public function getUrl($params)
+    /**
+     * @param array $params
+     * @return mixed|string
+     */
+    public function getUrl(array $params)
     {
         $path = $this->path;
         foreach ($params as $k => $v) {
@@ -45,7 +63,11 @@ class Route
         return $path;
     }
 
-    private function paramMatch($match)
+    /**
+     * @param array $match
+     * @return string
+     */
+    private function paramMatch(array $match)
     {
         if (isset($this->params[1])) {
             return '(' . $this->params[$match[1]] . ')';
@@ -53,7 +75,11 @@ class Route
         return '([^/]+)';
     }
 
-    public function call($controllerType)
+    /**
+     * @param string $controllerType
+     * @return mixed
+     */
+    public function call(string $controllerType)
     {
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);

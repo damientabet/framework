@@ -4,6 +4,11 @@ namespace App\Controllers\front;
 
 class ContactController extends FrontController
 {
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function index()
     {
         echo $this->twig->render('contact.html.twig');
@@ -11,21 +16,21 @@ class ContactController extends FrontController
 
     public function sendMail()
     {
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $subject = $_POST['subject'];
-        $email = $_POST['email'];
-        $message = $_POST['message'];
+        $firstname = (string)$_POST['firstname'];
+        $lastname = (string)$_POST['lastname'];
+        $subject = (string)$_POST['subject'];
+        $email = (string)$_POST['email'];
+        $message = (string)$_POST['message'];
 
         $templateVars = array(
-            '{nom}' => $firstname,
-            '{prenom}' => $lastname,
-            '{email}' => $email,
-            '{message}' => $message
+            '{nom}' => (string)$firstname,
+            '{prenom}' => (string)$lastname,
+            '{email}' => (string)$email,
+            '{message}' => (string)$message
         );
 
-        $search = array_keys($templateVars);
-        $replace = array_values($templateVars);
+        $search = array_keys((array)$templateVars);
+        $replace = array_values((array)$templateVars);
 
         $template = file_get_contents('../src/Views/front/mail/contact.html');
 
