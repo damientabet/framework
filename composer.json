@@ -1,4 +1,22 @@
 {
+  "name": "oc/blog-projet5",
+  "description": "OpenClassrooms PHP/SYMFONY - Projet 5",
+  "version": "0.1.0",
+  "type": "project",
+  "keywords": [
+    "framework",
+    "blog",
+    "php",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Damien Tabet",
+      "email": "tabetdamien@free.fr",
+      "role": "Creator"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "App\\": "src/",
