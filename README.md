@@ -1,5 +1,5 @@
 # OpenClassrooms PHP/SYMFONY - Projet 5
-##Résumé du projet
+## Résumé du projet
 Le projet est donc de développer votre blog professionnel. Ce site web se décompose en deux grands groupes de pages :
 les pages utiles à tous les visiteurs ;
 les pages permettant d’administrer votre blog.
@@ -48,7 +48,7 @@ Dans le footer menu, il doit figurer un lien pour accéder à l’administration
 - Cloner le repository avec le lien suivant : https://github.com/damientabet/framework.git
 ### Étape 2 :
 - Bien s'assurer que composer est installé sur votre machine
-- Lancer ``composer install` à la racine
+- Lancer ``composer install`` à la racine
 ### Étape 3 :
 - Bien s'assurer que npm est installer sur votre machine
 - Se rendre, avec la console, dans le dossier **/public** ``cd public/``
