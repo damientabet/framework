@@ -6,7 +6,7 @@
     <div style="height: 500px; background-color: black"></div>
     <div class="p-3 shadow">
         <h2 class="m-4 text-center">{{ article.title }}
-            {% if "now"|date("d-m-Y") < (article.add_article|date_modify("+7 days")|date("d-m-Y")) %}
+            {% if ("now"|date("Y-m-d")) < (article.add_article|date_modify("+7 days")|date("Y-m-d")) %}
                 <span class="badge badge-warning">Nouveau</span>
             {% endif %}
         </h2>
