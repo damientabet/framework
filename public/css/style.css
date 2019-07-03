@@ -1,5 +1,5 @@
 a:hover {
-    text-decoration: none!important;
+    text-decoration: none !important;
 }
 .myaccount-card {
     transition: 200ms;
@@ -11,7 +11,7 @@ a:hover {
 }
 
 .block-body {
-    margin-top: 20px!important;
+    margin-top: 20px !important;
 }
 
 .articles-card:hover {
@@ -24,7 +24,7 @@ footer {
     bottom: 0;
     width: 100%;
     display: block;
-    background-color: #6c757d!important;
+    background-color: #6c757d !important;
 }
 
 .label-file {
