@@ -9,6 +9,10 @@ abstract class Model implements ModelInterface
     protected $database;
     protected $table;
 
+    /**
+     * Model constructor.
+     * @param DatabaseInterface $database
+     */
     public function __construct(DatabaseInterface $database)
     {
         $this->database = $database;
@@ -18,6 +22,12 @@ abstract class Model implements ModelInterface
         $this->table = ucfirst(str_replace('Model', '', array_pop($modelName)));
     }
 
+    /**
+     * @param string|null $value
+     * @param string|null $key
+     * @param int $order
+     * @return mixed
+     */
     public function list(string $value = null, string $key = null, int $order = 0)
     {
         if (isset($key))
@@ -43,6 +53,9 @@ abstract class Model implements ModelInterface
         }
     }
 
+    /**
+     * @param array $data
+     */
     public function create(array $data)
     {
         $keys = implode(', ', array_keys($data));
@@ -53,6 +66,11 @@ abstract class Model implements ModelInterface
         $this->database->action($query);
     }
 
+    /**
+     * @param string $value
+     * @param string|null $key
+     * @return mixed
+     */
     public function read(string $value, string $key = null)
     {
         if (isset($key))
@@ -65,6 +83,11 @@ abstract class Model implements ModelInterface
         return $this->database->result($query, [$value]);
     }
 
+    /**
+     * @param string $value
+     * @param array $data
+     * @param string|null $key
+     */
     public function update(string $value, array $data, string $key = null)
     {
         $set = null;
@@ -86,6 +109,10 @@ abstract class Model implements ModelInterface
         $this->database->action($query, [$value]);
     }
 
+    /**
+     * @param string $value
+     * @param string|null $key
+     */
     public function delete(string $value, string $key = null)
     {
         if (isset($key))

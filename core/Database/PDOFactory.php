@@ -8,6 +8,9 @@ class PDOFactory
 {
     static private $pdo = null;
 
+    /**
+     * @return PDO|null
+     */
     public static function getConnection()
     {
         require_once dirname(dirname(__DIR__)) . '/config/config.php';

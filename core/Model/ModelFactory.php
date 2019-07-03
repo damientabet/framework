@@ -9,6 +9,10 @@ class ModelFactory
 {
     static private $models = [];
 
+    /**
+     * @param $table
+     * @return mixed
+     */
     static public function get($table)
     {
         if (array_key_exists($table, self::$models))

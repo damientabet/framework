@@ -8,11 +8,14 @@ class LoginController extends FrontController
 {
     public $errors;
 
+    /**
+     * @return bool|string
+     */
     public function login()
     {
         if (isset($_POST['connection'])) {
-            $email = $_POST['connection_email'];
-            $user = ModelFactory::get('User')->read($email, 'email');
+            $email = (string)$_POST['connection_email'];
+            $user = ModelFactory::get('User')->read((string)$email, 'email');
             if (empty($_POST['connection_email']) || empty($_POST['connection_password'])) {
                 return $this->errors[] = 'Please fill fields';
             }
@@ -24,7 +27,7 @@ class LoginController extends FrontController
                         'firstname' => $user['firstname'],
                         'email' => $email
                     ];
-                    header('Location: /user/' . $_SESSION['user']['id']);
+                    header('Location: ' . $_SERVER["HTTP_REFERER"]);
                 }
             } else {
                 $this->errors[] = 'No matching user';

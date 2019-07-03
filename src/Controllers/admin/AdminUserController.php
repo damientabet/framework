@@ -6,6 +6,9 @@ use Core\Model\ModelFactory;
 
 class AdminUserController extends AdminController
 {
+    /**
+     * AdminUserController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +17,11 @@ class AdminUserController extends AdminController
         }
     }
 
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function userPanel()
     {
         if (isset($_POST['deleteUser'])) {
@@ -28,16 +36,25 @@ class AdminUserController extends AdminController
         echo $this->twig->render('users/usersList.html.twig', ['users' => $users]);
     }
 
-    public function viewUser($id)
+    /**
+     * @param int $id
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function viewUser(int $id)
     {
-        $user = ModelFactory::get('User')->read($id, 'id_user');
+        $user = ModelFactory::get('User')->read((int)$id, 'id_user');
         echo $this->twig->render('users/user.html.twig', ['user' => $user]);
     }
 
-    public function deleteUser($id)
+    /**
+     * @param int $id
+     */
+    public function deleteUser(int $id)
     {
         if (isset($_POST['deleteUser'])) {
-            $user = ModelFactory::get('User')->read($id, 'id_user');
+            $user = ModelFactory::get('User')->read((int)$id, 'id_user');
             unlink('../public/img/user/'.$user['image_name']);
             ModelFactory::get('Article')->delete($user['id_user'], 'id_user');
             ModelFactory::get('Comment')->delete($user['id_user'], 'id_user');
@@ -47,13 +64,16 @@ class AdminUserController extends AdminController
         }
     }
 
-    public function editUser($id)
+    /**
+     * @param int $id
+     */
+    public function editUser(int $id)
     {
         if (isset($_POST['editUser'])) {
             $data = [
-                'firstname' => $_POST['firstname'],
-                'lastname' => $_POST['lastname'],
-                'email' => $_POST['email'],
+                'firstname' => (string)$_POST['firstname'],
+                'lastname' => (string)$_POST['lastname'],
+                'email' => (string)$_POST['email'],
                 'date_upd' => date('Y-m-d H:i:s')
             ];
 
@@ -63,7 +83,7 @@ class AdminUserController extends AdminController
                 ];
             }
             
-            ModelFactory::get('User')->update($id, $data, 'id_user');
+            ModelFactory::get('User')->update((int)$id, $data, 'id_user');
         }
     }
 }

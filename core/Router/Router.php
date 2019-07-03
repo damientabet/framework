@@ -15,14 +15,18 @@ class Router
 
     /**
      * Router constructor.
-     * @param $url
+     * @param string $url
      */
-    public function __construct($url)
+    public function __construct(string $url)
     {
         $this->url = $url;
     }
 
-    public function urlProcess($url)
+    /**
+     * @param string $url
+     * @throws RouterException
+     */
+    public function urlProcess(string $url)
     {
         $routeAction = new listRoutes();
         $routeAction = $routeAction->getRoutes();
@@ -61,12 +65,12 @@ class Router
     }
 
     /**
-     * @param $path
-     * @param $callable
-     * @param $method
+     * @param string $path
+     * @param string $callable
+     * @param string $method
      * @return Route
      */
-    public function dispatch($path, $callable, $method)
+    public function dispatch(string $path, string $callable, string $method)
     {
         if ($method == 'GET') {
             return $this->get($path, $callable);
@@ -76,35 +80,35 @@ class Router
     }
 
     /**
-     * @param $path
-     * @param $callable
-     * @param null $name
+     * @param string $path
+     * @param string $callable
+     * @param string|null $name
      * @return Route
      */
-    public function get($path, $callable, $name = null)
+    public function get(string $path, string $callable, string $name = null)
     {
         return $this->add($path, $callable, $name, 'GET');
     }
 
     /**
-     * @param $path
-     * @param $callable
-     * @param null $name
+     * @param string $path
+     * @param string $callable
+     * @param string|null $name
      * @return Route
      */
-    public function post($path, $callable, $name = null)
+    public function post(string $path, string $callable, string $name = null)
     {
         return $this->add($path, $callable, $name, 'POST');
     }
 
     /**
-     * @param $path
-     * @param $callable
+     * @param string $path
+     * @param string $callable
      * @param $name
-     * @param $method
+     * @param string $method
      * @return Route
      */
-    private function add($path, $callable, $name, $method)
+    private function add(string $path, string $callable, $name, string $method)
     {
         $route = new Route($path, $callable);
         $this->routes[$method][] = $route;
@@ -119,10 +123,11 @@ class Router
     }
 
     /**
+     * @param string $controllerType
      * @return mixed
      * @throws RouterException
      */
-    public function run($controllerType)
+    public function run(string $controllerType)
     {
         if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
             throw new RouterException('REQUEST_METHOD does not exist');
@@ -137,12 +142,12 @@ class Router
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @param array $params
      * @return mixed
      * @throws RouterException
      */
-    public function url($name, $params = [])
+    public function url(string $name, array $params = [])
     {
         if (!isset($this->namedRoutes[$name]))
         {

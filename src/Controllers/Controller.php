@@ -8,6 +8,10 @@ class Controller
 {
     protected $twig;
 
+    /**
+     * Controller constructor.
+     * @param $loader
+     */
     public function __construct($loader)
     {
         $className = substr(get_class($this), 12, -10);

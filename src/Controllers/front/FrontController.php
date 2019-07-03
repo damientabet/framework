@@ -8,12 +8,20 @@ use Twig\Loader\FilesystemLoader;
 
 class FrontController extends Controller
 {
+    /**
+     * FrontController constructor.
+     */
     public function __construct()
     {
         $loader = new FilesystemLoader('./../src/Views/front');
         parent::__construct($loader);
     }
 
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function index()
     {
         $articles = ModelFactory::get('Article')->getAllArticles();

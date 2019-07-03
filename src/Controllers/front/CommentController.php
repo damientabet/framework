@@ -6,17 +6,21 @@ use Core\Model\ModelFactory;
 
 class CommentController extends FrontController
 {
-    public function addComment($id)
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function addComment(int $id)
     {
         if (!empty($_POST['comment'])) {
             $data = [
-                'content' => $_POST['comment'],
-                'id_article' => $id,
-                'id_user' => $_SESSION['user']['id'],
+                'content' => (string)$_POST['comment'],
+                'id_article' => (int)$id,
+                'id_user' => (int)$_SESSION['user']['id'],
                 'date_add' => date('Y-m-d H:i:s')
             ];
 
-            if (ModelFactory::get('Comment')->create($data)) {
+            if (ModelFactory::get('Comment')->create((array)$data)) {
                 return true;
             } else{
                 $this->errors[] = 'Erreur lors de l\'enregistrement';

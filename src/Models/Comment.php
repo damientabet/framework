@@ -6,15 +6,22 @@ use Core\Model\Model;
 
 class Comment extends Model
 {
-    public function getCommentsByArticle($id)
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getCommentsByArticle(int $id)
     {
         $query = 'SELECT c.`id_comment`, c.`content`, c.`date_add`, c.`id_user`, u.`firstname`, u.`lastname`, c.`approved`, c.`id_article` FROM `comment` c
                 LEFT JOIN `user` u
                     ON (c.`id_user` = u.`id_user`)
-                WHERE c.`id_article` = '.$id;
+                WHERE c.`id_article` = '.(int)$id;
         return $this->database->results($query);
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllComments()
     {
         $query = 'SELECT c.`id_comment`, c.`content`, c.`date_add`, c.`id_user`, u.`firstname`, u.`lastname`, a.`title`, c.`approved`, c.`id_article` FROM `comment` c
