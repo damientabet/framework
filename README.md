@@ -26,7 +26,8 @@ Sur la page d’accueil il faudra présenter les informations suivantes :
     -   nom/prénom  
     -   email de contact  
     -   message  
--   un lien vers votre CV au format pdf ; et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre (Github, LinkedIn, Twitter…)   
+    
+-   un lien vers votre CV au format pdf ; et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre (Github, LinkedIn, Twitter…)  
 
 Sur la page listant tous les blogs posts (du plus récent au plus ancien), il faut afficher les informations suivantes pour chaque blog post :  
 -   le titre  
@@ -57,13 +58,15 @@ Dans le footer menu, il doit figurer un lien pour accéder à l’administration
 -   Bien s'assurer que composer est installé sur votre machine  
   
     www.getcomposer.org/doc/00-intro.md  
+    
 -   Après avoir installé composer, lancer ``composer install`` à la racine de votre projet  
 Toutes les dépendances vont s'installer et se stocker dans le dossier **vendor/**  
 ### Étape 4
--  Assurez-vous que npm est installer sur votre machine  
+-   Assurez-vous que npm est installer sur votre machine  
 
     www.npmjs.com/get-npm  
--   Se rendre, avec la console, dans le dossier **/public**  ``cd public/``  
+    
+-   Se rendre, avec la console, dans le dossier **/public** ``cd public/``  
 -   Lancer ``npm install``  
 Toutes les dépendances vont s'installer et se stocker dans le dossier **node_modules/**  
 ### Étape 5
