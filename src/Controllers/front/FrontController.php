@@ -25,6 +25,8 @@ class FrontController extends Controller
     public function index()
     {
         $articles = ModelFactory::get('Article')->getAllArticles();
-        echo $this->twig->render('index.html.twig', ['articles' => $articles]);
+        return $this->twig->display('index.html.twig', [
+            'articles' => $articles
+        ]);
     }
 }

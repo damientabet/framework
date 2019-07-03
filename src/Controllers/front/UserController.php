@@ -18,7 +18,7 @@ class UserController extends FrontController
     {
         $user = ModelFactory::get('User')->read((int)$id, 'id_user');
         if (isset($_SESSION['user'])) {
-            echo $this->twig->render('user/account.html.twig',
+            return $this->twig->display('user/account.html.twig',
                 [
                     "user" => $user
                 ]
@@ -37,7 +37,7 @@ class UserController extends FrontController
     {
         $this->createUser();
 
-        echo $this->twig->render('authentification.html.twig',
+        return $this->twig->display('authentification.html.twig',
             [
                 'errors' => $this->errors
             ]);
@@ -119,10 +119,10 @@ class UserController extends FrontController
                             ModelFactory::get('User')->update($_SESSION['user']['id'], ['image_name' => $imgName], 'id_user');
                             header('Location: /user/edit/'.(int)$id);
                         } else {
-                            echo 'Erreur lors du téléchargement de l\'image';
+                            return 'Erreur lors du téléchargement de l\'image';
                         }
                     } else {
-                        echo 'L\'extension de l\'image n\'est pas correct : '.$acceptExtension;
+                        return 'L\'extension de l\'image n\'est pas correct : '.$acceptExtension;
                     }
                 }
                 $data = [
@@ -137,7 +137,7 @@ class UserController extends FrontController
 
             $user = ModelFactory::get('User')->read($_SESSION['user']['id'], 'id_user');
 
-            echo $this->twig->render('user/edit.html.twig',
+            return $this->twig->display('user/edit.html.twig',
                 [
                     "user" => $user
                 ]
@@ -165,7 +165,7 @@ class UserController extends FrontController
                     header('Location: /');
                 }
             }
-            echo $this->twig->render('user/delete.html.twig', ['user_id' => (int)$_SESSION['user']['id']]);
+            return $this->twig->display('user/delete.html.twig', ['user_id' => (int)$_SESSION['user']['id']]);
         } else {
             header('Location: /');
         }

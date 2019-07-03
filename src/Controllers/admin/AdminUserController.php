@@ -33,7 +33,7 @@ class AdminUserController extends AdminController
             header('Location: /admin/users');
         }
         $users = ModelFactory::get('User')->list(null, null, 1);
-        echo $this->twig->render('users/usersList.html.twig', ['users' => $users]);
+        return $this->twig->display('users/usersList.html.twig', ['users' => $users]);
     }
 
     /**
@@ -45,7 +45,7 @@ class AdminUserController extends AdminController
     public function viewUser(int $id)
     {
         $user = ModelFactory::get('User')->read((int)$id, 'id_user');
-        echo $this->twig->render('users/user.html.twig', ['user' => $user]);
+        return $this->twig->display('users/user.html.twig', ['user' => $user]);
     }
 
     /**

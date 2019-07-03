@@ -16,7 +16,7 @@ class ArticleController extends FrontController
     public function index()
     {
         $articles = ModelFactory::get('Article')->getAllArticles();
-        echo $this->twig->render('article/index.html.twig',
+        return $this->twig->display('article/index.html.twig',
             [
                 'articles' => $articles
             ]);
@@ -38,7 +38,7 @@ class ArticleController extends FrontController
 
         $article = ModelFactory::get('Article')->getArticleById((int)$id, 'id_article');
         $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
-        echo $this->twig->render('article/article.html.twig',
+        return $this->twig->display('article/article.html.twig',
             [
                 'article' => $article,
                 'comments' => $comments
@@ -73,7 +73,7 @@ class ArticleController extends FrontController
                 }
             }
 
-            echo $this->twig->render('article/add.html.twig', ['errors' => $this->errors]);
+            return $this->twig->display('article/add.html.twig', ['errors' => $this->errors]);
         } else {
             header('Location: /');
         }
@@ -92,7 +92,7 @@ class ArticleController extends FrontController
                 ModelFactory::get('Article')->delete((int)$id);
                 header('Location: /user/article');
             }
-            echo $this->twig->render('article/delete.html.twig', ['article_id' => (int)$id]);
+            return $this->twig->display('article/delete.html.twig', ['article_id' => (int)$id]);
         } else {
             header('Location: /');
         }
@@ -107,7 +107,7 @@ class ArticleController extends FrontController
     {
         if (isset($_SESSION['user'])) {
             $articles = ModelFactory::get('Article')->list($_SESSION['user']['id'], 'id_user');
-            echo $this->twig->render('user/articles.html.twig', ['articles' => (array)$articles]);
+            return $this->twig->display('user/articles.html.twig', ['articles' => (array)$articles]);
         } else {
             header('Location: /');
         }
@@ -132,7 +132,7 @@ class ArticleController extends FrontController
             }
             $article = ModelFactory::get('article')->read((int)$id, 'id_article');
 
-            echo $this->twig->render('article/edit.html.twig',
+            return $this->twig->display('article/edit.html.twig',
                 [
                     "article" => $article
                 ]

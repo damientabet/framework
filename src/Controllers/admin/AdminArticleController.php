@@ -29,7 +29,7 @@ class AdminArticleController extends AdminController
             header('Location: /admin/articles');
         }
         $articles = ModelFactory::get('Article')->getAllArticles();
-        echo $this->twig->render('articles/articlesList.html.twig', ['articles' => $articles]);
+        return $this->twig->display('articles/articlesList.html.twig', ['articles' => $articles]);
     }
 
     /**
@@ -63,7 +63,7 @@ class AdminArticleController extends AdminController
         $article = ModelFactory::get('Article')->getArticleById((int)$id);
         $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
 
-        echo $this->twig->render('articles/article.html.twig',
+        return $this->twig->display('articles/article.html.twig',
             [
                 'article' => $article,
                 'comments' => $comments

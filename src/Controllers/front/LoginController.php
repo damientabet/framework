@@ -27,7 +27,7 @@ class LoginController extends FrontController
                         'firstname' => $user['firstname'],
                         'email' => $email
                     ];
-                    header('Location: ' . $_SERVER["HTTP_REFERER"]);
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
                 }
             } else {
                 $this->errors[] = 'No matching user';
@@ -40,6 +40,6 @@ class LoginController extends FrontController
     public function logout()
     {
         session_destroy();
-        header('Location: /');
+        header('Location: '.$_SERVER['HTTP_REFERER']);
     }
 }

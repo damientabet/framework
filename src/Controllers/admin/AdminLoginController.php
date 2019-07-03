@@ -13,7 +13,7 @@ class AdminLoginController extends AdminController
      */
     public function index()
     {
-        echo $this->twig->render('login.html.twig');
+        return $this->twig->display('login.html.twig');
     }
 
     public function login()
