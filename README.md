@@ -45,16 +45,25 @@ Sur la page permettant de modifier un blog post, l’utilisateur a la possibilit
 Dans le footer menu, il doit figurer un lien pour accéder à l’administration du blog.
 ## Processus d'installation
 ### Étape 1 :
-- Cloner le repository avec le lien suivant : https://github.com/damientabet/framework.git
+- Assurez-vous d'avoir Git installé sur votre machine  
+https://git-scm.com
 ### Étape 2 :
-- Bien s'assurer que composer est installé sur votre machine
-- Lancer ``composer install`` à la racine
+- Cloner le repository sur votre serveur local  
+``git clone https://github.com/damientabet/framework.git``
 ### Étape 3 :
-- Bien s'assurer que npm est installer sur votre machine
-- Se rendre, avec la console, dans le dossier **/public** ``cd public/``
-- Lancer ``npm run``
+- Bien s'assurer que composer est installé sur votre machine  
+https://getcomposer.org/doc/00-intro.md
+- Après avoir installé composer, lancer ``composer install`` à la racine de votre projet  
+Toutes les dépendances vont s'installer et se stocker dans le dossier **vendor/**
 ### Étape 4 :
-Modifier votre fichier **host** afin de faire pointer une url directement vers le dossier **/public**
+- Assurez-vous que npm est installer sur votre machine  
+https://www.npmjs.com/get-npm
+- Se rendre, avec la console, dans le dossier **/public**  
+``cd public/``
+- Lancer ``npm install``  
+Toutes les dépendances vont s'installer et se stocker dans le dossier **node_modules/**
+### Étape 5 :
+Modifier votre fichier **host** afin de faire pointer une url directement vers le fichier **index.php** du dossier **/public**
 ## Lancer le projet
 Après installé le projet et modifier votre fichier host.  
 Rendez-vous sur votre **navigateur web** pour lancer la page d'accueil du site.
