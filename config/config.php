@@ -14,5 +14,4 @@ define('IMG_USER_DIR', '../public/img/user/');
 
 if (MODE_DEV) {
     Debugger::enable();
-    ini_set('display_errors', 'on');
 }
