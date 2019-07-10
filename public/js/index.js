@@ -3,8 +3,8 @@
 function setActive() {
     var liObj = document.getElementById("accordionSidebar").getElementsByTagName("li");
     for(var i = 0; i < liObj.length; i++) {
-        var aObj = liObj[i].getElementsByTagName("a")[0];
-        var linkObj = liObj[i];
+        var aObj = liObj[parseInt(i)].getElementsByTagName("a")[0];
+        var linkObj = liObj[parseInt(i)];
         if(document.location.href === aObj.href) {
             linkObj.classList.add("active");
         }
@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (input !== null) {
         input.addEventListener("change", function () {
-            document.getElementById("filename").innerHTML = '<i class="fas fa-upload"></i> ' + this.files[0].name;
+            var filename = this.files[0].name;
+            document.getElementById("text").innerText = "";
+            document.getElementById("filename").appendChild(document.createTextNode(filename));
         });
     }
 
