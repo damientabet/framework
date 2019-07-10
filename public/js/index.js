@@ -3,8 +3,8 @@
 function setActive() {
     var liObj = document.getElementById("accordionSidebar").getElementsByTagName("li");
     for(var i = 0; i < liObj.length; i++) {
-        var aObj = liObj[parseInt(i)].getElementsByTagName("a")[0];
-        var linkObj = liObj[parseInt(i)];
+        var aObj = liObj[parseInt(i, 10)].getElementsByTagName("a")[0];
+        var linkObj = liObj[parseInt(i, 10)];
         if(document.location.href === aObj.href) {
             linkObj.classList.add("active");
         }
