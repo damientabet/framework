@@ -11,7 +11,7 @@ function setActive() {
     }
 }
 
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded", () => {
     setActive();
     var input = document.getElementById("file");
 
