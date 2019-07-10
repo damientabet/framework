@@ -11,8 +11,7 @@ function setActive() {
     }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-    setActive();
+function displayFilename() {
     var input = document.getElementById("file");
 
     if (input !== null) {
@@ -22,21 +21,27 @@ window.addEventListener("DOMContentLoaded", () => {
             document.getElementById("filename").appendChild(document.createTextNode(filename));
         });
     }
+}
 
+function displayImgSlideHome() {
     var img = document.getElementById("indexImg");
     if (document.location.pathname !== "/" && img !== null) {
         img.classList.add("d-none");
     }
+}
 
+function lengthCounter() {
     var desc = document.getElementById("articleDescription");
     if (desc !== null) {
-    document.getElementById("length").append(desc.textLength);
+        document.getElementById("length").append(desc.textLength);
         desc.addEventListener("keyup", function () {
             document.getElementById("length").innerHTML = "";
             document.getElementById("length").append(desc.textLength);
         });
     }
+}
 
+function displayAdminUserForm() {
     var test = document.getElementById("test");
     if (test !== null) {
         test.addEventListener("click", function(){
@@ -44,7 +49,9 @@ window.addEventListener("DOMContentLoaded", () => {
             form.classList.remove("d-none");
         });
     }
+}
 
+function displayAdminArticleForm() {
     var editArticleContent = document.getElementById("editArticleContent");
     if (editArticleContent !== null) {
         editArticleContent.addEventListener("click", function(){
@@ -62,4 +69,13 @@ window.addEventListener("DOMContentLoaded", () => {
             articleTitle.classList.add("d-none");
         });
     }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    setActive();
+    displayFilename();
+    displayImgSlideHome();
+    lengthCounter();
+    displayAdminUserForm();
+    displayAdminArticleForm();
 });
