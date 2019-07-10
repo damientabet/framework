@@ -1,15 +1,19 @@
 # OpenClassrooms PHP/SYMFONY - Projet 5
+
 ## Résumé du projet
+
 Le projet est donc de développer votre blog professionnel.  
 Ce site web se décompose en deux grands groupes de pages :  
+
 -   les pages utiles à tous les visiteurs  
 -   les pages permettant d’administrer votre blog  
 
 Voici la liste des pages qui devront être accessibles depuis votre site web :  
+
 -   la page d'accueil  
--   la page listant l’ensemble des blogs posts  
+-   la page listant l'ensemble des blogs posts  
 -   la page affichant un blog post  
--   la page permettant d’ajouter un blog post  
+-   la page permettant d'ajouter un blog post  
 -   la page permettant de modifier un blog post  
 -   les pages permettant de modifier/supprimer un blog post  
 -   les pages de connexion/enregistrement des utilisateurs  
@@ -24,10 +28,10 @@ Sur la page d’accueil il faudra présenter les informations suivantes :
 -   Une phrase d’accroche qui vous ressemble ( exemple : “Martin Durand, le développeur qu’il vous faut !”)  
 -   Un menu permettant de naviguer parmi l’ensemble des pages de votre site web  
 -   Un formulaire de contact (à la soumission de ce formulaire, un email avec toutes ces informations vous serons envoyé) avec les champs suivants :  
-    -   nom/prénom  
+    -   non/prénom  
     -   email de contact  
-    -   message  
--   un lien vers votre CV au format pdf ; et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre (Github, LinkedIn, Twitter…)    
+    -   message   
+-   un lien vers votre CV au format pdf ; et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre (Github, LinkedIn, Twitter…)  
 
 Sur la page listant tous les blogs posts (du plus récent au plus ancien), il faut afficher les informations suivantes pour chaque blog post :  
 -   le titre  
@@ -72,6 +76,7 @@ Dans le footer menu, il doit figurer un lien pour accéder à l’administration
 Toutes les dépendances vont s'installer et se stocker dans le dossier **vendor/**  
   
 ### Étape 4
+
 -   Assurez-vous que npm est installer sur votre machine  
 
     www.npmjs.com/get-npm  
