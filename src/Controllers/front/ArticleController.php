@@ -21,21 +21,21 @@ class ArticleController extends FrontController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function articleView(int $id)
+    public function articleView(int $idy)
     {
         if (isset($this->post['addComment'])) {
             $comment = new CommentController();
-            $comment->addComment((int)$id);
-            $this->redirect('/article/'.(int)$id);
+            $comment->addComment((int)$idy);
+            $this->redirect('/article/'.(int)$idy);
         }
 
-        $article = ModelFactory::get('Article')->getArticleById((int)$id, 'id_article');
-        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
+        $article = ModelFactory::get('Article')->getArticleById((int)$idy, 'id_article');
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$idy);
         return $this->twig->display('article/article.html.twig', [
                 'article' => $article,
                 'comments' => $comments]);
@@ -75,19 +75,19 @@ class ArticleController extends FrontController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function deleteArticle(int $id)
+    public function deleteArticle(int $idy)
     {
         if (isset($this->session['user'])) {
             if (isset($this->post['deleteArticle'])) {
-                ModelFactory::get('Article')->delete((int)$id);
+                ModelFactory::get('Article')->delete((int)$idy);
                $this->redirect('/user/article');
             }
-            return $this->twig->display('article/delete.html.twig', ['article_id' => (int)$id]);
+            return $this->twig->display('article/delete.html.twig', ['article_id' => (int)$idy]);
         }
        $this->redirect('/');
     }
@@ -107,12 +107,12 @@ class ArticleController extends FrontController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function updateArticle(int $id)
+    public function updateArticle(int $idy)
     {
         if (isset($this->session['user'])) {
             if (isset($this->post['updateArticle'])) {
@@ -121,9 +121,9 @@ class ArticleController extends FrontController
                     'description' => $this->post['descArticle'],
                     'content' => $this->post['contentArticle'],
                 ];
-                ModelFactory::get('article')->update((int)$id, (array)$data, 'id_article');
+                ModelFactory::get('article')->update((int)$idy, (array)$data, 'id_article');
             }
-            $article = ModelFactory::get('article')->read((int)$id, 'id_article');
+            $article = ModelFactory::get('article')->read((int)$idy, 'id_article');
 
             return $this->twig->display('article/edit.html.twig', [
                     "article" => $article]);

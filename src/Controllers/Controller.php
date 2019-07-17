@@ -11,6 +11,7 @@ class Controller
     public $post;
     public $server;
     public $session;
+    public $files;
 
     /**
      * Controller constructor.
@@ -21,6 +22,7 @@ class Controller
         $this->post = filter_input_array(INPUT_POST);
         $this->server = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_URL);
         $this->session = filter_var_array($_SESSION);
+        $this->files = filter_var_array($_FILES);
 
         substr(get_class($this), 12, -10);
 

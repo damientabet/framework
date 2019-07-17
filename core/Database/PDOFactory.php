@@ -13,9 +13,9 @@ class PDOFactory
      */
     public static function getConnection()
     {
-        require_once dirname(dirname(__DIR__)) . '/config/config.php';
+        require_once '../config/config.php';
 
-        if (is_null(self::$pdo))
+        if (self::$pdo == null)
         {
             $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME;
 

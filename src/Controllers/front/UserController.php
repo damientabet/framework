@@ -9,14 +9,14 @@ class UserController extends FrontController
     public $errors = [];
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function userIndex(int $id)
+    public function userIndex(int $idy)
     {
-        $user = ModelFactory::get('User')->read((int)$id, 'id_user');
+        $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
         if (isset($this->session['user'])) {
             return $this->twig->display('user/account.html.twig', [
                     "user" => $user]);
@@ -86,38 +86,37 @@ class UserController extends FrontController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError(string)
      */
-    public function updateUser(int $id)
+    public function updateUser(int $idy)
     {
         if (isset($this->session['user'])) {
             if (isset($this->post['deleteImg'])) {
-                $user = ModelFactory::get('User')->read((int)$id, 'id_user');
+                $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
                 ModelFactory::get('User')->update($this->session['user']['id'], ['image_name' => null], 'id_user');
                 unlink('../public/img/user/'.$user['image_name']);
             }
 
             if (isset($this->post['updateUser'])) {
                 // Ajout de l'image
-                if (isset($_FILES['userImg'])) {
-                    $extension = new \SplFileInfo($_FILES['userImg']['name']);
+                if (isset($this->files['userImg'])) {
+                    $extension = new \SplFileInfo($this->files['userImg']['name']);
                     $extension = $extension->getExtension();
                     $acceptExtension = ['jpg', 'png'];
                     if (in_array($extension, $acceptExtension)) {
-                        $imgName = (int)$id . '.' . $extension;
+                        $imgName = (int)$idy . '.' . $extension;
                         $imgDirname = IMG_USER_DIR.$imgName;
-                        if (move_uploaded_file($_FILES['userImg']['tmp_name'], $imgDirname)) {
+                        if (move_uploaded_file($this->files['userImg']['tmp_name'], $imgDirname)) {
                             ModelFactory::get('User')->update($this->session['user']['id'], ['image_name' => $imgName], 'id_user');
-                            $this->redirect('/user/edit/'.(int)$id);
+                            $this->redirect('/user/edit/'.(int)$idy);
                         } else {
                             return 'Erreur lors du téléchargement de l\'image';
                         }
-                    } else {
-                        return 'L\'extension de l\'image n\'est pas correct : '.$acceptExtension;
                     }
+                    return 'L\'extension de l\'image n\'est pas correct : '.$acceptExtension;
                 }
                 $data = [
                     'firstname' => (string)$this->post['firstname'],
@@ -139,16 +138,16 @@ class UserController extends FrontController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function deleteUser(int $id)
+    public function deleteUser(int $idy)
     {
         if (isset($this->session['user'])) {
             if (isset($this->post['deleteUser'])) {
-                $user = ModelFactory::get('User')->read((int)$id, 'id_user');
+                $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
                 unlink('../public/img/user/'.$user['image_name']);
                 ModelFactory::get('Article')->delete((int)$this->session['user']['id'], 'id_user');
                 if (ModelFactory::get('User')->delete((int)$this->session['user']['id'])) {

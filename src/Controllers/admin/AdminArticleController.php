@@ -33,18 +33,18 @@ class AdminArticleController extends AdminController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function viewArticle(int $id)
+    public function viewArticle(int $idy)
     {
         if (isset($this->post['approvedArticle'])) {
             $data = [
                 'approved' => 1,
             ];
-            ModelFactory::get('Article')->update($id, $data, 'id_article');
+            ModelFactory::get('Article')->update($idy, $data, 'id_article');
         }
 
         if (isset($this->post['deleteArticle'])) {
@@ -58,10 +58,10 @@ class AdminArticleController extends AdminController
                 'description' => $this->post['descArticle'],
                 'content' => $this->post['contentArticle'],
             ];
-            ModelFactory::get('Article')->update((int)$id, (array)$data, 'id_article');
+            ModelFactory::get('Article')->update((int)$idy, (array)$data, 'id_article');
         }
-        $article = ModelFactory::get('Article')->getArticleById((int)$id);
-        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
+        $article = ModelFactory::get('Article')->getArticleById((int)$idy);
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$idy);
 
         return $this->twig->display('articles/article.html.twig', [
                 'article' => $article,
@@ -69,13 +69,13 @@ class AdminArticleController extends AdminController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      */
-    public function deleteArticle(int $id)
+    public function deleteArticle(int $idy)
     {
         if (isset($this->post['deleteArticle'])) {
-            ModelFactory::get('Comment')->delete((int)$id, 'id_article');
-            ModelFactory::get('Article')->delete((int)$id, 'id_article');
+            ModelFactory::get('Comment')->delete((int)$idy, 'id_article');
+            ModelFactory::get('Article')->delete((int)$idy, 'id_article');
             $this->redirect('/admin/articles');
         }
     }

@@ -39,7 +39,7 @@ class ContactController extends FrontController
         $headers[] = 'MIME-Version: 1.0';
         $headers[] = 'Content-type: text/html; charset=UTF-8';
 
-        if (isset($_POST['mailsend'])) {
+        if (isset($this->post['mailsend'])) {
             if (!empty($firstname)
                 && !empty($lastname)
                 && !empty($email)

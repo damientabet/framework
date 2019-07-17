@@ -12,6 +12,7 @@ class Router
     private $routes = [];
     private $namedRoutes = [];
     private $controllerType;
+    private $server;
 
     /**
      * Router constructor.
@@ -20,6 +21,7 @@ class Router
     public function __construct(string $url)
     {
         $this->url = $url;
+        $this->server = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_URL);
     }
 
     /**
@@ -37,11 +39,12 @@ class Router
             case '2' :
                 if (is_numeric($url[1])) {
                     $url = $url[0].'/:id';
+                    break;
                 } elseif (is_string($url[1]) && strstr('-', $url[1])) {
                     $url = $url[0].'/:id-:slug';
-                } else {
-                    $url = implode('/', $url);
+                    break;
                 }
+                $url = implode('/', $url);
                 break;
             case '3' :
                 $url = $url[0].'/'.$url[1].'/:id';
@@ -51,12 +54,12 @@ class Router
                 break;
         }
 
-        $route = isset($routeAction[$_SERVER['REQUEST_METHOD']][$url]) ? $routeAction[$_SERVER['REQUEST_METHOD']][$url]: null;
+        $route = isset($routeAction[$this->server['REQUEST_METHOD']][$url]) ? $routeAction[$this->server['REQUEST_METHOD']][$url]: null;
 
         $this->controllerType = ($route != null) ? $route['controllerType'] : 'front';
 
         if ($route != null) {
-            $this->dispatch($url, $route['controller'] . '#' . $route['action'], $_SERVER['REQUEST_METHOD']);
+            $this->dispatch($url, $route['controller'] . '#' . $route['action'], $this->server['REQUEST_METHOD']);
         }
 
         $this->run($this->controllerType);
@@ -127,11 +130,11 @@ class Router
      */
     public function run(string $controllerType)
     {
-        if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
+        if (!isset($this->routes[$this->server['REQUEST_METHOD']])) {
             throw new RouterException('REQUEST_METHOD does not exist');
         }
 
-        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+        foreach ($this->routes[$this->server['REQUEST_METHOD']] as $route) {
             if ($route->match($this->url)) {
                 return $route->call($controllerType);
             }

@@ -29,9 +29,8 @@ class LoginController extends FrontController
                     ];
                     $this->redirect($this->server['HTTP_REFERER']);
                 }
-            } else {
-                $this->errors[] = 'No matching user';
             }
+            $this->errors[] = 'No matching user';
         }
         return false;
     }

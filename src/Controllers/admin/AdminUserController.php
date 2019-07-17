@@ -37,24 +37,24 @@ class AdminUserController extends AdminController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function viewUser(int $id)
+    public function viewUser(int $idy)
     {
-        $user = ModelFactory::get('User')->read((int)$id, 'id_user');
+        $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
         return $this->twig->display('users/user.html.twig', ['user' => $user]);
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      */
-    public function deleteUser(int $id)
+    public function deleteUser(int $idy)
     {
-        if (isset($_POST['deleteUser'])) {
-            $user = ModelFactory::get('User')->read((int)$id, 'id_user');
+        if (isset($this->post['deleteUser'])) {
+            $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
             unlink('../public/img/user/'.$user['image_name']);
             ModelFactory::get('Article')->delete($user['id_user'], 'id_user');
             ModelFactory::get('Comment')->delete($user['id_user'], 'id_user');
@@ -65,9 +65,9 @@ class AdminUserController extends AdminController
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      */
-    public function editUser(int $id)
+    public function editUser(int $idy)
     {
         if (isset($this->post['editUser'])) {
             $data = [
@@ -79,11 +79,11 @@ class AdminUserController extends AdminController
 
             if (!empty($this->post['password'])) {
                 $data += [
-                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'password' => password_hash($this->post['password'], PASSWORD_DEFAULT),
                 ];
             }
             
-            ModelFactory::get('User')->update((int)$id, $data, 'id_user');
+            ModelFactory::get('User')->update((int)$idy, $data, 'id_user');
         }
     }
 }
