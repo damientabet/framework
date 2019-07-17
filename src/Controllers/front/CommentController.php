@@ -12,19 +12,16 @@ class CommentController extends FrontController
      */
     public function addComment(int $id)
     {
-        if (!empty($_POST['comment'])) {
+        if (!empty($this->post['comment'])) {
             $data = [
-                'content' => (string)$_POST['comment'],
+                'content' => (string)$this->post['comment'],
                 'id_article' => (int)$id,
-                'id_user' => (int)$_SESSION['user']['id'],
+                'id_user' => (int)$this->session['user']['id'],
                 'date_add' => date('Y-m-d H:i:s')
             ];
 
-            if (ModelFactory::get('Comment')->create((array)$data)) {
-                return true;
-            } else{
-                $this->errors[] = 'Erreur lors de l\'enregistrement';
-            }
+            ModelFactory::get('Comment')->create((array)$data);
+            $this->redirect($this->server['HTTP_REFERER']);
         }
     }
 }

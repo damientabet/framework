@@ -11,12 +11,10 @@ class AdminCommentController extends AdminController
      */
     public function approvedComment(int $id)
     {
-        if (isset($_POST['approvedComment'])) {
-            $data = [
-                'approved' => 1,
-            ];
+        if (isset($this->post['approvedComment'])) {
+            $data = ['approved' => 1];
             ModelFactory::get('Comment')->update((int)$id, (array)$data, 'id_comment');
-            header('Location: '.$_SERVER['HTTP_REFERER']);
+            $this->redirect($this->server['HTTP_REFERER']);
         }
     }
 }

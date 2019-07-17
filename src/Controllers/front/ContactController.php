@@ -16,11 +16,11 @@ class ContactController extends FrontController
 
     public function sendMail()
     {
-        $firstname = (string)$_POST['firstname'];
-        $lastname = (string)$_POST['lastname'];
-        $subject = (string)$_POST['subject'];
-        $email = (string)$_POST['email'];
-        $message = (string)$_POST['message'];
+        $firstname = (string)$this->post['firstname'];
+        $lastname = (string)$this->post['lastname'];
+        $subject = (string)$this->post['subject'];
+        $email = (string)$this->post['email'];
+        $message = (string)$this->post['message'];
 
         $templateVars = array(
             '{nom}' => (string)$firstname,
@@ -45,9 +45,9 @@ class ContactController extends FrontController
                 && !empty($email)
                 && !empty($message)
             ) {
-                if ($_POST['rgpd'] == 'on') {
+                if ($this->post['rgpd'] == 'on') {
                     mail('tabetdamien@free.fr', $subject, $template, implode("\r\n", $headers));
-                    header('Location: /contact');
+                    $this->redirect('/contact');
                 }
             }
         }

@@ -12,8 +12,8 @@ class AdminArticleController extends AdminController
     public function __construct()
     {
         parent::__construct();
-        if (!isset($_SESSION['admin'])) {
-            header('Location: /admin/login');
+        if (!isset($this->session['admin'])) {
+            $this->redirect('/admin/login');
         }
     }
 
@@ -24,9 +24,9 @@ class AdminArticleController extends AdminController
      */
     public function articlePanel()
     {
-        if (isset($_POST['deleteArticle'])) {
-            $this->deleteArticle($_POST['id_article']);
-            header('Location: /admin/articles');
+        if (isset($this->post['deleteArticle'])) {
+            $this->deleteArticle($this->post['id_article']);
+            $this->redirect('/admin/articles');
         }
         $articles = ModelFactory::get('Article')->getAllArticles();
         return $this->twig->display('articles/articlesList.html.twig', ['articles' => $articles]);
@@ -40,35 +40,32 @@ class AdminArticleController extends AdminController
      */
     public function viewArticle(int $id)
     {
-        if (isset($_POST['approvedArticle'])) {
+        if (isset($this->post['approvedArticle'])) {
             $data = [
                 'approved' => 1,
             ];
             ModelFactory::get('Article')->update($id, $data, 'id_article');
         }
 
-        if (isset($_POST['deleteArticle'])) {
-            $this->deleteArticle($_POST['id_article']);
-            header('Location: /admin/articles');
+        if (isset($this->post['deleteArticle'])) {
+            $this->deleteArticle($this->post['id_article']);
+            $this->redirect('/admin/articles');
         }
 
-        if (isset($_POST['editAdminArticle'])) {
+        if (isset($this->post['editAdminArticle'])) {
             $data = [
-                'title' => $_POST['titleArticle'],
-                'description' => $_POST['descArticle'],
-                'content' => $_POST['contentArticle'],
+                'title' => $this->post['titleArticle'],
+                'description' => $this->post['descArticle'],
+                'content' => $this->post['contentArticle'],
             ];
             ModelFactory::get('Article')->update((int)$id, (array)$data, 'id_article');
         }
         $article = ModelFactory::get('Article')->getArticleById((int)$id);
         $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
 
-        return $this->twig->display('articles/article.html.twig',
-            [
+        return $this->twig->display('articles/article.html.twig', [
                 'article' => $article,
-                'comments' => $comments
-            ]
-        );
+                'comments' => $comments]);
     }
 
     /**
@@ -76,10 +73,10 @@ class AdminArticleController extends AdminController
      */
     public function deleteArticle(int $id)
     {
-        if (isset($_POST['deleteArticle'])) {
+        if (isset($this->post['deleteArticle'])) {
             ModelFactory::get('Comment')->delete((int)$id, 'id_article');
             ModelFactory::get('Article')->delete((int)$id, 'id_article');
-            header('Location: /admin/articles');
+            $this->redirect('/admin/articles');
         }
     }
 }

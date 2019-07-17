@@ -57,8 +57,6 @@ class Router
 
         if ($route != null) {
             $this->dispatch($url, $route['controller'] . '#' . $route['action'], $_SERVER['REQUEST_METHOD']);
-        } else {
-            $this->dispatch('/', 'Error#notFound', 'GET');
         }
 
         $this->run($this->controllerType);

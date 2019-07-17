@@ -13,33 +13,32 @@ class LoginController extends FrontController
      */
     public function login()
     {
-        if (isset($_POST['connection'])) {
-            $email = (string)$_POST['connection_email'];
+        if (isset($this->post['connection'])) {
+            $email = (string)$this->post['connection_email'];
             $user = ModelFactory::get('User')->read((string)$email, 'email');
-            if (empty($_POST['connection_email']) || empty($_POST['connection_password'])) {
+            if (empty($this->post['connection_email']) || empty($this->post['connection_password'])) {
                 return $this->errors[] = 'Please fill fields';
             }
             if ($user) {
-                if (password_verify($_POST['connection_password'], $user['password'])) {
+                if (password_verify($this->post['connection_password'], $user['password'])) {
                     $_SESSION['user'] = [
                         'id' => $user['id_user'],
                         'lastname' => $user['lastname'],
                         'firstname' => $user['firstname'],
                         'email' => $email
                     ];
-                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                    $this->redirect($this->server['HTTP_REFERER']);
                 }
             } else {
                 $this->errors[] = 'No matching user';
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function logout()
     {
         session_destroy();
-        header('Location: '.$_SERVER['HTTP_REFERER']);
+        $this->redirect($this->server['HTTP_REFERER']);
     }
 }

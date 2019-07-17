@@ -12,8 +12,8 @@ class AdminUserController extends AdminController
     public function __construct()
     {
         parent::__construct();
-        if (!isset($_SESSION['admin'])) {
-            header('Location: /admin/login');
+        if (!isset($this->session['admin'])) {
+            $this->redirect('/admin/login');
         }
     }
 
@@ -24,13 +24,13 @@ class AdminUserController extends AdminController
      */
     public function userPanel()
     {
-        if (isset($_POST['deleteUser'])) {
-            $this->deleteUser($_POST['id_user']);
-            header('Location: /admin/users');
+        if (isset($this->post['deleteUser'])) {
+            $this->deleteUser($this->post['id_user']);
+            $this->redirect('/admin/users');
         }
-        if (isset($_POST['editUser'])) {
-            $this->editUser($_POST['id_user']);
-            header('Location: /admin/users');
+        if (isset($this->post['editUser'])) {
+            $this->editUser($this->post['id_user']);
+            $this->redirect('/admin/users');
         }
         $users = ModelFactory::get('User')->list(null, null, 1);
         return $this->twig->display('users/usersList.html.twig', ['users' => $users]);
@@ -59,7 +59,7 @@ class AdminUserController extends AdminController
             ModelFactory::get('Article')->delete($user['id_user'], 'id_user');
             ModelFactory::get('Comment')->delete($user['id_user'], 'id_user');
             if (ModelFactory::get('User')->delete($user['id_user'], 'id_user')) {
-                header('Location: /admin/users');
+                $this->redirect('/admin/users');
             }
         }
     }
@@ -69,15 +69,15 @@ class AdminUserController extends AdminController
      */
     public function editUser(int $id)
     {
-        if (isset($_POST['editUser'])) {
+        if (isset($this->post['editUser'])) {
             $data = [
-                'firstname' => (string)$_POST['firstname'],
-                'lastname' => (string)$_POST['lastname'],
-                'email' => (string)$_POST['email'],
+                'firstname' => (string)$this->post['firstname'],
+                'lastname' => (string)$this->post['lastname'],
+                'email' => (string)$this->post['email'],
                 'date_upd' => date('Y-m-d H:i:s')
             ];
 
-            if (!empty($_POST['password'])) {
+            if (!empty($this->post['password'])) {
                 $data += [
                     'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                 ];

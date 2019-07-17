@@ -1,5 +1,7 @@
 # OpenClassrooms PHP/SYMFONY - Projet 5
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c98335564ffa4051a838f24b8e32df7c)](https://www.codacy.com/app/damientabet/framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=damientabet/framework&amp;utm_campaign=Badge_Grade)
+
 ## Résumé du projet
 
 Le projet est donc de développer votre blog professionnel.  

@@ -32,8 +32,6 @@ class PDOFactory
 
             return $pdo;
         }
-        else {
-            return self::$pdo;
-        }
+        return self::$pdo;
     }
 }
