@@ -57,8 +57,8 @@ class Route
     public function getUrl(array $params)
     {
         $path = $this->path;
-        foreach ($params as $k => $v) {
-            $path = str_replace(":k", $v, $path);
+        foreach ($params as $key => $value) {
+            $path = str_replace(":key", $value, $path);
         }
         return $path;
     }
@@ -86,8 +86,7 @@ class Route
             $controller = "App\\Controllers\\". $controllerType . '\\' . ucfirst($params[0]) . 'Controller';
             $controller = new $controller();
             return call_user_func_array([$controller, $params[1]], $this->matches);
-        } else {
-            return call_user_func_array($this->callable, $this->matches);
         }
+        return call_user_func_array($this->callable, $this->matches);
     }
 }

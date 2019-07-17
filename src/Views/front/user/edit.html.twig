@@ -13,10 +13,10 @@
                             class="fas fa-trash"></i> Supprimer</label>
                 <input id="deleteImg" type="submit" name="deleteImg" value="Supprimer" onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}">
             {% else %}
-                <label for="file" class="shadow p-3 mb-2 bg-white rounded btn btn-default" id="filename"><i class="fas fa-upload"></i>
-                    Choisir une image</label>
+                <label for="file" class="shadow p-3 mb-2 bg-white rounded btn btn-default" id="filename">
+                    <i class="fas fa-upload"></i>
+                    <span id="text">Choisir une image</span></label>
                 <input id="file" class="input-file" type="file" name="userImg">
-                <p id="file-upload-filename"></p>
             {% endif %}
         </div>
 

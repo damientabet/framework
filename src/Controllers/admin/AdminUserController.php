@@ -12,8 +12,8 @@ class AdminUserController extends AdminController
     public function __construct()
     {
         parent::__construct();
-        if (!isset($_SESSION['admin'])) {
-            header('Location: /admin/login');
+        if (!isset($this->session['admin'])) {
+            $this->redirect('/admin/login');
         }
     }
 
@@ -24,66 +24,66 @@ class AdminUserController extends AdminController
      */
     public function userPanel()
     {
-        if (isset($_POST['deleteUser'])) {
-            $this->deleteUser($_POST['id_user']);
-            header('Location: /admin/users');
+        if (isset($this->post['deleteUser'])) {
+            $this->deleteUser($this->post['id_user']);
+            $this->redirect('/admin/users');
         }
-        if (isset($_POST['editUser'])) {
-            $this->editUser($_POST['id_user']);
-            header('Location: /admin/users');
+        if (isset($this->post['editUser'])) {
+            $this->editUser($this->post['id_user']);
+            $this->redirect('/admin/users');
         }
         $users = ModelFactory::get('User')->list(null, null, 1);
-        echo $this->twig->render('users/usersList.html.twig', ['users' => $users]);
+        return $this->twig->display('users/usersList.html.twig', ['users' => $users]);
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function viewUser(int $id)
+    public function viewUser(int $idy)
     {
-        $user = ModelFactory::get('User')->read((int)$id, 'id_user');
-        echo $this->twig->render('users/user.html.twig', ['user' => $user]);
+        $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
+        return $this->twig->display('users/user.html.twig', ['user' => $user]);
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      */
-    public function deleteUser(int $id)
+    public function deleteUser(int $idy)
     {
-        if (isset($_POST['deleteUser'])) {
-            $user = ModelFactory::get('User')->read((int)$id, 'id_user');
+        if (isset($this->post['deleteUser'])) {
+            $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
             unlink('../public/img/user/'.$user['image_name']);
             ModelFactory::get('Article')->delete($user['id_user'], 'id_user');
             ModelFactory::get('Comment')->delete($user['id_user'], 'id_user');
             if (ModelFactory::get('User')->delete($user['id_user'], 'id_user')) {
-                header('Location: /admin/users');
+                $this->redirect('/admin/users');
             }
         }
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      */
-    public function editUser(int $id)
+    public function editUser(int $idy)
     {
-        if (isset($_POST['editUser'])) {
+        if (isset($this->post['editUser'])) {
             $data = [
-                'firstname' => (string)$_POST['firstname'],
-                'lastname' => (string)$_POST['lastname'],
-                'email' => (string)$_POST['email'],
+                'firstname' => (string)$this->post['firstname'],
+                'lastname' => (string)$this->post['lastname'],
+                'email' => (string)$this->post['email'],
                 'date_upd' => date('Y-m-d H:i:s')
             ];
 
-            if (!empty($_POST['password'])) {
+            if (!empty($this->post['password'])) {
                 $data += [
-                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'password' => password_hash($this->post['password'], PASSWORD_DEFAULT),
                 ];
             }
             
-            ModelFactory::get('User')->update((int)$id, $data, 'id_user');
+            ModelFactory::get('User')->update((int)$idy, $data, 'id_user');
         }
     }
 }

@@ -16,33 +16,29 @@ class ArticleController extends FrontController
     public function index()
     {
         $articles = ModelFactory::get('Article')->getAllArticles();
-        echo $this->twig->render('article/index.html.twig',
-            [
-                'articles' => $articles
-            ]);
+        return $this->twig->display('article/index.html.twig', [
+                'articles' => $articles]);
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function articleView(int $id)
+    public function articleView(int $idy)
     {
-        if (isset($_POST['addComment'])) {
+        if (isset($this->post['addComment'])) {
             $comment = new CommentController();
-            $comment->addComment((int)$id);
-            header('Location: /article/'.(int)$id);
+            $comment->addComment((int)$idy);
+            $this->redirect('/article/'.(int)$idy);
         }
 
-        $article = ModelFactory::get('Article')->getArticleById((int)$id, 'id_article');
-        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
-        echo $this->twig->render('article/article.html.twig',
-            [
+        $article = ModelFactory::get('Article')->getArticleById((int)$idy, 'id_article');
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$idy);
+        return $this->twig->display('article/article.html.twig', [
                 'article' => $article,
-                'comments' => $comments
-            ]);
+                'comments' => $comments]);
     }
 
     /**
@@ -52,19 +48,19 @@ class ArticleController extends FrontController
      */
     public function add()
     {
-        if (isset($_SESSION['user'])) {
-            if (isset($_POST['addArticle'])) {
-                if (!empty($_POST['titleArticle']) || !empty($_POST['contentArticle']) || !empty($_POST['descArticle'])) {
+        if (isset($this->session['user'])) {
+            if (isset($this->post['addArticle'])) {
+                if (!empty($this->post['titleArticle']) || !empty($this->post['descArticle']) || !empty($this->post['contentArticle'])) {
                     $data = [
-                        'title' => $_POST['titleArticle'],
-                        'description' => $_POST['descArticle'],
-                        'content' => $_POST['contentArticle'],
-                        'id_user' => $_SESSION['user']['id'],
+                        'title' => $this->post['titleArticle'],
+                        'description' => $this->post['descArticle'],
+                        'content' => $this->post['contentArticle'],
+                        'id_user' => $this->session['user']['id'],
                         'date_add' => date('Y-m-d H:i:s')
                     ];
 
                     if (ModelFactory::get('Article')->create((array)$data)) {
-                        header('Location: /user/article');
+                        $this->redirect('/user/article');
                     } else{
                         $this->errors[] = 'Erreur lors de l\'enregistrement';
                     }
@@ -73,29 +69,27 @@ class ArticleController extends FrontController
                 }
             }
 
-            echo $this->twig->render('article/add.html.twig', ['errors' => $this->errors]);
-        } else {
-            header('Location: /');
+            return $this->twig->display('article/add.html.twig', ['errors' => $this->errors]);
         }
+        $this->redirect('/');
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function deleteArticle(int $id)
+    public function deleteArticle(int $idy)
     {
-        if (isset($_SESSION['user'])) {
-            if (isset($_POST['deleteArticle'])) {
-                ModelFactory::get('Article')->delete((int)$id);
-                header('Location: /user/article');
+        if (isset($this->session['user'])) {
+            if (isset($this->post['deleteArticle'])) {
+                ModelFactory::get('Article')->delete((int)$idy);
+               $this->redirect('/user/article');
             }
-            echo $this->twig->render('article/delete.html.twig', ['article_id' => (int)$id]);
-        } else {
-            header('Location: /');
+            return $this->twig->display('article/delete.html.twig', ['article_id' => (int)$idy]);
         }
+       $this->redirect('/');
     }
 
     /**
@@ -105,40 +99,35 @@ class ArticleController extends FrontController
      */
     public function articlesByUser()
     {
-        if (isset($_SESSION['user'])) {
-            $articles = ModelFactory::get('Article')->list($_SESSION['user']['id'], 'id_user');
-            echo $this->twig->render('user/articles.html.twig', ['articles' => (array)$articles]);
-        } else {
-            header('Location: /');
+        if (isset($this->session['user'])) {
+            $articles = ModelFactory::get('Article')->list($this->session['user']['id'], 'id_user');
+            return $this->twig->display('user/articles.html.twig', ['articles' => (array)$articles]);
         }
+       $this->redirect('/');
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function updateArticle(int $id)
+    public function updateArticle(int $idy)
     {
-        if (isset($_SESSION['user'])) {
-            if (isset($_POST['updateArticle'])) {
+        if (isset($this->session['user'])) {
+            if (isset($this->post['updateArticle'])) {
                 $data = [
-                    'title' => $_POST['titleArticle'],
-                    'description' => $_POST['descArticle'],
-                    'content' => $_POST['contentArticle'],
+                    'title' => $this->post['titleArticle'],
+                    'description' => $this->post['descArticle'],
+                    'content' => $this->post['contentArticle'],
                 ];
-                ModelFactory::get('article')->update((int)$id, (array)$data, 'id_article');
+                ModelFactory::get('article')->update((int)$idy, (array)$data, 'id_article');
             }
-            $article = ModelFactory::get('article')->read((int)$id, 'id_article');
+            $article = ModelFactory::get('article')->read((int)$idy, 'id_article');
 
-            echo $this->twig->render('article/edit.html.twig',
-                [
-                    "article" => $article
-                ]
-            );
-        } else {
-            header('Location: /');
+            return $this->twig->display('article/edit.html.twig', [
+                    "article" => $article]);
         }
+        $this->redirect('/');
     }
 }

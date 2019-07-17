@@ -24,18 +24,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        if (isset($_SESSION['admin'])) {
+        if (isset($this->session['admin'])) {
         $users = ModelFactory::get('User')->list(null, null, 1);
         $articles = ModelFactory::get('Article')->getAllArticles();
         $comments = ModelFactory::get('Comment')->getAllComments();
-            echo $this->twig->render('index.html.twig',
-                [
+            return $this->twig->display('index.html.twig', [
                     'users' => count($users),
                     'articles' => $articles,
-                    'comments' => $comments
-                ]);
-        } else {
-            header('Location: /admin/login');
+                    'comments' => $comments]);
         }
+
+        return $this->redirect('/admin/login');
     }
 }

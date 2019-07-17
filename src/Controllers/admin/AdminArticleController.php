@@ -12,8 +12,8 @@ class AdminArticleController extends AdminController
     public function __construct()
     {
         parent::__construct();
-        if (!isset($_SESSION['admin'])) {
-            header('Location: /admin/login');
+        if (!isset($this->session['admin'])) {
+            $this->redirect('/admin/login');
         }
     }
 
@@ -24,62 +24,59 @@ class AdminArticleController extends AdminController
      */
     public function articlePanel()
     {
-        if (isset($_POST['deleteArticle'])) {
-            $this->deleteArticle($_POST['id_article']);
-            header('Location: /admin/articles');
+        if (isset($this->post['deleteArticle'])) {
+            $this->deleteArticle($this->post['id_article']);
+            $this->redirect('/admin/articles');
         }
         $articles = ModelFactory::get('Article')->getAllArticles();
-        echo $this->twig->render('articles/articlesList.html.twig', ['articles' => $articles]);
+        return $this->twig->display('articles/articlesList.html.twig', ['articles' => $articles]);
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function viewArticle(int $id)
+    public function viewArticle(int $idy)
     {
-        if (isset($_POST['approvedArticle'])) {
+        if (isset($this->post['approvedArticle'])) {
             $data = [
                 'approved' => 1,
             ];
-            ModelFactory::get('Article')->update($id, $data, 'id_article');
+            ModelFactory::get('Article')->update($idy, $data, 'id_article');
         }
 
-        if (isset($_POST['deleteArticle'])) {
-            $this->deleteArticle($_POST['id_article']);
-            header('Location: /admin/articles');
+        if (isset($this->post['deleteArticle'])) {
+            $this->deleteArticle($this->post['id_article']);
+            $this->redirect('/admin/articles');
         }
 
-        if (isset($_POST['editAdminArticle'])) {
+        if (isset($this->post['editAdminArticle'])) {
             $data = [
-                'title' => $_POST['titleArticle'],
-                'description' => $_POST['descArticle'],
-                'content' => $_POST['contentArticle'],
+                'title' => $this->post['titleArticle'],
+                'description' => $this->post['descArticle'],
+                'content' => $this->post['contentArticle'],
             ];
-            ModelFactory::get('Article')->update((int)$id, (array)$data, 'id_article');
+            ModelFactory::get('Article')->update((int)$idy, (array)$data, 'id_article');
         }
-        $article = ModelFactory::get('Article')->getArticleById((int)$id);
-        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id);
+        $article = ModelFactory::get('Article')->getArticleById((int)$idy);
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$idy);
 
-        echo $this->twig->render('articles/article.html.twig',
-            [
+        return $this->twig->display('articles/article.html.twig', [
                 'article' => $article,
-                'comments' => $comments
-            ]
-        );
+                'comments' => $comments]);
     }
 
     /**
-     * @param int $id
+     * @param int $idy
      */
-    public function deleteArticle(int $id)
+    public function deleteArticle(int $idy)
     {
-        if (isset($_POST['deleteArticle'])) {
-            ModelFactory::get('Comment')->delete((int)$id, 'id_article');
-            ModelFactory::get('Article')->delete((int)$id, 'id_article');
-            header('Location: /admin/articles');
+        if (isset($this->post['deleteArticle'])) {
+            ModelFactory::get('Comment')->delete((int)$idy, 'id_article');
+            ModelFactory::get('Article')->delete((int)$idy, 'id_article');
+            $this->redirect('/admin/articles');
         }
     }
 }
