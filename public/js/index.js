@@ -23,13 +23,6 @@ function displayFilename() {
     }
 }
 
-function displayImgSlideHome() {
-    var img = document.getElementById("indexImg");
-    if (document.location.pathname !== "/" && img !== null) {
-        img.classList.add("d-none");
-    }
-}
-
 function lengthCounter() {
     var desc = document.getElementById("articleDescription");
     if (desc !== null) {
@@ -74,7 +67,6 @@ function displayAdminArticleForm() {
 window.addEventListener("DOMContentLoaded", () => {
     setActive();
     displayFilename();
-    displayImgSlideHome();
     lengthCounter();
     displayAdminUserForm();
     displayAdminArticleForm();
