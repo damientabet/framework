@@ -8,8 +8,7 @@
             {% if article.approved == 1 %}
                 <a style="color: black" href="/article/{{ article.id_article }}">
                     <li class="media shadow mt-5 p-3" id="index-list">
-                        <img style="max-width: 120px; max-height: 120px;" src="/img/user/default.png" class="mr-3"
-                             alt="...">
+                        <i style="font-size: 60px;" class="fas fa-blog m-3"></i>
                         <div class="media-body">
                             <h5 class="mt-0 mb-1">{{ article.title }}</h5>
                             {{ article.description|truncate(300, true)|raw }}
