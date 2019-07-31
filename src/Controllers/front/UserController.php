@@ -93,28 +93,14 @@ class UserController extends FrontController
     {
         if (isset($this->session['user'])) {
             if (isset($this->post['deleteImg'])) {
-                $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
-                ModelFactory::get('User')->update($this->session['user']['id'], ['image_name' => null], 'id_user');
-                unlink('../public/img/user/'.$user['image_name']);
+                $image = new ImageController();
+                $image->deleteUserImage((int)$idy);
             }
-
             if (isset($this->post['updateUser'])) {
                 // Ajout de l'image
                 if (isset($this->files['userImg'])) {
-                    $extension = new \SplFileInfo($this->files['userImg']['name']);
-                    $extension = $extension->getExtension();
-                    $acceptExtension = ['jpg', 'png'];
-                    if (in_array($extension, $acceptExtension)) {
-                        $imgName = (int)$idy . '.' . $extension;
-                        $imgDirname = IMG_USER_DIR.$imgName;
-                        if (move_uploaded_file($this->files['userImg']['tmp_name'], $imgDirname)) {
-                            ModelFactory::get('User')->update($this->session['user']['id'], ['image_name' => $imgName], 'id_user');
-                            $this->redirect('/user/edit/'.(int)$idy);
-                        } else {
-                            return 'Erreur lors du téléchargement de l\'image';
-                        }
-                    }
-                    return 'L\'extension de l\'image n\'est pas correct : '.$acceptExtension;
+                    $image = new ImageController();
+                    $image->addUserImage((int)$idy);
                 }
                 $data = [
                     'firstname' => (string)$this->post['firstname'],
@@ -122,12 +108,9 @@ class UserController extends FrontController
                     'email' => (string)$this->post['email'],
                     'date_upd' => date('Y-m-d H:i:s')
                 ];
-
                 ModelFactory::get('User')->update($this->session['user']['id'], $data, 'id_user');
             }
-
             $user = ModelFactory::get('User')->read($this->session['user']['id'], 'id_user');
-
             return $this->twig->display('user/edit.html.twig', [
                     "user" => $user]);
         }
@@ -145,8 +128,8 @@ class UserController extends FrontController
     {
         if (isset($this->session['user'])) {
             if (isset($this->post['deleteUser'])) {
-                $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
-                unlink('../public/img/user/'.$user['image_name']);
+                $image = new ImageController();
+                $image->deleteUserImage((int)$idy);
                 ModelFactory::get('Article')->delete((int)$this->session['user']['id'], 'id_user');
                 if (ModelFactory::get('User')->delete((int)$this->session['user']['id'])) {
                     $this->logout();
