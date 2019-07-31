@@ -32,7 +32,6 @@ class Router
     {
         $routeAction = new listRoutes();
         $routeAction = $routeAction->getRoutes();
-
         $url = explode('/', $url);
 
         switch (count($url)){
@@ -55,7 +54,6 @@ class Router
         }
 
         $route = isset($routeAction[$this->server['REQUEST_METHOD']][$url]) ? $routeAction[$this->server['REQUEST_METHOD']][$url]: null;
-
         $this->controllerType = ($route != null) ? $route['controllerType'] : 'front';
 
         if ($route != null) {
