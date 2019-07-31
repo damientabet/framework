@@ -1,6 +1,7 @@
 # OpenClassrooms PHP/SYMFONY - Projet 5
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c98335564ffa4051a838f24b8e32df7c)](https://www.codacy.com/app/damientabet/framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=damientabet/framework&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e347675a777ba81d686/maintainability)](https://codeclimate.com/github/damientabet/framework/maintainability)
 
 ## Résumé du projet
 
