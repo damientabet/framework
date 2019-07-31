@@ -19,7 +19,7 @@ abstract class Model implements ModelInterface
 
         $modelName = explode('\\', get_class($this));
 
-        $this->table = ucfirst(str_replace('Model', '', array_pop($modelName)));
+        $this->table = strtolower(ucfirst(str_replace('Model', '', array_pop($modelName))));
     }
 
     /**
