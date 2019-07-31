@@ -84,7 +84,8 @@ class ArticleController extends FrontController
     {
         if (isset($this->session['user'])) {
             if (isset($this->post['deleteArticle'])) {
-                ModelFactory::get('Article')->delete((int)$idy);
+                ModelFactory::get('Comment')->delete((int)$idy, 'id_article');
+                ModelFactory::get('Article')->delete((int)$idy, 'id_article');
                $this->redirect('/user/article');
             }
             return $this->twig->display('article/delete.html.twig', ['article_id' => (int)$idy]);

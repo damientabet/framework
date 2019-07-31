@@ -70,8 +70,6 @@ class UserController extends FrontController
                 ModelFactory::get('User')->create((array)$data);
 
                 $user = ModelFactory::get('User')->read($data['email'], 'email');
-                // TODO : A checker !
-                // $session = $this->session['user']['id'];
                 $this->session['user'] = [
                     'id' => (string)$user['id_user'],
                     'lastname' => (string)$user['lastname'],

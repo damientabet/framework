@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\admin;
 
 use Core\Model\ModelFactory;
 
@@ -74,7 +74,7 @@ class AdminArticleController extends AdminController
     public function deleteArticle(int $idy)
     {
         if (isset($this->post['deleteArticle'])) {
-            ModelFactory::get('Comment')->delete((int)$idy, 'id_article');
+            ModelFactory::get('Comment')->delete($idy, 'id_article');
             ModelFactory::get('Article')->delete((int)$idy, 'id_article');
             $this->redirect('/admin/articles');
         }

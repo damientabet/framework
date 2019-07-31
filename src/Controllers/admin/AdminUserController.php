@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\admin;
 
 use Core\Model\ModelFactory;
 
