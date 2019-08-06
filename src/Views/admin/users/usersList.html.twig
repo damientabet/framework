@@ -39,13 +39,13 @@
             </div>
 
             <!-- DataTales Example -->
-            <div class="card shadow mb-4">
+            <div class="card mb-4" style="box-shadow: 3px 3px 15px 2px">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Liste des utilisateurs</h6>
+                    <h6 class="m-0 font-weight-bold text-secondary">Liste des utilisateurs</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -68,7 +68,7 @@
                             </tfoot>
                             <tbody>
                             {% for user in users %}
-                                <tr>
+                                <tr onclick="location.href = '/admin/user/{{ user.id_user }}'" style="cursor: pointer">
                                     <td>{{ user.id_user }}</td>
                                     <td>{{ user.firstname }}</td>
                                     <td>{{ user.lastname }}</td>
@@ -76,7 +76,8 @@
                                     <td>{{ user.date_add|date('d/m/Y H:i:s') }}</td>
                                     <td><form action="/admin/users" method="POST"><a href="/admin/user/{{ user.id_user }}"><i class="fas fa-edit"></i></a>
                                             <button class="btn btn-default text-danger" name="deleteUser" onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}"><i class="fas fa-trash"></i></button>
-                                            <input type="hidden" name="id_user" value="{{ user.id_user }}"></form></td>
+                                            <input type="hidden" name="id_user" value="{{ user.id_user }}"></form>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
