@@ -42,4 +42,23 @@ class Article extends Model
         $query = 'SELECT * FROM `article` WHERE `id_article` = '.(int)$id.' AND `id_user` = '.(int)$id_user;
         return $this->database->result($query);
     }
+
+    /**
+     * @param int $id_user
+     * @return mixed
+     */
+    public function getArticlesByIdUser(int $id_user)
+    {
+        $query = 'SELECT * FROM `article` WHERE `id_user` = '.(int)$id_user;
+        return $this->database->results($query);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotApprovedArticles()
+    {
+        $query = 'SELECT * FROM `article` WHERE `approved` = 0 ORDER BY `id_article` DESC';
+        return $this->database->results($query);
+    }
 }

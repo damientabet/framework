@@ -28,10 +28,14 @@ class AdminController extends Controller
         $users = ModelFactory::get('User')->list(null, null, 1);
         $articles = ModelFactory::get('Article')->getAllArticles();
         $comments = ModelFactory::get('Comment')->getAllComments();
-            return $this->twig->display('index.html.twig', [
-                    'users' => count($users),
-                    'articles' => $articles,
-                    'comments' => $comments]);
+        $unapprovedArticles = ModelFactory::get('Article')->getNotApprovedArticles();
+        $unapprovedComments = ModelFactory::get('Comment')->getNotApprovedComments();
+        return $this->twig->display('index.html.twig', [
+                'users' => count($users),
+                'articles' => count($articles),
+                'comments' => count($comments),
+                'unapprovedArticles' => $unapprovedArticles,
+                'unapprovedComments' => $unapprovedComments]);
         }
 
         return $this->redirect('/admin/login');

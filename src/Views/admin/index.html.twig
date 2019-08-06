@@ -9,145 +9,185 @@
     <!-- Main Content -->
     <div id="content">
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Tableau de bord</h1>
-            </div>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Tableau de bord</h1>
+    </div>
 
-            <!-- Content Row -->
-            <div class="row">
+    <!-- Content Row -->
+    <div class="row">
 
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre
-                                        d'utilisateurs
-                                    </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ users }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-user fa-2x text-gray-300"></i>
-                                </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre
+                                d'utilisateurs
                             </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ users }}</div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nombres
-                                        d'articles
-                                    </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ articles|length }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-newspaper fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-warning shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Nombres
-                                        de commentaires
-                                    </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ comments|length }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-comment fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Content Row -->
-
-            <div class="row">
-
-                <!-- Area Chart -->
-                <div class="col-xl-6 col-lg-6">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Articles à approuver</h6>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <!-- Page Heading -->
-                            {% for article in articles %}
-                                {% if article.approved == 0 %}
-                                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <a href="/admin/article/{{ article.id_article }}"
-                                           class="d-none d-sm-inline-block">
-                                            <span class="text">{{ article.title }} - {{ article.date_add|date('d/m/Y') }}</span>
-                                        </a>
-                                        <form action="/admin/article/{{ article.id_article }}" method="POST">
-                                            <label style="cursor: pointer;" for="approved" class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm">
-                                                <span class="icon text-white" title="Approuver">
-                                                    <i class="fas fa-check fa-sm text-white"></i>
-                                                </span>
-                                                <span class="text"></span>
-                                            </label>
-                                            <input id="approved" type="submit" name="approvedArticle" class="d-none">
-                                        </form>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-6 col-lg-6">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Commentaires à approuver</h6>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <!-- Page Heading -->
-                            {% for comment in comments %}
-                                {% if comment.approved == 0 %}
-                                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <a href="/admin/article/{{ comment.id_article }}" class="d-none d-sm-inline-block">
-                                            <span class="text">#{{ comment.id_article }} / {{ comment.content|truncate(80, true) }} - {{ comment.date_add|date('d/m/Y') }}</span>
-                                        </a>
-                                        <form action="/admin/comment/{{ comment.id_comment }}" method="POST">
-                                            <label style="cursor: pointer;" for="approvedComment" class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm" title="Approuver">
-                                                <span class="icon text-white">
-                                                    <i class="fas fa-check fa-sm text-white"></i>
-                                                </span>
-                                                <span class="text"></span>
-                                            </label>
-                                            <input id="approvedComment" type="submit" name="approvedComment" class="d-none">
-                                        </form>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                        <div class="col-auto">
+                            <i class="fas fa-user fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End of Main Content -->
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nombres
+                                d'articles
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ articles }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-newspaper fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Nombres
+                                de commentaires
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ comments }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comment fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-primary" role="alert">
+        <i class="fas fa-exclamation-triangle"></i> Pour approuver les différents posts, cliquez simplement sur le bouton vert. Attention, aucune confirmation n'est demandée !
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+               aria-selected="true">Articles à approuver <span
+                        class="badge badge-light">{{ unapprovedArticles|length }}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+               aria-controls="profile" aria-selected="false">Commentaire à approuver <span
+                        class="badge badge-light">{{ unapprovedComments|length }}</span></a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table table-borderless">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in unapprovedArticles %}
+                    <a href="/admin/article/{{ article.id_article }}"
+                       class="d-none d-sm-inline-block">
+                        <tr>
+                            <td>
+                                {{ article.id_article }}
+                            </td>
+                            <td>
+                                {{ article.title }}
+                            </td>
+                            <td>
+                                {{ article.date_add|date('d/m/Y') }}
+                            </td>
+                            <td>
+                                <form action="/admin/article/{{ article.id_article }}" method="POST">
+                                    <label style="cursor: pointer;" for="approved"
+                                           class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm">
+                                            <span class="icon text-white" title="Approuver">
+                                                <i class="fas fa-check fa-sm text-white"></i>
+                                            </span>
+                                        <span class="text"></span>
+                                    </label>
+                                    <input id="approved" type="submit" name="approvedArticle" class="d-none">
+                                </form>
+                            </td>
+                        </tr>
+                    </a>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table class="table table-borderless">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Article</th>
+                    <th scope="col">Contenu</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in unapprovedComments %}
+                    <a href="/admin/article/{{ comment.id_article }}"
+                       class="d-none d-sm-inline-block">
+                        <tr>
+                            <td>
+                                {{ comment.id_comment }}
+                            </td>
+                            <td>
+                                <a href="/admin/article/{{ comment.id_article }}"
+                                   class="d-none d-sm-inline-block">
+                                    {{ comment.id_article }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ comment.content|truncate(80, true) }}
+                            </td>
+                            <td>
+                                {{ comment.date_add|date('d/m/Y') }}
+                            </td>
+                            <td>
+                                <form action="/admin/comment/{{ comment.id_comment }}" method="POST">
+                                    <label style="cursor: pointer;" for="approvedComment"
+                                           class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm"
+                                           title="Approuver">
+                                                <span class="icon text-white">
+                                                    <i class="fas fa-check fa-sm text-white"></i>
+                                                </span>
+                                        <span class="text"></span>
+                                    </label>
+                                    <input id="approvedComment" type="submit" name="approvedComment"
+                                           class="d-none">
+                                </form>
+                            </td>
+                        </tr>
+                    </a>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">

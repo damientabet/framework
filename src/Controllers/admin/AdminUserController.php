@@ -45,7 +45,12 @@ class AdminUserController extends AdminController
     public function viewUser(int $idy)
     {
         $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
-        return $this->twig->display('users/user.html.twig', ['user' => $user]);
+        $articles = ModelFactory::get('Article')->getArticlesByIdUser((int)$idy);
+        $comments = ModelFactory::get('Comment')->getCommentsByUser((int)$idy);
+        return $this->twig->display('users/user.html.twig', [
+            'user' => $user,
+            'articles' => $articles,
+            'comments' => $comments]);
     }
 
     /**
