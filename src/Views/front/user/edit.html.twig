@@ -8,7 +8,7 @@
 
         <div style="margin: 0 auto" class="text-center col-6 mb-3">
             {% if user.image_name != null %}
-                <img id="userImg" src="/img/user/{{ user.image_name }}" alt="">
+                <img class="border border-secondary" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover;" id="userImg" src="/img/user/{{ user.image_name }}" alt="">
                 <label id="labelDeleteImg" style="cursor: pointer" for="deleteImg" class="col-4 shadow p-3 mt-2 mb-2 bg-white rounded btn btn-default"><i
                             class="fas fa-trash"></i> Supprimer</label>
                 <input id="deleteImg" type="submit" name="deleteImg" value="Supprimer" onclick="if(confirm('Êtes-vous sûr ?')){return true;}else{return false;}">
