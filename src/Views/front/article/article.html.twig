@@ -3,7 +3,7 @@
 {% block title %}Article #{{ article.id_article }}{% endblock %}
 
 {% block body %}
-    <div style="height: 500px; background-color: black"></div>
+    <img src="/default-img/blg3.jpg" class="img-fluid" alt="Responsive image">
     <div class="p-3 shadow">
         <h2 class="m-4 text-center">{{ article.title }}
             {% if ("now"|date("Y-m-d")) < (article.add_article|date_modify("+7 days")|date("Y-m-d")) %}

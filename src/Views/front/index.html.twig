@@ -3,10 +3,29 @@
 {% block title %}Accueil{% endblock %}
 
 {% block slide %}
-    <div id="indexImg" style="background-image: url('/slide/slide1.jpg'); width: 100%; height: 500px;"></div>
+    <div id="indexImg" style="background-image: url('/default-img/slide1.jpg'); width: 100%; height: 500px;"></div>
 {% endblock %}
 
 {% block body %}
+    <div class="row mt-5">
+        {% for article in lastArticles if article.approved == 1 %}
+            <div class="col-lg-5 shadow mx-auto border">
+                <a style="color: black" href="/article/{{ article.id_article }}">
+                    <div class="text-center">
+                        <i style="font-size: 60px;" class="fas fa-blog m-3"></i>
+                    </div>
+                    <div class="" style="min-height: 150px">
+                        <h5 class="mb-2 text-center">{{ article.title }}</h5>
+                        <p class="text-justify">{{ article.description|truncate(300, true)|raw }}</p>
+                    </div>
+                    <hr/>
+                    <div>
+                        <p class="font-weight-bold">{{ article.firstname }} {{ article.lastname }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
     <ul class="list-unstyled">
         {% for article in articles %}
             {% if article.approved == 1 %}
