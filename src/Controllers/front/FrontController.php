@@ -24,9 +24,11 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $articles = ModelFactory::get('Article')->getAllArticles();
+        $articles = ModelFactory::get('Article')->getArticles();
+        $lastArticles = ModelFactory::get('Article')->getTwoLastArticles();
         return $this->twig->display('index.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'lastArticles' => $lastArticles
         ]);
     }
 }
