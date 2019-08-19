@@ -6,6 +6,12 @@ class listRoutes
 {
     protected $routes = array(
         "GET" => array(
+            '404-not-found' =>
+                array(
+                    "controller" => "404NotFound",
+                    "action" => "index",
+                    "controllerType" => 'front'
+                ),
             'admin/article/:id' =>
                 array(
                     "controller" => "AdminArticle",

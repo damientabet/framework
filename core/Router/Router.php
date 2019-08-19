@@ -2,6 +2,9 @@
 
 namespace Core\Router;
 
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
 /**
  * Class Router
  * @package Router
@@ -22,6 +25,16 @@ class Router
     {
         $this->url = $url;
         $this->server = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_URL);
+
+        substr(get_class($this), 12, -10);
+
+        $loader = new FilesystemLoader('./../src/Views/front');
+        $this->twig = new Environment($loader, array(
+            'cache' => false,
+            'debug' => true
+        ));
+        $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
     }
 
     /**
@@ -60,7 +73,11 @@ class Router
             $this->dispatch($url, $route['controller'] . '#' . $route['action'], $this->server['REQUEST_METHOD']);
         }
 
-        $this->run($this->controllerType);
+        try {
+            $this->run($this->controllerType);
+        } catch (\Exception $e) {
+            echo $this->twig->render('404.html.twig');
+        }
     }
 
     /**
@@ -129,7 +146,7 @@ class Router
     public function run(string $controllerType)
     {
         if (!isset($this->routes[$this->server['REQUEST_METHOD']])) {
-            throw new RouterException('REQUEST_METHOD does not exist');
+            throw new RouterException('REQUEST_METHOD does not exist', 404);
         }
 
         foreach ($this->routes[$this->server['REQUEST_METHOD']] as $route) {
