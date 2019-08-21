@@ -106,4 +106,12 @@ Modifier votre fichier **host** afin de faire pointer une url directement vers l
 
 ### Étape 9
 
+Créer la base de données en utilisant le fichier présent dans le dossier ``sql/install.sql`.  
+
+### Étape 10
+
+Une fois la base de données créée, ajouter un compte administrateur dans la table ``admin``.  
+
+### Étape 11
+
 Après avoir installé la totalité du projet et modifier votre fichier host, rendez-vous sur votre **navigateur web** pour lancer la page d'accueil du site.  
