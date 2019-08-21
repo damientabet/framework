@@ -33,17 +33,6 @@ class Article extends Model
     }
 
     /**
-     * @param int $id
-     * @param int $id_user
-     * @return mixed
-     */
-    public function getArticleByIdUser(int $id, int $id_user)
-    {
-        $query = 'SELECT * FROM `article` WHERE `id_article` = '.(int)$id.' AND `id_user` = '.(int)$id_user;
-        return $this->database->result($query);
-    }
-
-    /**
      * @param int $id_user
      * @return mixed
      */

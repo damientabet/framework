@@ -32,10 +32,10 @@ class Comment extends Model
         return $this->database->results($query);
     }
 
-    public function getCommentsByUser(int $idy)
+    public function getCommentsByUser(int $id)
     {
-        $query = 'SELECT * FROM comment 
-                WHERE `id_user` = '.(int)$idy;
+        $query = 'SELECT * FROM `comment` 
+                WHERE `id_user` = '.$id;
         return $this->database->results($query);
     }
 
