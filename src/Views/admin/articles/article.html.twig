@@ -117,6 +117,7 @@
                         </div>
                     </div>
 
+                    {% if comments|length > 0 %}
                     <div class="row">
                         <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
@@ -124,27 +125,55 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Les Commentaires</h6>
                                 </div>
                                 <div class="card-body">
-                                    <!-- Page Heading -->
-                                    {% for comment in comments %}
-                                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                            <span class="text">{{ comment.content }}</span>
-                                            {% if comment.approved == 0 %}
-                                                <form action="/admin/comment/{{ comment.id_comment }}" method="POST">
-                                                    <label style="cursor: pointer;" for="approved"
-                                                           class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm"><span
-                                                                class="icon text-white" title="Approuver"><i
-                                                                    class="fas fa-check fa-sm text-white"></i></span><span
-                                                                class="text"></span></label>
-                                                    <input id="approved" type="submit" name="approvedComment"
-                                                           class="d-none">
-                                                </form>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
+                                    <table class="table table-borderless">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Contenu</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for comment in comments %}
+                                            <tr>
+                                                <td>
+                                                    {{ comment.id_comment }}
+                                                </td>
+                                                <td>
+                                                    {{ comment.content|truncate(80, true) }}
+                                                </td>
+                                                <td>
+                                                    {{ comment.date_add|date('d/m/Y') }}
+                                                </td>
+                                                <td>
+                                                    {% if comment.approved == 0 %}
+                                                        <form action="/admin/comment/{{ comment.id_comment }}"
+                                                              method="POST">
+                                                            <label style="cursor: pointer;"
+                                                                   for="approvedComment_{{ comment.id_comment }}"
+                                                                   class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm"
+                                                                   title="Approuver">
+                                                                <span class="icon text-white">
+                                                                    <i class="fas fa-check fa-sm text-white"></i>
+                                                                </span>
+                                                                <span class="text"></span>
+                                                            </label>
+                                                            <input id="approvedComment_{{ comment.id_comment }}"
+                                                                   type="submit" name="approvedComment"
+                                                                   class="d-none">
+                                                        </form>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </form>
         </div>
