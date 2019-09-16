@@ -64,28 +64,31 @@ function displayAdminArticleForm() {
     }
 }
 
+function validFormField() {
+    $("input").focusout(function () {
+        if ($(this).hasClass("is-valid")) {
+            $(this).removeClass("is-valid");
+        } else if ($(this).hasClass("is-invalid")) {
+            $(this).removeClass("is-invalid");
+        }
+
+        if ($(this).val() !== "") {
+            if ($(this).attr("type") === "email" && !$(this).val().match(/^\w+@\w+.\w{3}$/)) {
+                $(this).addClass("is-invalid");
+            } else {
+                $(this).addClass("is-valid");
+            }
+        } else {
+            $(this).addClass("is-invalid");
+        }
+    })
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     setActive();
     displayFilename();
     lengthCounter();
     displayAdminUserForm();
     displayAdminArticleForm();
-
-    $('input').focusout(function () {
-        if ($(this).hasClass('is-valid')) {
-            $(this).removeClass('is-valid');
-        } else if ($(this).hasClass('is-invalid')) {
-            $(this).removeClass('is-invalid');
-        }
-
-        if ($(this).val() !== '') {
-            if ($(this).attr('type') === 'email' && !$(this).val().match(/^\w+@\w+.\w{3}$/)) {
-                $(this).addClass('is-invalid');
-            } else {
-                $(this).addClass('is-valid');
-            }
-        } else {
-            $(this).addClass('is-invalid');
-        }
-    })
+    validFormField();
 });

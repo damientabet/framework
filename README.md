@@ -116,7 +116,8 @@ Modifier les accès à votre base de données dans le fichier ``config/config.ph
 
 Une fois la base de données créée, ajouter un compte administrateur dans la table ``admin`` grâce à PhpMyAdmin.  
 Afin de générer un mot de passe, il est possible d'utiliser un convertisseur.  
-https://www.bcrypt.fr
+
+https://www.bcrypt.fr  
 
 ### Étape 12
 
