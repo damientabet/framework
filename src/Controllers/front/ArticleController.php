@@ -2,6 +2,7 @@
 
 namespace App\Controllers\front;
 
+use App\Models\Article;
 use Core\Model\ModelFactory;
 
 class ArticleController extends FrontController
@@ -30,15 +31,19 @@ class ArticleController extends FrontController
     {
         if (isset($this->post['addComment'])) {
             $comment = new CommentController();
-            $comment->addComment((int)$idy);
-            $this->redirect('/article/'.(int)$idy);
+            if ($comment->addComment((int)$idy)) {
+                $this->redirect('/article/'.(int)$idy);
+            }
         }
 
         $article = ModelFactory::get('Article')->getArticleById((int)$idy, 'id_article');
-        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$idy);
-        return $this->twig->display('article/article.html.twig', [
+        if ($article) {
+            $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$idy);
+            return $this->twig->display('article/article.html.twig', [
                 'article' => $article,
                 'comments' => $comments]);
+        }
+        $this->redirect('/articles');
     }
 
     /**
@@ -83,14 +88,17 @@ class ArticleController extends FrontController
     public function deleteArticle(int $idy)
     {
         if (isset($this->session['user'])) {
-            if (isset($this->post['deleteArticle'])) {
-                ModelFactory::get('Comment')->delete((int)$idy, 'id_article');
-                ModelFactory::get('Article')->delete((int)$idy, 'id_article');
-               $this->redirect('/user/article');
+            $article = ModelFactory::get('Article')->getArticleById((int)$idy, 'id_article');
+            if ($article) {
+                if (isset($this->post['deleteArticle'])) {
+                    ModelFactory::get('Comment')->delete((int)$idy, 'id_article');
+                    ModelFactory::get('Article')->delete((int)$idy, 'id_article');
+                    $this->redirect('/user/article');
+                }
+                return $this->twig->display('article/delete.html.twig', ['article_id' => (int)$idy]);
             }
-            return $this->twig->display('article/delete.html.twig', ['article_id' => (int)$idy]);
         }
-       $this->redirect('/');
+        $this->redirect('/');
     }
 
     /**

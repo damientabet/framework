@@ -19,7 +19,7 @@ class ContactController extends FrontController
         $firstname = (string)$this->post['firstname'];
         $lastname = (string)$this->post['lastname'];
         $subject = (string)$this->post['subject'];
-        $email = (string)$this->post['email'];
+        $email = (string)filter_var($this->post['email'], FILTER_VALIDATE_EMAIL);
         $message = (string)$this->post['message'];
 
         $templateVars = array(
@@ -39,10 +39,14 @@ class ContactController extends FrontController
         $headers[] = 'Content-type: text/html; charset=UTF-8';
 
         if (isset($this->post['mailsend'])) {
-            if (!empty($firstname) && !empty($lastname) && !empty($email) && !empty($message) && $this->post['rgpd'] == 'on') {
+            if (!empty($firstname)
+                && !empty($lastname)
+                && !empty($email)
+                && !empty($message)
+                && $this->post['rgpd'] == 'on') {
                     mail('tabetdamien@free.fr', $subject, $template, implode("\r\n", $headers));
-                    $this->redirect('/contact');
             }
+            $this->redirect('/contact');
         }
     }
 }

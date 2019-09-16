@@ -13,11 +13,11 @@ class LoginController extends FrontController
      */
     public function login()
     {
-        if (isset($this->post['connection'])) {
+        if (isset($this->post['connection']) && preg_match('#^\w+@\w+.(fr|com)#', $this->post['connection_email'])) {
             $email = (string)$this->post['connection_email'];
             $user = ModelFactory::get('User')->read((string)$email, 'email');
             if (empty($this->post['connection_email']) || empty($this->post['connection_password'])) {
-                return $this->errors[] = 'Please fill fields';
+                $this->errors[] = 'Please fill fields';
             }
             if ($user) {
                 if (password_verify($this->post['connection_password'], $user['password'])) {
@@ -32,7 +32,7 @@ class LoginController extends FrontController
             }
             $this->errors[] = 'No matching user';
         }
-        return false;
+        $this->redirect($this->server['HTTP_REFERER']);
     }
 
     public function logout()

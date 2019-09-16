@@ -12,7 +12,7 @@ class CommentController extends FrontController
      */
     public function addComment(int $idy)
     {
-        if (!empty($this->post['comment'])) {
+        if (!empty($this->post['comment']) && !preg_match('#^\s*$#', $this->post['comment'])) {
             $data = [
                 'content' => (string)$this->post['comment'],
                 'id_article' => (int)$idy,
@@ -21,7 +21,7 @@ class CommentController extends FrontController
             ];
 
             ModelFactory::get('Comment')->create((array)$data);
-            $this->redirect($this->server['HTTP_REFERER']);
         }
+        $this->redirect($this->server['HTTP_REFERER']);
     }
 }

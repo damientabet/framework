@@ -2,10 +2,10 @@
 
 function setActive() {
     var liObj = document.getElementById("accordionSidebar").getElementsByTagName("li");
-    for(var i = 0; i < liObj.length; i++) {
+    for (var i = 0; i < liObj.length; i++) {
         var aObj = liObj[parseInt(i, 10)].getElementsByTagName("a")[0];
         var linkObj = liObj[parseInt(i, 10)];
-        if(document.location.href === aObj.href) {
+        if (document.location.href === aObj.href) {
             linkObj.classList.add("active");
         }
     }
@@ -37,7 +37,7 @@ function lengthCounter() {
 function displayAdminUserForm() {
     var test = document.getElementById("test");
     if (test !== null) {
-        test.addEventListener("click", function(){
+        test.addEventListener("click", function () {
             var form = document.getElementById("formAdmin");
             form.classList.remove("d-none");
         });
@@ -47,7 +47,7 @@ function displayAdminUserForm() {
 function displayAdminArticleForm() {
     var editArticleContent = document.getElementById("editArticleContent");
     if (editArticleContent !== null) {
-        editArticleContent.addEventListener("click", function(){
+        editArticleContent.addEventListener("click", function () {
             var formArticleContent = document.getElementById("formArticleContent");
             formArticleContent.classList.remove("d-none");
             var articleContent = document.getElementById("articleContent");
@@ -70,4 +70,22 @@ window.addEventListener("DOMContentLoaded", () => {
     lengthCounter();
     displayAdminUserForm();
     displayAdminArticleForm();
+
+    $('input').focusout(function () {
+        if ($(this).hasClass('is-valid')) {
+            $(this).removeClass('is-valid');
+        } else if ($(this).hasClass('is-invalid')) {
+            $(this).removeClass('is-invalid');
+        }
+
+        if ($(this).val() !== '') {
+            if ($(this).attr('type') === 'email' && !$(this).val().match(/^\w+@\w+.\w{3}$/)) {
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).addClass('is-valid');
+            }
+        } else {
+            $(this).addClass('is-invalid');
+        }
+    })
 });

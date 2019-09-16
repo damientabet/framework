@@ -44,24 +44,19 @@ class UserController extends FrontController
     {
         if (isset($this->post['addUser'])) {
 
-            if (empty($this->post['lastname'])) {
-                $this->errors[] = 'No lastname';
-            }
-            if (empty($this->post['firstname'])) {
-                $this->errors[] = 'No firstname';
-            }
-            if (empty($this->post['email'])) {
-                $this->errors[] = 'No email';
-            }
-            if (empty($this->post['password'])) {
+            if (empty($this->post['firstname']) || !preg_match('#^[a-zA-Z]+$#',$this->post['firstname'])) {
+                $this->errors[] = 'Le prénom est invalide';
+            } elseif (empty($this->post['lastname']) || !preg_match('#^[a-zA-Z]+$#',$this->post['lastname'])) {
+                $this->errors[] = 'Le nom est invalide';
+            } elseif (empty($this->post['email']) && preg_match('#^\w+@\w+.\w{3}#',$this->post['email'])) {
+                $this->errors[] = 'Une erreur est survenue au niveau de l\'adresse email';
+            } elseif (empty($this->post['password'])) {
                 $this->errors[] = 'No password';
-            }
-
-            if (!$this->errors) {
+            } else {
                 $data = [
                     'lastname' => (string)$this->post['lastname'],
                     'firstname' => (string)$this->post['firstname'],
-                    'email' => (string)$this->post['email'],
+                    'email' => (string)filter_var($this->post['email'], FILTER_VALIDATE_EMAIL),
                     'password' => password_hash($this->post['password'], PASSWORD_DEFAULT),
                     'image_name' => 'default.png',
                     'date_add' => date('Y-m-d H:i:s'),
@@ -77,7 +72,9 @@ class UserController extends FrontController
                     'email' => (string)$user['email']
                 ];
                 $this->redirect('/user/' . $this->session['user']['id']);
-            } else {
+            }
+
+            if ($this->errors) {
                 return $this->errors;
             }
         }
