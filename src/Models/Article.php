@@ -15,7 +15,7 @@ class Article extends Model
                     LEFT JOIN `user` u
                     ON (a.`id_user` = u.`id_user`)
                     ORDER BY a.`id_article` DESC';
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 
     /**
@@ -29,7 +29,7 @@ class Article extends Model
                     LEFT JOIN `user` u 
                         ON (a.`id_user` = u.`id_user`) 
                     WHERE a.`id_article` = '. (int)$id;
-        return $this->database->result($query);
+        return $this->database->get($query);
     }
 
     /**
@@ -40,7 +40,7 @@ class Article extends Model
     public function getArticleByIdUser(int $id, int $id_user)
     {
         $query = 'SELECT * FROM `article` WHERE `id_article` = '.(int)$id.' AND `id_user` = '.(int)$id_user;
-        return $this->database->result($query);
+        return $this->database->get($query);
     }
 
     /**
@@ -50,7 +50,7 @@ class Article extends Model
     public function getArticlesByIdUser(int $id_user)
     {
         $query = 'SELECT * FROM `article` WHERE `id_user` = '.(int)$id_user;
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 
     /**
@@ -59,7 +59,7 @@ class Article extends Model
     public function getNotApprovedArticles()
     {
         $query = 'SELECT * FROM `article` WHERE `approved` = 0 ORDER BY `id_article` DESC';
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 
     public function getTwoLastArticles()
@@ -70,7 +70,7 @@ class Article extends Model
                     WHERE a.`approved` = 1
                     ORDER BY a.`id_article` DESC
                     LIMIT 0,2';
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 
     public function getArticles()
@@ -81,6 +81,6 @@ class Article extends Model
                     WHERE a.`approved` = 1
                     ORDER BY a.`id_article` DESC
                     LIMIT 2,10';
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 }

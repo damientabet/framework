@@ -16,7 +16,7 @@ class Comment extends Model
                 LEFT JOIN `user` u
                     ON (c.`id_user` = u.`id_user`)
                 WHERE c.`id_article` = '.(int)$id;
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 
     /**
@@ -29,20 +29,20 @@ class Comment extends Model
                     ON (c.`id_user` = u.`id_user`)
                 LEFT JOIN `article` a
                     ON (c.`id_article` = a.`id_article`)';
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 
     public function getCommentsByUser(int $idy)
     {
         $query = 'SELECT * FROM comment 
                 WHERE `id_user` = '.(int)$idy;
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 
     public function getNotApprovedComments()
     {
         $query = 'SELECT * FROM `comment`
                 WHERE `approved` = 0';
-        return $this->database->results($query);
+        return $this->database->getAll($query);
     }
 }

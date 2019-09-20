@@ -30,27 +30,21 @@ abstract class Model implements ModelInterface
      */
     public function list(string $value = null, string $key = null, int $order = 0)
     {
-        if (isset($key))
-        {
-            if ($order == 1)
-            {
-                $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $key . ' = ?';
+        $query = 'SELECT * FROM ' . $this->table;
+
+        if (isset($key)) {
+            $query .= ' WHERE ' . $key . ' = ?';
+
+            if ($order == 1) {
+                $query .= ' ORDER BY `' . $key . '` DESC';
             }
-            else {
-                $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $key . ' = ? ORDER BY ' . $key . ' DESC';
+        } else {
+            if ($order == 0) {
+                $query .= ' ORDER BY id DESC';
             }
-            return $this->database->results($query, [$value]);
         }
-        else {
-            if ($order == 1)
-            {
-                $query = 'SELECT * FROM ' . $this->table;
-            }
-            else {
-                $query = 'SELECT * FROM ' . $this->table . ' ORDER BY id DESC';
-            }
-            return $this->database->results($query);
-        }
+
+        return $this->database->getAll($query, [$value]);
     }
 
     /**
@@ -73,14 +67,12 @@ abstract class Model implements ModelInterface
      */
     public function read(string $value, string $key = null)
     {
-        if (isset($key))
-        {
+        if (isset($key)) {
             $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $key . ' = ?';
-        }
-        else {
+        } else {
             $query = 'SELECT * FROM ' . $this->table . ' WHERE id = ?';
         }
-        return $this->database->result($query, [$value]);
+        return $this->database->get($query, [$value]);
     }
 
     /**
@@ -92,18 +84,15 @@ abstract class Model implements ModelInterface
     {
         $set = null;
 
-        foreach ($data as $dataKey => $dataValue)
-        {
+        foreach ($data as $dataKey => $dataValue) {
             $set .= $dataKey . ' = "' . $dataValue . '", ';
         }
 
         $set = substr_replace($set, '', -2);
 
-        if (isset($key))
-        {
+        if (isset($key)) {
             $query = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE ' . $key . ' = ?';
-        }
-        else {
+        } else {
             $query = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = ?';
         }
         $this->database->action($query, [$value]);
@@ -115,11 +104,9 @@ abstract class Model implements ModelInterface
      */
     public function delete(string $value, string $key = null)
     {
-        if (isset($key))
-        {
+        if (isset($key)) {
             $query = 'DELETE FROM ' . $this->table . ' WHERE ' . $key . ' = ?';
-        }
-        else {
+        } else {
             $query = 'DELETE FROM ' . $this->table . ' WHERE id = ?';
         }
         $this->database->action($query, [$value]);
