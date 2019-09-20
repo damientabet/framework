@@ -1,4 +1,5 @@
 .idea/
+config
 vendor/
 \.DS_Store
 public/img/
