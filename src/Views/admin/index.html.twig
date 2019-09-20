@@ -79,7 +79,8 @@
     </div>
 
     <div class="alert alert-primary" role="alert">
-        <i class="fas fa-exclamation-triangle"></i> Pour approuver les différents posts, cliquez simplement sur le bouton vert. Attention, aucune confirmation n'est demandée !
+        <i class="fas fa-exclamation-triangle"></i> Pour approuver les différents posts, cliquez simplement sur le
+        bouton vert. Attention, aucune confirmation n'est demandée !
     </div>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -107,32 +108,29 @@
                 </thead>
                 <tbody>
                 {% for article in unapprovedArticles %}
-                    <a href="/admin/article/{{ article.id_article }}"
-                       class="d-none d-sm-inline-block">
-                        <tr>
-                            <td>
-                                {{ article.id_article }}
-                            </td>
-                            <td>
-                                {{ article.title }}
-                            </td>
-                            <td>
-                                {{ article.date_add|date('d/m/Y') }}
-                            </td>
-                            <td>
-                                <form action="/admin/article/{{ article.id_article }}" method="POST">
-                                    <label style="cursor: pointer;" for="approved"
-                                           class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm">
+                    <tr>
+                        <td>
+                            {{ article.id_article }}
+                        </td>
+                        <td>
+                            {{ article.title }}
+                        </td>
+                        <td>
+                            {{ article.date_add|date('d/m/Y') }}
+                        </td>
+                        <td>
+                            <form action="/admin/article/{{ article.id_article }}" method="POST">
+                                <label style="cursor: pointer;" for="approved_{{ article.id_article }}"
+                                       class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm">
                                             <span class="icon text-white" title="Approuver">
                                                 <i class="fas fa-check fa-sm text-white"></i>
                                             </span>
-                                        <span class="text"></span>
-                                    </label>
-                                    <input id="approved" type="submit" name="approvedArticle" class="d-none">
-                                </form>
-                            </td>
-                        </tr>
-                    </a>
+                                    <span class="text"></span>
+                                </label>
+                                <input id="approved_{{ article.id_article }}" type="submit" name="approvedArticle" class="d-none">
+                            </form>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
@@ -150,40 +148,37 @@
                 </thead>
                 <tbody>
                 {% for comment in unapprovedComments %}
-                    <a href="/admin/article/{{ comment.id_article }}"
-                       class="d-none d-sm-inline-block">
-                        <tr>
-                            <td>
-                                {{ comment.id_comment }}
-                            </td>
-                            <td>
-                                <a href="/admin/article/{{ comment.id_article }}"
-                                   class="d-none d-sm-inline-block">
-                                    {{ comment.id_article }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ comment.content|truncate(80, true) }}
-                            </td>
-                            <td>
-                                {{ comment.date_add|date('d/m/Y') }}
-                            </td>
-                            <td>
-                                <form action="/admin/comment/{{ comment.id_comment }}" method="POST">
-                                    <label style="cursor: pointer;" for="approvedComment"
-                                           class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm"
-                                           title="Approuver">
+                    <tr>
+                        <td>
+                            {{ comment.id_comment }}
+                        </td>
+                        <td>
+                            <a href="/admin/article/{{ comment.id_article }}"
+                               class="d-none d-sm-inline-block">
+                                {{ comment.id_article }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ comment.content|truncate(80, true) }}
+                        </td>
+                        <td>
+                            {{ comment.date_add|date('d/m/Y') }}
+                        </td>
+                        <td>
+                            <form action="/admin/comment/{{ comment.id_comment }}" method="POST">
+                                <label style="cursor: pointer;" for="approvedComment_{{ comment.id_comment }}"
+                                       class="d-none d-sm-inline-block btn btn-circle btn-success shadow-sm"
+                                       title="Approuver">
                                                 <span class="icon text-white">
                                                     <i class="fas fa-check fa-sm text-white"></i>
                                                 </span>
-                                        <span class="text"></span>
-                                    </label>
-                                    <input id="approvedComment" type="submit" name="approvedComment"
-                                           class="d-none">
-                                </form>
-                            </td>
-                        </tr>
-                    </a>
+                                    <span class="text"></span>
+                                </label>
+                                <input id="approvedComment_{{ comment.id_comment }}" type="submit" name="approvedComment"
+                                    class="d-none">
+                            </form>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

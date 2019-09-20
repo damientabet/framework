@@ -15,12 +15,12 @@ USE blog_projet5;
 --
 
 CREATE TABLE `admin` (
-  `id_admin` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(128) NOT NULL,
-  `lastname` varchar(128) NOT NULL,
-  `email` text NOT NULL,
-  `password` varchar(128) NOT NULL,
-  `date_add` datetime NOT NULL
+  `id_admin` MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+  `firstname` VARCHAR(128) NOT NULL,
+  `lastname` VARCHAR(128) NOT NULL,
+  `email` VARCHAR(128) NOT NULL,
+  `password` VARCHAR(128) NOT NULL,
+  `date_add` DATETIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -30,14 +30,14 @@ CREATE TABLE `admin` (
 --
 
 CREATE TABLE `user` (
-  `id_user` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `lastname` varchar(64) NOT NULL,
-  `firstname` varchar(64) NOT NULL,
-  `email` varchar(128) NOT NULL,
-  `password` text NOT NULL,
-  `image_name` text,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL
+  `id_user` MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+  `lastname` VARCHAR(64) NOT NULL,
+  `firstname` VARCHAR(64) NOT NULL,
+  `email` VARCHAR(128) NOT NULL,
+  `password` VARCHAR(128) NOT NULL,
+  `image_name` VARCHAR(64),
+  `date_add` DATETIME NOT NULL,
+  `date_upd` DATETIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -55,13 +55,13 @@ INSERT INTO `user` (`id_user`, `lastname`, `firstname`, `email`, `password`, `im
 --
 
 CREATE TABLE `article` (
-  `id_article` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `title` varchar(64) NOT NULL,
-  `description` varchar(1024) NOT NULL,
-  `content` text NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `approved` int(1) NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
+  `id_article` MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+  `title` VARCHAR(64) NOT NULL,
+  `description` TEXT NOT NULL,
+  `content` TEXT NOT NULL,
+  `id_user` MEDIUMINT NOT NULL,
+  `approved` TINYINT NOT NULL DEFAULT '0',
+  `date_add` DATETIME NOT NULL,
   CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -83,12 +83,12 @@ INSERT INTO `article` (`id_article`, `title`, `description`, `content`, `id_user
 --
 
 CREATE TABLE `comment` (
-  `id_comment` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `id_article` int(11) NOT NULL,
-  `content` text NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `approved` tinyint(1) NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
+  `id_comment` MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+  `id_article` MEDIUMINT NOT NULL,
+  `content` TEXT NOT NULL,
+  `id_user` MEDIUMINT NOT NULL,
+  `approved` TINYINT NOT NULL DEFAULT '0',
+  `date_add` DATETIME NOT NULL,
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`id_article`) REFERENCES `article` (`id_article`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

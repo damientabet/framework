@@ -106,12 +106,19 @@ Modifier votre fichier **host** afin de faire pointer une url directement vers l
 
 ### Étape 9
 
-Créer la base de données en utilisant le fichier présent dans le dossier ``sql/install.sql`.  
+Créer la base de données en utilisant le fichier présent dans le dossier ``sql/install.sql``.  
 
 ### Étape 10
 
-Une fois la base de données créée, ajouter un compte administrateur dans la table ``admin``.  
+Modifier les accès à votre base de données dans le fichier ``config/config.php``.
 
 ### Étape 11
+
+Une fois la base de données créée, ajouter un compte administrateur dans la table ``admin`` grâce à PhpMyAdmin.  
+Afin de générer un mot de passe, il est possible d'utiliser un convertisseur.  
+
+https://www.bcrypt.fr  
+
+### Étape 12
 
 Après avoir installé la totalité du projet et modifier votre fichier host, rendez-vous sur votre **navigateur web** pour lancer la page d'accueil du site.  
