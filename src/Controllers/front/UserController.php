@@ -48,7 +48,7 @@ class UserController extends FrontController
                 $this->errors[] = 'Le prénom est invalide';
             } elseif (empty($this->post['lastname']) || !preg_match('#^[a-zA-Z]+$#',$this->post['lastname'])) {
                 $this->errors[] = 'Le nom est invalide';
-            } elseif (empty($this->post['email']) && preg_match('#^\w+@\w+.\w{3}#',$this->post['email'])) {
+            } elseif (empty($this->post['email']) && preg_match('#^\w+@\w+.\w{2,3}#',$this->post['email'])) {
                 $this->errors[] = 'Une erreur est survenue au niveau de l\'adresse email';
             } elseif (empty($this->post['password'])) {
                 $this->errors[] = 'No password';
