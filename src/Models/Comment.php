@@ -7,15 +7,15 @@ use Core\Model\Model;
 class Comment extends Model
 {
     /**
-     * @param int $id
+     * @param int $id_article
      * @return mixed
      */
-    public function getCommentsByArticle(int $id)
+    public function getCommentsByArticle(int $id_article)
     {
         $query = 'SELECT c.`id_comment`, c.`content`, c.`date_add`, c.`id_user`, u.`firstname`, u.`lastname`, c.`approved`, c.`id_article` FROM `comment` c
                 LEFT JOIN `user` u
                     ON (c.`id_user` = u.`id_user`)
-                WHERE c.`id_article` = '.(int)$id;
+                WHERE c.`id_article` = '.(int)$id_article;
         return $this->database->getAll($query);
     }
 
@@ -32,10 +32,10 @@ class Comment extends Model
         return $this->database->getAll($query);
     }
 
-    public function getCommentsByUser(int $idy)
+    public function getCommentsByUser(int $id_user)
     {
         $query = 'SELECT * FROM comment 
-                WHERE `id_user` = '.(int)$idy;
+                WHERE `id_user` = '.(int)$id_user;
         return $this->database->getAll($query);
     }
 

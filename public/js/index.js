@@ -81,7 +81,7 @@ function validFormField() {
         } else {
             $(this).addClass("is-invalid");
         }
-    })
+    });
 }
 
 window.addEventListener("DOMContentLoaded", () => {

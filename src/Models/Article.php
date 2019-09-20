@@ -19,27 +19,27 @@ class Article extends Model
     }
 
     /**
-     * @param int $id
+     * @param int $id_article
      * @return mixed
      */
-    public function getArticleById(int $id)
+    public function getArticleById(int $id_article)
     {
         $query = 'SELECT a.`id_article`, a.`title`, a.`description`, a.`content`, a.`id_user`, a.`approved`,a.`date_add` AS "add_article", u.`firstname`, u.`lastname` 
                     FROM `article` a 
                     LEFT JOIN `user` u 
                         ON (a.`id_user` = u.`id_user`) 
-                    WHERE a.`id_article` = '. (int)$id;
+                    WHERE a.`id_article` = '. (int)$id_article;
         return $this->database->get($query);
     }
 
     /**
-     * @param int $id
+     * @param int $id_article
      * @param int $id_user
      * @return mixed
      */
-    public function getArticleByIdUser(int $id, int $id_user)
+    public function getArticleByIdUser(int $id_article, int $id_user)
     {
-        $query = 'SELECT * FROM `article` WHERE `id_article` = '.(int)$id.' AND `id_user` = '.(int)$id_user;
+        $query = 'SELECT * FROM `article` WHERE `id_article` = '.(int)$id_article.' AND `id_user` = '.(int)$id_user;
         return $this->database->get($query);
     }
 

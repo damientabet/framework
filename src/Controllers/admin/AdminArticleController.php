@@ -33,18 +33,18 @@ class AdminArticleController extends AdminController
     }
 
     /**
-     * @param int $idy
+     * @param int $id_article
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function viewArticle(int $idy)
+    public function viewArticle(int $id_article)
     {
         if (isset($this->post['approvedArticle'])) {
             $data = [
                 'approved' => 1,
             ];
-            ModelFactory::get('Article')->update($idy, $data, 'id_article');
+            ModelFactory::get('Article')->update($id_article, $data, 'id_article');
         }
 
         if (isset($this->post['deleteArticle'])) {

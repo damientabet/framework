@@ -20,9 +20,8 @@ class ImageController extends FrontController
             if (move_uploaded_file($this->files['userImg']['tmp_name'], $imgDirname)) {
                 ModelFactory::get('User')->update($this->session['user']['id'], ['image_name' => $imgName], 'id_user');
                 $this->redirect('/user/edit/' . (int)$idy);
-            } else {
-                return 'Erreur lors du téléchargement de l\'image';
             }
+            return 'Erreur lors du téléchargement de l\'image';
         }
         return 'L\'extension de l\'image n\'est pas correct : ' . $acceptExtension;
     }

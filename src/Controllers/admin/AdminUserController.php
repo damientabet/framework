@@ -60,7 +60,7 @@ class AdminUserController extends AdminController
     {
         if (isset($this->post['deleteUser'])) {
             $user = ModelFactory::get('User')->read((int)$idy, 'id_user');
-            unlink('../public/img/user/'.$user['image_name']);
+            unlink(IMG_USER_DIR.$user['image_name']);
             ModelFactory::get('Article')->delete($user['id_user'], 'id_user');
             ModelFactory::get('Comment')->delete($user['id_user'], 'id_user');
             if (ModelFactory::get('User')->delete($user['id_user'], 'id_user')) {
