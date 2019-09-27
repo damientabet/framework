@@ -40,7 +40,7 @@ abstract class Model implements ModelInterface
             }
         }
         if ($order == 0) {
-            $query .= ' ORDER BY id DESC';
+            $query .= ' ORDER BY id_'.$this->table.' DESC';
         }
 
         return $this->database->getAll($query, [$value]);

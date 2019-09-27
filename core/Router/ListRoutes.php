@@ -2,7 +2,7 @@
 
 namespace core\Router;
 
-class listRoutes
+class ListRoutes
 {
     protected $routes = array(
         "GET" => array(

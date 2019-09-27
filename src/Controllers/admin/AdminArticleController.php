@@ -58,10 +58,10 @@ class AdminArticleController extends AdminController
                 'description' => $this->post['descArticle'],
                 'content' => $this->post['contentArticle'],
             ];
-            ModelFactory::get('Article')->update((int)$idy, (array)$data, 'id_article');
+            ModelFactory::get('Article')->update((int)$id_article, (array)$data, 'id_article');
         }
-        $article = ModelFactory::get('Article')->getArticleById((int)$idy);
-        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$idy);
+        $article = ModelFactory::get('Article')->getArticleById((int)$id_article);
+        $comments = ModelFactory::get('Comment')->getCommentsByArticle((int)$id_article);
 
         return $this->twig->display('articles/article.html.twig', [
                 'article' => $article,
@@ -71,11 +71,11 @@ class AdminArticleController extends AdminController
     /**
      * @param int $idy
      */
-    public function deleteArticle(int $idy)
+    public function deleteArticle(int $id_article)
     {
         if (isset($this->post['deleteArticle'])) {
-            ModelFactory::get('Comment')->delete($idy, 'id_article');
-            ModelFactory::get('Article')->delete((int)$idy, 'id_article');
+            ModelFactory::get('Comment')->delete($id_article, 'id_article');
+            ModelFactory::get('Article')->delete((int)$id_article, 'id_article');
             $this->redirect('/admin/articles');
         }
     }
