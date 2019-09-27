@@ -38,10 +38,9 @@ abstract class Model implements ModelInterface
             if ($order == 1) {
                 $query .= ' ORDER BY `' . $key . '` DESC';
             }
-        } else {
-            if ($order == 0) {
-                $query .= ' ORDER BY id DESC';
-            }
+        }
+        if ($order == 0) {
+            $query .= ' ORDER BY id DESC';
         }
 
         return $this->database->getAll($query, [$value]);
