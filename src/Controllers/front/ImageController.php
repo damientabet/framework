@@ -15,7 +15,7 @@ class ImageController extends FrontController
             $imgName = (int)$idy . '.' . $extension;
             $imgDirname = IMG_USER_DIR . $imgName;
             if (!file_exists(IMG_USER_DIR)) {
-                mkdir(IMG_USER_DIR, 0777,true);
+                mkdir(IMG_USER_DIR, 0755,true);
             }
             if (move_uploaded_file($this->files['userImg']['tmp_name'], $imgDirname)) {
                 ModelFactory::get('User')->update($this->session['user']['id'], ['image_name' => $imgName], 'id_user');
