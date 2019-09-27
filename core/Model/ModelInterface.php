@@ -23,7 +23,7 @@ interface ModelInterface
      * @param string|null $key
      * @return mixed
      */
-    public function read(string $value, string $key = null);
+    public function read(string $value, string $key = 'id');
 
     /**
      * @param string $value
@@ -31,12 +31,12 @@ interface ModelInterface
      * @param string|null $key
      * @return mixed
      */
-    public function update(string $value, array $data, string $key = null);
+    public function update(string $value, array $data, string $key = 'id');
 
     /**
      * @param string $value
      * @param string|null $key
      * @return mixed
      */
-    public function delete(string $value, string $key = null);
+    public function delete(string $value, string $key = 'id');
 }

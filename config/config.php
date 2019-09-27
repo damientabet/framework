@@ -3,7 +3,7 @@
 use Tracy\Debugger;
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'mvctest');
+define('DB_NAME', 'blog_projet5');
 define('DB_USER', 'root');
 define('DB_PASS', 'root');
 

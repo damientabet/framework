@@ -13,7 +13,7 @@ class LoginController extends FrontController
      */
     public function login()
     {
-        if (isset($this->post['connection']) && preg_match('#^\w+@\w+.(fr|com)#', $this->post['connection_email'])) {
+        if (isset($this->post['connection']) && preg_match('#^\w+@\w+.{2,3}#', $this->post['connection_email'])) {
             $email = (string)$this->post['connection_email'];
             $user = ModelFactory::get('User')->read((string)$email, 'email');
             if (empty($this->post['connection_email']) || empty($this->post['connection_password'])) {
